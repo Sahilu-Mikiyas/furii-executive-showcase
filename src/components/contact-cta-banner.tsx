@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export function ContactCtaBanner() {
   return (
@@ -17,13 +17,13 @@ export function ContactCtaBanner() {
 
         <div className="relative z-10 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur-md transition-all duration-500 group-hover:border-white/40 group-hover:bg-white/15">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur-md transition-all duration-500 group-hover:border-white/40 group-hover:bg-white/15">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-white/90 font-medium flex items-center gap-1.5">
-                <Sparkles className="h-3 w-3 text-emerald-400" /> Available for new engagements
+              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-white/90 font-medium">
+                Available for new engagements
               </span>
             </div>
 
