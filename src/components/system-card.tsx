@@ -13,6 +13,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "equinox-ledger": "/systems/equinox-ledger",
     "prism-impact": "/systems/prism-impact",
     "forge-mes": "/systems/forge-mes",
+    "aura-hospitality": "/systems/aura-hospitality",
   };
 
   const targetPath = detailPages[s.slug];

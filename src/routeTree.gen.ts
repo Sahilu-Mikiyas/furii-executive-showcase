@@ -17,6 +17,7 @@ import { Route as FounderRouteImport } from './routes/founder'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as SystemsIndexRouteImport } from './routes/systems.index'
+import { Route as SystemsAuraHospitalityRouteImport } from './routes/systems.aura-hospitality'
 import { Route as SystemsCivicPulseRouteImport } from './routes/systems.civic-pulse'
 import { Route as SystemsEquinoxLedgerRouteImport } from './routes/systems.equinox-ledger'
 import { Route as SystemsForgeMesRouteImport } from './routes/systems.forge-mes'
@@ -65,6 +66,11 @@ const SystemsRoute = SystemsRouteImport.update({
 const SystemsIndexRoute = SystemsIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => SystemsRoute,
+} as any)
+const SystemsAuraHospitalityRoute = SystemsAuraHospitalityRouteImport.update({
+  id: '/aura-hospitality',
+  path: '/aura-hospitality',
   getParentRoute: () => SystemsRoute,
 } as any)
 const SystemsCivicPulseRoute = SystemsCivicPulseRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
+  '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/forge-mes': typeof SystemsForgeMesRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
+  '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/forge-mes': typeof SystemsForgeMesRoute
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
+  '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/forge-mes': typeof SystemsForgeMesRoute
@@ -180,6 +189,7 @@ export interface FileRouteTypes {
     | '/founder'
     | '/media'
     | '/systems'
+    | '/systems/aura-hospitality'
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
     | '/systems/forge-mes'
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/founder'
     | '/media'
+    | '/systems/aura-hospitality'
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
     | '/systems/forge-mes'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/founder'
     | '/media'
     | '/systems'
+    | '/systems/aura-hospitality'
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
     | '/systems/forge-mes'
@@ -297,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsIndexRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/aura-hospitality': {
+      id: '/systems/aura-hospitality'
+      path: '/aura-hospitality'
+      fullPath: '/systems/aura-hospitality'
+      preLoaderRoute: typeof SystemsAuraHospitalityRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/civic-pulse': {
       id: '/systems/civic-pulse'
       path: '/civic-pulse'
@@ -364,6 +383,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface SystemsRouteChildren {
+  SystemsAuraHospitalityRoute: typeof SystemsAuraHospitalityRoute
   SystemsCivicPulseRoute: typeof SystemsCivicPulseRoute
   SystemsEquinoxLedgerRoute: typeof SystemsEquinoxLedgerRoute
   SystemsForgeMesRoute: typeof SystemsForgeMesRoute
@@ -377,6 +397,7 @@ interface SystemsRouteChildren {
 }
 
 const SystemsRouteChildren: SystemsRouteChildren = {
+  SystemsAuraHospitalityRoute: SystemsAuraHospitalityRoute,
   SystemsCivicPulseRoute: SystemsCivicPulseRoute,
   SystemsEquinoxLedgerRoute: SystemsEquinoxLedgerRoute,
   SystemsForgeMesRoute: SystemsForgeMesRoute,
