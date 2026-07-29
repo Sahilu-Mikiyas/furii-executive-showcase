@@ -1,10 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { ArchitectureDiagram } from "../components/architecture-diagram";
-import { CountUp } from "../components/count-up";
+import { ArrowRight, Mail, Linkedin, Github } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
-import { SystemCard } from "../components/system-card";
-import { systems } from "../lib/systems";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -12,202 +9,247 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Mikiyas Sahilu — CTO at FURII. We design and engineer enterprise software platforms, AI-powered workflows, and large-scale systems for organisations that demand excellence.",
+          "Mikiyas Sahilu is CTO and enterprise software architect. He leads engineering and applied AI at FURII, building platforms that run mission-critical operations at scale.",
       },
-      {
-        property: "og:title",
-        content: "Mikiyas Sahilu — CTO & Enterprise Software Architect",
-      },
+      { property: "og:title", content: "Mikiyas Sahilu — CTO & Enterprise Architect" },
       {
         property: "og:description",
         content:
-          "Enterprise platforms, AI workflows and systems architecture. CTO at FURII.",
+          "CTO and enterprise architect building intelligent, large-scale software platforms.",
       },
       { property: "og:image", content: "/founder.jpg" },
       { name: "twitter:image", content: "/founder.jpg" },
     ],
   }),
-  component: Home,
+  component: FounderPage,
 });
 
-const metrics = [
-  { value: 18, suffix: "+", label: "Enterprise Platforms", detail: "Architected & shipped" },
-  { value: 150, suffix: "+", label: "Business Modules", detail: "Across industries" },
-  { value: 40, suffix: "+", label: "User Roles", detail: "Modelled end-to-end" },
-  { value: null, label: "AI Integrated", detail: "Into every workflow" },
-];
-
-const disciplines = [
+const capabilities = [
   {
-    title: "Enterprise Architecture",
-    body: "Designing multi-tenant platforms with clean service boundaries, RBAC, and event-driven workflows built to run at organisational scale.",
+    title: "System Architecture",
+    body: "We design multi-tenant, service-oriented platforms with clean domain boundaries, event-driven workflows, and defensible security models. Every platform we ship is built to scale from day one.",
   },
   {
     title: "Applied AI",
-    body: "Embedding AI directly into business workflows — summarisation, prediction, and intelligence woven into the tools people already use.",
+    body: "We integrate AI directly into operational workflows — clinical summaries, document intelligence, resume screening, predictive maintenance — as quiet, useful capabilities rather than bolted-on chatbots.",
   },
   {
     title: "Product Engineering",
-    body: "Turning complex enterprise problems into clear, elegant product experiences without compromising on depth or reliability.",
+    body: "We translate deep enterprise complexity into product experiences that feel simple, considered, and fast — the difference between software that gets tolerated and software that gets loved.",
   },
   {
-    title: "Systems at Scale",
-    body: "Microservices, gateways, queues, caching and observability — engineered with the same discipline you'd expect from a modern technology company.",
+    title: "CTO Leadership",
+    body: "I lead our engineering organization with a bias for taste, ownership, and long-term compounding. Our team ships with discipline, care, and a strong sense of craft.",
   },
 ];
 
-function Home() {
+const highlights = [
+  {
+    name: "MedCore",
+    context: "Healthcare · Hospital OS",
+    detail:
+      "Architected a full hospital operating system covering EMR, appointments, pharmacy, labs and billing, with AI-assisted triage and clinical summaries.",
+  },
+  {
+    name: "EduCore",
+    context: "Education · School Platform",
+    detail:
+      "Built an end-to-end school platform: student information, grading, attendance, parent portal and AI-driven performance insights.",
+  },
+  {
+    name: "PeopleCore",
+    context: "HR · Workforce Suite",
+    detail:
+      "Designed an HR suite spanning recruitment, onboarding, payroll, performance and workforce analytics with intelligent screening.",
+  },
+  {
+    name: "GovCore",
+    context: "Government · Citizen Services",
+    detail:
+      "Delivered citizen services, permits and workflow automation for public institutions with document intelligence at the core.",
+  },
+  {
+    name: "EstateCore",
+    context: "Real Estate · Property Ops",
+    detail:
+      "Shipped property, lease and maintenance operations with predictive maintenance and lease summarisation.",
+  },
+  {
+    name: "LogisticsCore",
+    context: "Logistics · Fleet & Dispatch",
+    detail:
+      "Built fleet, dispatch, warehouse and last-mile intelligence for logistics operators running national-scale networks.",
+  },
+];
+
+const principles = [
+  {
+    title: "Engineering Philosophy",
+    body: "Simplicity scales. Clear boundaries beat clever code. Every system we build should still be understandable years from now.",
+  },
+  {
+    title: "Leadership Philosophy",
+    body: "We empower engineers to think like owners. Ship with taste, respect the user, and optimise for long-term compounding.",
+  },
+  {
+    title: "Vision",
+    body: "Enterprise software that feels like consumer software — intelligent, elegant, and effortless to use.",
+  },
+  {
+    title: "Core Values",
+    body: "Precision. Intentionality. Engineering excellence as a form of care for the people who depend on the software.",
+  },
+];
+
+function FounderPage() {
   return (
-    <div className="pt-16">
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-background to-transparent" />
-        <div className="container-page relative grid gap-16 py-24 md:py-32 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-          <div className="flex flex-col justify-center">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-background px-3 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-                Mikiyas Sahilu · CTO at FURII
-              </span>
+    <div className="pt-32">
+      {/* Intro */}
+      <section className="container-page pb-20">
+        <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
+          <div>
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-surface">
+              <img
+                src="/founder.jpg"
+                alt="Mikiyas Sahilu"
+                className="aspect-[4/5] w-full object-cover"
+              />
             </div>
+            <div className="mt-6 flex flex-col gap-3 text-sm">
+              <a
+                href="mailto:hello@furii.co"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary"
+              >
+                <Mail className="h-4 w-4" /> hello@furii.co
+              </a>
+              <a
+                href="https://linkedin.com"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary"
+              >
+                <Linkedin className="h-4 w-4" /> LinkedIn
+              </a>
+              <a
+                href="https://github.com"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary"
+              >
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+            </div>
+          </div>
 
-            <h1 className="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-              We engineer enterprise software for organisations that demand excellence.
-            </h1>
-
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              As CTO, I lead engineering and architecture focused on designing scalable platforms,
-              AI-powered workflows, and enterprise systems that transform how organisations
-              operate — from hospitals and schools to governments and factories.
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">
+              About
             </p>
+            <h1 className="mt-3 text-balance text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+              Mikiyas Sahilu
+            </h1>
+            <p className="mt-3 text-lg text-muted-foreground">
+              CTO & Enterprise Software Architect · FURII
+            </p>
+
+            <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
+              <p>
+                As CTO at FURII, I lead an engineering team that designs and builds enterprise platforms
+                for organisations that expect reliability, scale, and craft. Our work sits at
+                the intersection of systems engineering, applied AI, and product design.
+              </p>
+              <p>
+                At FURII I lead engineering and architecture — shaping how our platforms are
+                designed, how they're built, and how AI is embedded into the workflows people
+                actually use. Together with our team, we've architected and shipped platforms across healthcare,
+                education, HR, government, real estate, logistics, manufacturing, and finance.
+              </p>
+              <p>
+                We care about the details that make software feel considered: clean domain
+                models, intentional interfaces, thoughtful defaults, and the quiet reliability
+                that lets an organisation depend on a system every day without thinking about
+                it.
+              </p>
+            </div>
 
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 to="/systems"
-                className="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:opacity-95"
+                className="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-95"
               >
-                Explore our work
+                See what we've built
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                to="/founder"
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface"
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-medium text-foreground hover:bg-surface"
               >
-                About our team
+                Work with us
               </Link>
             </div>
-
-            <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-[11px] uppercase tracking-widest text-subtle">
-              <span>Architecture</span>
-              <span>·</span>
-              <span>Applied AI</span>
-              <span>·</span>
-              <span>Product Engineering</span>
-            </div>
-          </div>
-
-          <div className="relative flex items-center">
-            <ArchitectureDiagram />
           </div>
         </div>
       </section>
 
-      {/* METRICS */}
-      <section className="border-y border-border bg-surface">
-        <div className="container-page grid grid-cols-2 gap-px overflow-hidden bg-border lg:grid-cols-4">
-          {metrics.map((m) => (
-            <div
-              key={m.label}
-              className="group relative bg-surface p-8 transition-colors hover:bg-background"
-            >
-              <div className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                {m.value !== null ? (
-                  <CountUp value={m.value} suffix={m.suffix} />
-                ) : (
-                  <span className="inline-flex items-center gap-2 text-primary">
-                    <Sparkles className="h-7 w-7" />
-                    AI
-                  </span>
-                )}
-              </div>
-              <p className="mt-3 text-sm font-medium text-foreground">{m.label}</p>
-              {m.detail && <p className="text-xs text-muted-foreground">{m.detail}</p>}
-              <div className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* DISCIPLINES / WHAT WE DO */}
-      <section className="py-24 md:py-32">
+      {/* Capabilities */}
+      <section className="border-y border-border bg-surface py-24">
         <div className="container-page">
           <SectionHeading
             eyebrow="What we do"
-            title="Engineering the systems modern organisations run on."
-            description="Our work spans architecture, applied AI, and product engineering — turning complex operational problems into clean, dependable platforms."
+            title="Architecture, AI, and product engineering."
+            description="Four disciplines our team brings to every engagement."
           />
           <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
-            {disciplines.map((d) => (
-              <div key={d.title} className="bg-card p-8 md:p-10">
-                <h3 className="text-xl font-semibold tracking-tight">{d.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d.body}</p>
+            {capabilities.map((c) => (
+              <div key={c.title} className="bg-card p-8">
+                <h3 className="text-lg font-semibold tracking-tight">{c.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SYSTEMS */}
-      <section id="systems" className="border-t border-border bg-surface py-24 md:py-32">
-        <div className="container-page">
-          <div className="flex flex-col items-end justify-between gap-6 md:flex-row">
-            <SectionHeading
-              eyebrow="Systems we've built"
-              title="Enterprise platforms, engineered end-to-end."
-              description="A selection of platforms we've architected and shipped at FURII — each running mission-critical operations at organisational scale."
-            />
-            <Link
-              to="/systems"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary"
-            >
-              View all systems
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {systems.slice(0, 6).map((s) => (
-              <SystemCard key={s.slug} s={s} />
-            ))}
-          </div>
-        </div>
+      {/* Selected work */}
+      <section className="container-page py-24">
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Platforms we've architected and shipped."
+        />
+        <ol className="mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+          {highlights.map((h, i) => (
+            <li key={h.name} className="grid gap-4 p-6 md:grid-cols-[80px_1fr_auto] md:items-center md:gap-8 md:p-8">
+              <span className="font-mono text-xs uppercase tracking-widest text-subtle">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-primary">
+                  {h.context}
+                </p>
+                <h3 className="mt-1 text-xl font-semibold tracking-tight">{h.name}</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                  {h.detail}
+                </p>
+              </div>
+              <Link
+                to="/systems"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary"
+              >
+                Details
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 md:py-32">
+      {/* Principles */}
+      <section className="border-t border-border bg-surface py-24">
         <div className="container-page">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-foreground px-8 py-20 text-center md:px-16">
-            <div className="absolute inset-0 grid-bg opacity-[0.06]" />
-            <p className="font-mono text-xs uppercase tracking-widest text-background/60">
-              Let's work together
-            </p>
-            <h2 className="mx-auto mt-4 max-w-2xl text-balance text-4xl font-bold tracking-tight text-background md:text-5xl">
-              Have an ambitious system to build?
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-base text-background/70">
-              We take on a small number of engagements each year — architecture reviews,
-              platform builds, and CTO-level advisory.
-            </p>
-            <div className="mt-8">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-md bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-background/90"
-              >
-                Get in touch
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+          <SectionHeading eyebrow="How we work" title="Principles that shape our craft." />
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {principles.map((p) => (
+              <div key={p.title} className="rounded-2xl border border-border bg-card p-8">
+                <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

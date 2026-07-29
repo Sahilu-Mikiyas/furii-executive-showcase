@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
+  { to: "/", label: "About" },
   { to: "/systems", label: "Systems" },
   { to: "/architecture", label: "Architecture" },
   { to: "/ai", label: "AI" },
   { to: "/media", label: "Media" },
-  { to: "/founder", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -50,8 +50,9 @@ export function SiteNav() {
             <Link
               key={item.to}
               to={item.to}
+              activeOptions={{ exact: true }}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground" }}
+              activeProps={{ className: "text-foreground font-medium" }}
             >
               {item.label}
             </Link>
