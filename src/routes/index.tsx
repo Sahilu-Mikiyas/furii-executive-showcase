@@ -5,8 +5,6 @@ import { CountUp } from "../components/count-up";
 import { SectionHeading } from "../components/section-heading";
 import { SystemCard } from "../components/system-card";
 import { systems } from "../lib/systems";
-import founderAsset from "../assets/founder.png.asset.json";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -25,8 +23,8 @@ export const Route = createFileRoute("/")({
         content:
           "Enterprise platforms, AI workflows and systems architecture. CTO at FURII.",
       },
-      { property: "og:image", content: founderAsset.url },
-      { name: "twitter:image", content: founderAsset.url },
+      { property: "og:image", content: "/founder.jpg" },
+      { name: "twitter:image", content: "/founder.jpg" },
     ],
   }),
   component: Home,

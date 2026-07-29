@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Mail, Linkedin, Github } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
-import founderAsset from "../assets/founder.png.asset.json";
-
 export const Route = createFileRoute("/founder")({
   head: () => ({
     meta: [
@@ -18,8 +16,8 @@ export const Route = createFileRoute("/founder")({
         content:
           "CTO and enterprise architect building intelligent, large-scale software platforms.",
       },
-      { property: "og:image", content: founderAsset.url },
-      { name: "twitter:image", content: founderAsset.url },
+      { property: "og:image", content: "/founder.jpg" },
+      { name: "twitter:image", content: "/founder.jpg" },
     ],
   }),
   component: FounderPage,
@@ -111,7 +109,7 @@ function FounderPage() {
           <div>
             <div className="relative overflow-hidden rounded-2xl border border-border bg-surface">
               <img
-                src={founderAsset.url}
+                src="/founder.jpg"
                 alt="Mikiyas Sahilu"
                 className="aspect-[4/5] w-full object-cover"
               />
