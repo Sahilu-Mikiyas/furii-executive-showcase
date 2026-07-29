@@ -10,6 +10,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "strata-ops": "/systems/strata-ops",
     "velox-commerce": "/systems/velox-commerce",
     "civic-pulse": "/systems/civic-pulse",
+    "equinox-ledger": "/systems/equinox-ledger",
   };
 
   const targetPath = detailPages[s.slug];

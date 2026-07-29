@@ -18,6 +18,7 @@ import { Route as MediaRouteImport } from './routes/media'
 import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as SystemsIndexRouteImport } from './routes/systems.index'
 import { Route as SystemsCivicPulseRouteImport } from './routes/systems.civic-pulse'
+import { Route as SystemsEquinoxLedgerRouteImport } from './routes/systems.equinox-ledger'
 import { Route as SystemsNexusCampusRouteImport } from './routes/systems.nexus-campus'
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
 import { Route as SystemsStrataOpsRouteImport } from './routes/systems.strata-ops'
@@ -69,6 +70,11 @@ const SystemsCivicPulseRoute = SystemsCivicPulseRouteImport.update({
   path: '/civic-pulse',
   getParentRoute: () => SystemsRoute,
 } as any)
+const SystemsEquinoxLedgerRoute = SystemsEquinoxLedgerRouteImport.update({
+  id: '/equinox-ledger',
+  path: '/equinox-ledger',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const SystemsNexusCampusRoute = SystemsNexusCampusRouteImport.update({
   id: '/nexus-campus',
   path: '/nexus-campus',
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
+  '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
+  '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
+  '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/systems'
     | '/systems/civic-pulse'
+    | '/systems/equinox-ledger'
     | '/systems/nexus-campus'
     | '/systems/pulse-os'
     | '/systems/strata-ops'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/founder'
     | '/media'
     | '/systems/civic-pulse'
+    | '/systems/equinox-ledger'
     | '/systems/nexus-campus'
     | '/systems/pulse-os'
     | '/systems/strata-ops'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/systems'
     | '/systems/civic-pulse'
+    | '/systems/equinox-ledger'
     | '/systems/nexus-campus'
     | '/systems/pulse-os'
     | '/systems/strata-ops'
@@ -268,6 +280,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsCivicPulseRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/equinox-ledger': {
+      id: '/systems/equinox-ledger'
+      path: '/equinox-ledger'
+      fullPath: '/systems/equinox-ledger'
+      preLoaderRoute: typeof SystemsEquinoxLedgerRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/nexus-campus': {
       id: '/systems/nexus-campus'
       path: '/nexus-campus'
@@ -308,6 +327,7 @@ declare module '@tanstack/react-router' {
 
 interface SystemsRouteChildren {
   SystemsCivicPulseRoute: typeof SystemsCivicPulseRoute
+  SystemsEquinoxLedgerRoute: typeof SystemsEquinoxLedgerRoute
   SystemsNexusCampusRoute: typeof SystemsNexusCampusRoute
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
   SystemsStrataOpsRoute: typeof SystemsStrataOpsRoute
@@ -318,6 +338,7 @@ interface SystemsRouteChildren {
 
 const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsCivicPulseRoute: SystemsCivicPulseRoute,
+  SystemsEquinoxLedgerRoute: SystemsEquinoxLedgerRoute,
   SystemsNexusCampusRoute: SystemsNexusCampusRoute,
   SystemsPulseOsRoute: SystemsPulseOsRoute,
   SystemsStrataOpsRoute: SystemsStrataOpsRoute,
