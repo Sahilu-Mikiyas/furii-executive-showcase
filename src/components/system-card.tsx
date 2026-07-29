@@ -1,8 +1,11 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CheckCircle2, Cpu, ShieldCheck } from "lucide-react";
 import type { SystemInfo } from "../lib/systems";
 
 export function SystemCard({ s }: { s: SystemInfo }) {
-  return (
+  const hasDetailPage = s.slug === "pulse-os";
+
+  const card = (
     <article className="group relative flex flex-col overflow-hidden rounded-[28px] border border-border bg-card shadow-xs transition-all duration-500 ease-out hover:-translate-y-2 hover:border-foreground/30 hover:shadow-2xl">
       {/* Logo Header */}
       <div className={`relative aspect-[16/9] overflow-hidden bg-gradient-to-br ${s.accent}`}>
@@ -83,4 +86,14 @@ export function SystemCard({ s }: { s: SystemInfo }) {
       </div>
     </article>
   );
+
+  if (hasDetailPage) {
+    return (
+      <Link to="/systems/pulse-os" className="block cursor-pointer no-underline">
+        {card}
+      </Link>
+    );
+  }
+
+  return card;
 }

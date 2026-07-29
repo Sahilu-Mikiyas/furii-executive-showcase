@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FounderRouteImport } from './routes/founder'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as SystemsRouteImport } from './routes/systems'
+import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const SystemsRoute = SystemsRouteImport.update({
   path: '/systems',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SystemsPulseOsRoute = SystemsPulseOsRouteImport.update({
+  id: '/pulse-os',
+  path: '/pulse-os',
+  getParentRoute: () => SystemsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,7 +66,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
-  '/systems': typeof SystemsRoute
+  '/systems': typeof SystemsRouteWithChildren
+  '/systems/pulse-os': typeof SystemsPulseOsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,7 +76,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
-  '/systems': typeof SystemsRoute
+  '/systems': typeof SystemsRouteWithChildren
+  '/systems/pulse-os': typeof SystemsPulseOsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,7 +87,8 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
-  '/systems': typeof SystemsRoute
+  '/systems': typeof SystemsRouteWithChildren
+  '/systems/pulse-os': typeof SystemsPulseOsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/founder'
     | '/media'
     | '/systems'
+    | '/systems/pulse-os'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/founder'
     | '/media'
     | '/systems'
+    | '/systems/pulse-os'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/founder'
     | '/media'
     | '/systems'
+    | '/systems/pulse-os'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,7 +130,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FounderRoute: typeof FounderRoute
   MediaRoute: typeof MediaRoute
-  SystemsRoute: typeof SystemsRoute
+  SystemsRoute: typeof SystemsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -172,8 +184,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/systems/pulse-os': {
+      id: '/systems/pulse-os'
+      path: '/pulse-os'
+      fullPath: '/systems/pulse-os'
+      preLoaderRoute: typeof SystemsPulseOsRouteImport
+      parentRoute: typeof SystemsRoute
+    }
   }
 }
+
+interface SystemsRouteChildren {
+  SystemsPulseOsRoute: typeof SystemsPulseOsRoute
+}
+
+const SystemsRouteChildren: SystemsRouteChildren = {
+  SystemsPulseOsRoute: SystemsPulseOsRoute,
+}
+
+const SystemsRouteWithChildren =
+  SystemsRoute._addFileChildren(SystemsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -182,7 +212,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FounderRoute: FounderRoute,
   MediaRoute: MediaRoute,
-  SystemsRoute: SystemsRoute,
+  SystemsRoute: SystemsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
