@@ -103,36 +103,36 @@ const principles = [
 
 function FounderPage() {
   return (
-    <div className="pt-32">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
       {/* Intro */}
-      <section className="container-page pb-20">
-        <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
-          <div className="flex flex-col items-start">
-            <div className="relative w-full max-w-[240px] sm:max-w-[260px] lg:max-w-none overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+      <section className="container-page pb-12 sm:pb-16 md:pb-20">
+        <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
+          <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-6 lg:gap-6">
+            <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-none shrink-0 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
               <img
                 src="/founder.jpg"
                 alt="Mikiyas Sahilu"
                 className="aspect-[4/5] w-full object-cover"
               />
             </div>
-            <div className="mt-6 flex flex-col gap-3 text-sm w-full max-w-[240px] sm:max-w-[260px] lg:max-w-none">
+            <div className="flex flex-col gap-2.5 text-sm w-full max-w-[260px] lg:max-w-none pt-1">
               <a
                 href="mailto:hello@furii.co"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors text-xs sm:text-sm"
               >
-                <Mail className="h-4 w-4 text-muted-foreground" /> hello@furii.co
+                <Mail className="h-4 w-4 text-muted-foreground shrink-0" /> hello@furii.co
               </a>
               <a
                 href="https://linkedin.com"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors text-xs sm:text-sm"
               >
-                <Linkedin className="h-4 w-4 text-muted-foreground" /> LinkedIn
+                <Linkedin className="h-4 w-4 text-muted-foreground shrink-0" /> LinkedIn
               </a>
               <a
                 href="https://github.com"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors text-xs sm:text-sm"
               >
-                <Github className="h-4 w-4 text-muted-foreground" /> GitHub
+                <Github className="h-4 w-4 text-muted-foreground shrink-0" /> GitHub
               </a>
             </div>
           </div>
@@ -141,14 +141,14 @@ function FounderPage() {
             <p className="font-mono text-xs uppercase tracking-widest text-primary">
               About
             </p>
-            <h1 className="mt-3 text-balance text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+            <h1 className="mt-2 sm:mt-3 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               Mikiyas Sahilu
             </h1>
-            <p className="mt-3 text-lg text-muted-foreground">
+            <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted-foreground">
               CTO & Enterprise Software Architect · FURII
             </p>
 
-            <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
+            <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
               <p>
                 As CTO at FURII, I lead an engineering team that designs and builds enterprise platforms
                 for organisations that expect reliability, scale, and craft. Our work sits at
@@ -168,17 +168,17 @@ function FounderPage() {
               </p>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-8 sm:mt-10 flex flex-wrap gap-3">
               <Link
                 to="/systems"
-                className="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-95"
+                className="group inline-flex items-center gap-2 rounded-md bg-primary px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-primary-foreground hover:opacity-95 transition-all"
               >
                 See what we've built
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-medium text-foreground hover:bg-surface"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-foreground hover:bg-surface transition-colors"
               >
                 Work with us
               </Link>
@@ -188,18 +188,18 @@ function FounderPage() {
       </section>
 
       {/* Capabilities */}
-      <section className="border-y border-border bg-surface py-24">
+      <section className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
         <div className="container-page">
           <SectionHeading
             eyebrow="What we do"
             title="Architecture, AI, and product engineering."
             description="Four disciplines our team brings to every engagement."
           />
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
+          <div className="mt-8 sm:mt-12 md:mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
             {capabilities.map((c) => (
-              <div key={c.title} className="bg-card p-8">
-                <h3 className="text-lg font-semibold tracking-tight">{c.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
+              <div key={c.title} className="bg-card p-6 sm:p-8">
+                <h3 className="text-base sm:text-lg font-semibold tracking-tight">{c.title}</h3>
+                <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{c.body}</p>
               </div>
             ))}
           </div>
@@ -207,32 +207,32 @@ function FounderPage() {
       </section>
 
       {/* Selected work */}
-      <section className="container-page py-24">
+      <section className="container-page py-12 sm:py-16 md:py-24">
         <SectionHeading
           eyebrow="Selected work"
           title="Platforms we've architected and shipped."
         />
-        <ol className="mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+        <ol className="mt-8 sm:mt-12 md:mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
           {highlights.map((h, i) => (
-            <li key={h.name} className="grid gap-4 p-6 md:grid-cols-[80px_1fr_auto] md:items-center md:gap-8 md:p-8">
+            <li key={h.name} className="grid gap-3 sm:gap-4 p-5 sm:p-6 md:grid-cols-[60px_1fr_auto] md:items-center md:gap-8 md:p-8">
               <span className="font-mono text-xs uppercase tracking-widest text-subtle">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-widest text-primary">
+                <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-primary">
                   {h.context}
                 </p>
-                <h3 className="mt-1 text-xl font-semibold tracking-tight">{h.name}</h3>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                <h3 className="mt-1 text-lg sm:text-xl font-semibold tracking-tight">{h.name}</h3>
+                <p className="mt-1.5 sm:mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-muted-foreground">
                   {h.detail}
                 </p>
               </div>
               <Link
                 to="/systems"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary"
+                className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-foreground hover:text-primary pt-1 md:pt-0"
               >
                 Details
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </li>
           ))}
@@ -240,14 +240,14 @@ function FounderPage() {
       </section>
 
       {/* Principles */}
-      <section className="border-t border-border bg-surface py-24">
+      <section className="border-t border-border bg-surface py-12 sm:py-16 md:py-24">
         <div className="container-page">
           <SectionHeading eyebrow="How we work" title="Principles that shape our craft." />
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
+          <div className="mt-8 sm:mt-12 md:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2">
             {principles.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-border bg-card p-8">
-                <h3 className="text-xl font-semibold tracking-tight">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              <div key={p.title} className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+                <h3 className="text-lg sm:text-xl font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{p.body}</p>
               </div>
             ))}
           </div>
