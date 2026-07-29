@@ -6,6 +6,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
   const detailPages: Record<string, string> = {
     "pulse-os": "/systems/pulse-os",
     "nexus-campus": "/systems/nexus-campus",
+    "talent-grid": "/systems/talent-grid",
   };
 
   const targetPath = detailPages[s.slug];
