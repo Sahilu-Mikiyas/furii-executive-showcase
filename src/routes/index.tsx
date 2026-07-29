@@ -46,38 +46,38 @@ const capabilities = [
 
 const highlights = [
   {
-    name: "MedCore",
-    context: "Healthcare · Hospital OS",
+    name: "Pulse OS",
+    context: "Healthcare · Hospital Operating System",
     detail:
       "Architected a full hospital operating system covering EMR, appointments, pharmacy, labs and billing, with AI-assisted triage and clinical summaries.",
   },
   {
-    name: "EduCore",
-    context: "Education · School Platform",
+    name: "Nexus Campus",
+    context: "Education · University & School OS",
     detail:
       "Built an end-to-end school platform: student information, grading, attendance, parent portal and AI-driven performance insights.",
   },
   {
-    name: "PeopleCore",
-    context: "HR · Workforce Suite",
+    name: "TalentGrid",
+    context: "HR · Enterprise Workforce Suite",
     detail:
       "Designed an HR suite spanning recruitment, onboarding, payroll, performance and workforce analytics with intelligent screening.",
   },
   {
-    name: "GovCore",
-    context: "Government · Citizen Services",
+    name: "CivicPulse",
+    context: "Government · Citizen Services OS",
     detail:
       "Delivered citizen services, permits and workflow automation for public institutions with document intelligence at the core.",
   },
   {
-    name: "EstateCore",
-    context: "Real Estate · Property Ops",
+    name: "Strata Ops",
+    context: "Real Estate · Property & Asset OS",
     detail:
       "Shipped property, lease and maintenance operations with predictive maintenance and lease summarisation.",
   },
   {
-    name: "LogisticsCore",
-    context: "Logistics · Fleet & Dispatch",
+    name: "Vector Dispatch",
+    context: "Logistics · Fleet & Last-Mile OS",
     detail:
       "Built fleet, dispatch, warehouse and last-mile intelligence for logistics operators running national-scale networks.",
   },

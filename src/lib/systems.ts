@@ -9,8 +9,8 @@ export type SystemInfo = {
 
 export const systems: SystemInfo[] = [
   {
-    slug: "medcore",
-    name: "MedCore",
+    slug: "pulse-os",
+    name: "Pulse OS",
     industry: "Healthcare",
     description:
       "Hospital operating system spanning EMR, appointments, pharmacy, labs, billing, and AI-assisted diagnostics.",
@@ -18,8 +18,8 @@ export const systems: SystemInfo[] = [
     accent: "from-sky-500/10 to-transparent",
   },
   {
-    slug: "educore",
-    name: "EduCore",
+    slug: "nexus-campus",
+    name: "Nexus Campus",
     industry: "Education",
     description:
       "End-to-end school platform: SIS, grading, attendance, parent portal, and AI performance insights.",
@@ -27,8 +27,8 @@ export const systems: SystemInfo[] = [
     accent: "from-indigo-500/10 to-transparent",
   },
   {
-    slug: "peoplecore",
-    name: "PeopleCore",
+    slug: "talent-grid",
+    name: "TalentGrid",
     industry: "Human Resources",
     description:
       "HR suite covering recruitment, onboarding, payroll, performance and workforce analytics.",
@@ -36,8 +36,8 @@ export const systems: SystemInfo[] = [
     accent: "from-emerald-500/10 to-transparent",
   },
   {
-    slug: "estatecore",
-    name: "EstateCore",
+    slug: "strata-ops",
+    name: "Strata Ops",
     industry: "Real Estate",
     description:
       "Property, lease, tenant, and maintenance operations with predictive maintenance intelligence.",
@@ -45,16 +45,16 @@ export const systems: SystemInfo[] = [
     accent: "from-amber-500/10 to-transparent",
   },
   {
-    slug: "retailcore",
-    name: "RetailCore",
+    slug: "velox-commerce",
+    name: "Velox Commerce",
     industry: "Retail",
     description: "POS, inventory, e-commerce and customer intelligence across every storefront.",
     tags: ["POS", "Inventory", "Omni"],
     accent: "from-rose-500/10 to-transparent",
   },
   {
-    slug: "govcore",
-    name: "GovCore",
+    slug: "civic-pulse",
+    name: "CivicPulse",
     industry: "Government",
     description:
       "Citizen services, permits, workflows and document intelligence for public institutions.",
@@ -62,24 +62,24 @@ export const systems: SystemInfo[] = [
     accent: "from-blue-500/10 to-transparent",
   },
   {
-    slug: "financecore",
-    name: "FinanceCore",
+    slug: "equinox-ledger",
+    name: "Equinox Ledger",
     industry: "Finance",
     description: "Core accounting, ledgers, budgeting, and financial reporting for enterprises.",
     tags: ["GL", "Budgeting", "Audit"],
     accent: "from-teal-500/10 to-transparent",
   },
   {
-    slug: "impactcore",
-    name: "ImpactCore",
+    slug: "prism-impact",
+    name: "Prism Impact",
     industry: "NGO & Impact",
     description: "Beneficiary management, program tracking, and donor reporting for NGOs.",
     tags: ["M&E", "Donors", "Programs"],
     accent: "from-lime-500/10 to-transparent",
   },
   {
-    slug: "factorycore",
-    name: "FactoryCore",
+    slug: "forge-mes",
+    name: "Forge MES",
     industry: "Manufacturing",
     description:
       "MES, production planning, quality, and asset intelligence for modern factories.",
@@ -87,24 +87,24 @@ export const systems: SystemInfo[] = [
     accent: "from-orange-500/10 to-transparent",
   },
   {
-    slug: "hospitalitycore",
-    name: "HospitalityCore",
+    slug: "aura-hospitality",
+    name: "Aura Hospitality",
     industry: "Hospitality",
     description: "PMS, reservations, POS, and guest experience for hotels and resorts.",
     tags: ["PMS", "POS", "Guest"],
     accent: "from-fuchsia-500/10 to-transparent",
   },
   {
-    slug: "constructioncore",
-    name: "ConstructionCore",
+    slug: "construct-x",
+    name: "ConstructX",
     industry: "Construction",
     description: "Projects, sites, procurement, and workforce operations for contractors.",
     tags: ["Projects", "Procure", "Field"],
     accent: "from-yellow-500/10 to-transparent",
   },
   {
-    slug: "logisticscore",
-    name: "LogisticsCore",
+    slug: "vector-dispatch",
+    name: "Vector Dispatch",
     industry: "Logistics",
     description: "Fleet, dispatch, warehouse, and last-mile intelligence for logistics operators.",
     tags: ["TMS", "WMS", "Route AI"],
