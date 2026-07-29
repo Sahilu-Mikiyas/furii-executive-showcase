@@ -5,17 +5,17 @@ import { SectionHeading } from "../components/section-heading";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mikiyas Sahilu — CTO & Enterprise Software Architect" },
+      { title: "Mikiyas Sahilu — CTO & Enterprise Systems Architect" },
       {
         name: "description",
         content:
-          "Mikiyas Sahilu is CTO and enterprise software architect. He leads engineering and applied AI at FURII, building platforms that run mission-critical operations at scale.",
+          "Mikiyas Sahilu is CTO and enterprise software architect. He leads engineering and applied AI at FURII, building high-throughput platforms for modern enterprises.",
       },
-      { property: "og:title", content: "Mikiyas Sahilu — CTO & Enterprise Architect" },
+      { property: "og:title", content: "Mikiyas Sahilu — CTO & Enterprise Systems Architect" },
       {
         property: "og:description",
         content:
-          "CTO and enterprise architect building intelligent, large-scale software platforms.",
+          "CTO & Enterprise Architect building scalable platforms, applied AI workflows, and resilient digital infrastructure.",
       },
       { property: "og:image", content: "/founder.jpg" },
       { name: "twitter:image", content: "/founder.jpg" },
@@ -27,19 +27,19 @@ export const Route = createFileRoute("/")({
 const capabilities = [
   {
     title: "System Architecture",
-    body: "We design multi-tenant, service-oriented platforms with clean domain boundaries, event-driven workflows, and defensible security models. Every platform we ship is built to scale from day one.",
+    body: "We design resilient, multi-tenant platforms with clean service boundaries, event-driven workflows, and defensible security models. Built to scale from day one.",
   },
   {
-    title: "Applied AI",
-    body: "We integrate AI directly into operational workflows — clinical summaries, document intelligence, resume screening, predictive maintenance — as quiet, useful capabilities rather than bolted-on chatbots.",
+    title: "Applied AI Workflows",
+    body: "We integrate pragmatic AI into real operational tools — clinical summaries, document intelligence, resume screening, and predictive analytics — with zero gimmick chatbots.",
   },
   {
     title: "Product Engineering",
-    body: "We translate deep enterprise complexity into product experiences that feel simple, considered, and fast — the difference between software that gets tolerated and software that gets loved.",
+    body: "We translate deep operational complexity into crisp, fast product experiences — the difference between software that gets tolerated and software people love using.",
   },
   {
     title: "CTO Leadership",
-    body: "I lead our engineering organization with a bias for taste, ownership, and long-term compounding. Our team ships with discipline, care, and a strong sense of craft.",
+    body: "I lead our engineering organization with a bias for taste, ownership, and long-term compounding. High standards, disciplined execution, and strong technical craft.",
   },
 ];
 
@@ -85,19 +85,19 @@ const highlights = [
 const principles = [
   {
     title: "Engineering Philosophy",
-    body: "Simplicity scales. Clear boundaries beat clever code. Every system we build should still be understandable years from now.",
+    body: "Simplicity scales. Clear domain boundaries beat clever code. Every system we build must be understandable and maintainable years from now.",
   },
   {
     title: "Leadership Philosophy",
-    body: "We empower engineers to think like owners. Ship with taste, respect the user, and optimise for long-term compounding.",
+    body: "Empower engineers to think like owners. Ship with taste, respect the user, and optimize for long-term compounding value.",
   },
   {
-    title: "Vision",
-    body: "Enterprise software that feels like consumer software — intelligent, elegant, and effortless to use.",
+    title: "Product Vision",
+    body: "Enterprise software engineered with consumer-grade polish — intelligent, fast, and effortless to operate.",
   },
   {
     title: "Core Values",
-    body: "Precision. Intentionality. Engineering excellence as a form of care for the people who depend on the software.",
+    body: "Precision. Intentionality. Engineering excellence as a form of respect for the organizations relying on our systems.",
   },
 ];
 
@@ -145,26 +145,27 @@ function FounderPage() {
               Mikiyas Sahilu
             </h1>
             <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted-foreground">
-              CTO & Enterprise Software Architect · FURII
+              CTO & Enterprise Systems Architect · FURII
             </p>
 
             <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
-              <p>
-                As CTO at FURII, I lead an engineering team that designs and builds enterprise platforms
-                for organisations that expect reliability, scale, and craft. Our work sits at
-                the intersection of systems engineering, applied AI, and product design.
+              <p className="text-foreground font-medium text-base sm:text-lg leading-snug">
+                Enterprise software shouldn't feel like a legacy chore. We build scalable platforms,
+                applied AI workflows, and resilient digital infrastructure for organizations that demand excellence.
               </p>
               <p>
-                At FURII I lead engineering and architecture — shaping how our platforms are
-                designed, how they're built, and how AI is embedded into the workflows people
-                actually use. Together with our team, we've architected and shipped platforms across healthcare,
-                education, HR, government, real estate, logistics, manufacturing, and finance.
+                I bridge executive strategy and deep technical execution. As CTO at FURII, I lead our
+                engineering team in designing high-throughput, multi-tenant platforms — across healthcare,
+                logistics, government, HR, real estate, and finance.
               </p>
               <p>
-                We care about the details that make software feel considered: clean domain
-                models, intentional interfaces, thoughtful defaults, and the quiet reliability
-                that lets an organisation depend on a system every day without thinking about
-                it.
+                We focus on the non-negotiables: clean domain boundaries, pragmatic AI integrations
+                that automate real work, and consumer-grade interfaces built for enterprise scale.
+              </p>
+              <p>
+                We care about the details that make software feel considered — quiet reliability,
+                intentional API contracts, thoughtful security models, and systems engineered to compound
+                in value over time.
               </p>
             </div>
 
@@ -173,7 +174,7 @@ function FounderPage() {
                 to="/systems"
                 className="group inline-flex items-center gap-2 rounded-md bg-primary px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-primary-foreground hover:opacity-95 transition-all"
               >
-                See what we've built
+                Explore our platforms
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
@@ -192,8 +193,8 @@ function FounderPage() {
         <div className="container-page">
           <SectionHeading
             eyebrow="What we do"
-            title="Architecture, AI, and product engineering."
-            description="Four disciplines our team brings to every engagement."
+            title="Architecture, applied AI, and product engineering."
+            description="Four core technical disciplines our team brings to every engagement."
           />
           <div className="mt-8 sm:mt-12 md:mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
             {capabilities.map((c) => (
