@@ -108,7 +108,7 @@ function FounderPage() {
       <section className="container-page pb-12 sm:pb-16 md:pb-20">
         <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
           <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-6 lg:gap-6">
-            <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-none shrink-0 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+            <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-none shrink-0 overflow-hidden rounded-3xl border border-border bg-surface shadow-sm transition-all duration-300 ease-in-out hover:border-foreground/30 hover:shadow-md">
               <img
                 src="/founder.jpg"
                 alt="Mikiyas Sahilu"
@@ -118,27 +118,27 @@ function FounderPage() {
             <div className="flex flex-col gap-3 text-sm w-full max-w-[280px] lg:max-w-none pt-1">
               <a
                 href="mailto:furiimotionlabsceo@outlook.com"
-                className="inline-flex items-center gap-2.5 text-foreground hover:text-primary transition-colors text-xs sm:text-sm font-medium"
+                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors text-xs sm:text-sm font-medium"
               >
-                <Mail className="h-4 w-4 text-primary shrink-0" /> furiimotionlabsceo@outlook.com
+                <Mail className="h-4 w-4 text-foreground shrink-0" /> furiimotionlabsceo@outlook.com
               </a>
               <a
                 href="tel:+251909312671"
-                className="inline-flex items-center gap-2.5 text-foreground hover:text-primary transition-colors text-xs sm:text-sm font-medium"
+                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors text-xs sm:text-sm font-medium"
               >
-                <Phone className="h-4 w-4 text-primary shrink-0" /> +251 909 312 671
+                <Phone className="h-4 w-4 text-foreground shrink-0" /> +251 909 312 671
               </a>
             </div>
           </div>
 
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-primary">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground font-semibold">
               About
             </p>
             <h1 className="mt-2 sm:mt-3 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               Mikiyas Sahilu
             </h1>
-            <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted-foreground">
+            <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted-foreground font-medium">
               CTO & Enterprise Software Architect · FURII
             </p>
 
@@ -166,14 +166,14 @@ function FounderPage() {
             <div className="mt-8 sm:mt-10 flex flex-wrap gap-3">
               <Link
                 to="/systems"
-                className="group inline-flex items-center gap-2 rounded-md bg-primary px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-primary-foreground hover:opacity-95 transition-all"
+                className="group inline-flex items-center gap-2 rounded-xl bg-foreground border border-foreground px-5 py-3 text-xs sm:text-sm font-medium text-background transition-all duration-300 ease-in-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
               >
                 Explore our platforms
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <a
                 href="mailto:furiimotionlabsceo@outlook.com"
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-foreground hover:bg-surface transition-colors"
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-xs sm:text-sm font-medium text-foreground transition-all duration-300 ease-in-out hover:bg-foreground hover:text-background hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
               >
                 Work with us
               </a>
@@ -190,9 +190,12 @@ function FounderPage() {
             title="Architecture, applied AI, and product engineering."
             description="Four core technical disciplines our team brings to every engagement."
           />
-          <div className="mt-8 sm:mt-12 md:mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+          <div className="mt-8 sm:mt-12 md:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2">
             {capabilities.map((c) => (
-              <div key={c.title} className="bg-card p-6 sm:p-8">
+              <div
+                key={c.title}
+                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
+              >
                 <h3 className="text-base sm:text-lg font-semibold tracking-tight">{c.title}</h3>
                 <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{c.body}</p>
               </div>
@@ -207,14 +210,17 @@ function FounderPage() {
           eyebrow="Selected work"
           title="Platforms we've architected and shipped."
         />
-        <ol className="mt-8 sm:mt-12 md:md:mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+        <ol className="mt-8 sm:mt-12 md:mt-14 divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
           {highlights.map((h, i) => (
-            <li key={h.name} className="grid gap-3 sm:gap-4 p-5 sm:p-6 md:grid-cols-[60px_1fr_auto] md:items-center md:gap-8 md:p-8">
+            <li
+              key={h.name}
+              className="grid gap-3 sm:gap-4 p-5 sm:p-6 md:grid-cols-[60px_1fr_auto] md:items-center md:gap-8 md:p-8 transition-all duration-300 ease-in-out hover:bg-surface/70"
+            >
               <span className="font-mono text-xs uppercase tracking-widest text-subtle">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
-                <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-primary">
+                <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-foreground/70 font-semibold">
                   {h.context}
                 </p>
                 <h3 className="mt-1 text-lg sm:text-xl font-semibold tracking-tight">{h.name}</h3>
@@ -224,10 +230,10 @@ function FounderPage() {
               </div>
               <Link
                 to="/systems"
-                className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-foreground hover:text-primary pt-1 md:pt-0"
+                className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-foreground hover:text-foreground/70 pt-1 md:pt-0"
               >
                 Details
-                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </li>
           ))}
@@ -240,7 +246,10 @@ function FounderPage() {
           <SectionHeading eyebrow="How we work" title="Principles that shape our craft." />
           <div className="mt-8 sm:mt-12 md:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2">
             {principles.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+              <div
+                key={p.title}
+                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
+              >
                 <h3 className="text-lg sm:text-xl font-semibold tracking-tight">{p.title}</h3>
                 <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{p.body}</p>
               </div>

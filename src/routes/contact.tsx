@@ -38,11 +38,11 @@ function ContactPage() {
               e.preventDefault();
               setSubmitted(true);
             }}
-            className="rounded-2xl border border-border bg-card p-6 sm:p-8 md:p-10"
+            className="rounded-3xl border border-border bg-card p-6 sm:p-8 md:p-10 shadow-sm"
           >
             {submitted ? (
               <div className="py-12 text-center">
-                <p className="font-mono text-xs uppercase tracking-widest text-primary">
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground font-semibold">
                   Message received
                 </p>
                 <h3 className="mt-3 text-2xl font-semibold tracking-tight">
@@ -59,7 +59,7 @@ function ContactPage() {
                 <Field label="Email" name="email" type="email" placeholder="you@company.com" />
                 <div>
                   <Label>Project Type</Label>
-                  <select className="mt-2 w-full rounded-md border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary">
+                  <select className="mt-2 w-full rounded-xl border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-all duration-300 ease-in-out focus:border-foreground">
                     <option>Enterprise Platform</option>
                     <option>AI Integration</option>
                     <option>Architecture Consulting</option>
@@ -72,12 +72,12 @@ function ContactPage() {
                   <textarea
                     rows={5}
                     placeholder="Tell us about the problem you'd like to solve."
-                    className="mt-2 w-full resize-none rounded-md border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary"
+                    className="mt-2 w-full resize-none rounded-xl border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-all duration-300 ease-in-out focus:border-foreground"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-95"
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-foreground border border-foreground px-5 py-3 text-sm font-medium text-background transition-all duration-300 ease-in-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
                 >
                   Schedule a Meeting
                   <ArrowRight className="h-4 w-4" />
@@ -87,25 +87,25 @@ function ContactPage() {
           </form>
 
           <aside className="flex flex-col gap-6">
-            <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
+            <div className="rounded-3xl border border-border bg-surface p-6 sm:p-8 transition-all duration-300 ease-in-out hover:border-foreground/20 hover:shadow-md">
               <p className="font-mono text-[11px] uppercase tracking-widest text-subtle">
                 Direct Contact
               </p>
               <div className="mt-4 flex flex-col gap-3">
                 <a
                   href="mailto:furiimotionlabsceo@outlook.com"
-                  className="group flex items-center gap-3 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                  className="group flex items-center gap-3 text-sm font-medium text-foreground transition-colors duration-300 hover:text-foreground/80"
                 >
-                  <span className="grid h-9 w-9 place-items-center rounded-md border border-border bg-background transition-colors group-hover:border-primary group-hover:text-primary">
+                  <span className="grid h-9 w-9 place-items-center rounded-xl border border-border bg-background transition-all duration-300 ease-in-out group-hover:border-foreground group-hover:bg-foreground group-hover:text-background">
                     <Mail className="h-4 w-4" />
                   </span>
                   <span className="break-all">furiimotionlabsceo@outlook.com</span>
                 </a>
                 <a
                   href="tel:+251909312671"
-                  className="group flex items-center gap-3 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                  className="group flex items-center gap-3 text-sm font-medium text-foreground transition-colors duration-300 hover:text-foreground/80"
                 >
-                  <span className="grid h-9 w-9 place-items-center rounded-md border border-border bg-background transition-colors group-hover:border-primary group-hover:text-primary">
+                  <span className="grid h-9 w-9 place-items-center rounded-xl border border-border bg-background transition-all duration-300 ease-in-out group-hover:border-foreground group-hover:bg-foreground group-hover:text-background">
                     <Phone className="h-4 w-4" />
                   </span>
                   <span>+251 909 312 671</span>
@@ -148,7 +148,7 @@ function Field({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-md border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-subtle focus:border-primary"
+        className="mt-2 w-full rounded-xl border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-all duration-300 ease-in-out placeholder:text-subtle focus:border-foreground"
       />
     </div>
   );
