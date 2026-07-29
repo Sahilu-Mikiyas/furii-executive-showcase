@@ -9,6 +9,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "talent-grid": "/systems/talent-grid",
     "strata-ops": "/systems/strata-ops",
     "velox-commerce": "/systems/velox-commerce",
+    "civic-pulse": "/systems/civic-pulse",
   };
 
   const targetPath = detailPages[s.slug];
