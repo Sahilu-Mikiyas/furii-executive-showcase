@@ -31,11 +31,18 @@ export function SiteNav() {
       }`}
     >
       <div className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid h-7 w-7 place-items-center rounded-md bg-foreground text-[11px] font-bold text-background">
-            F
+        <Link to="/" className="group flex items-center gap-2.5">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-foreground text-[12px] font-mono font-bold tracking-tight text-background shadow-sm transition-transform duration-200 group-hover:scale-105">
+            MS
           </span>
-          <span className="text-[15px]">FURII</span>
+          <span className="flex flex-col leading-none">
+            <span className="text-[15px] font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+              Mikiyas Sahilu
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5">
+              CTO & Architect
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
