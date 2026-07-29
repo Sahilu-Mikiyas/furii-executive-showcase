@@ -30,13 +30,13 @@ export function SiteNav() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="group flex items-center gap-2.5">
+      <div className="container-page flex h-16 items-center justify-between gap-4">
+        <Link to="/" className="group flex items-center gap-2.5 shrink-0">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-foreground text-[12px] font-mono font-bold tracking-tight text-background shadow-sm transition-transform duration-200 group-hover:scale-105">
             MS
           </span>
           <span className="flex flex-col leading-none">
-            <span className="text-[15px] font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+            <span className="text-[14px] sm:text-[15px] font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
               Mikiyas Sahilu
             </span>
             <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5">
@@ -45,7 +45,7 @@ export function SiteNav() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 xl:flex xl:gap-8">
           {nav.map((item) => (
             <Link
               key={item.to}
@@ -62,14 +62,14 @@ export function SiteNav() {
         <div className="flex items-center gap-3">
           <Link
             to="/contact"
-            className="group hidden items-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground md:inline-flex"
+            className="group hidden items-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground xl:inline-flex"
           >
             Book a Meeting
           </Link>
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen((o) => !o)}
-            className="grid h-9 w-9 place-items-center rounded-md border border-border md:hidden"
+            className="grid h-9 w-9 place-items-center rounded-md border border-border xl:hidden hover:bg-surface transition-colors"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -77,14 +77,16 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="border-t border-border bg-background/95 backdrop-blur-md xl:hidden shadow-lg">
           <div className="container-page flex flex-col py-4">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
+                activeOptions={{ exact: true }}
                 onClick={() => setOpen(false)}
-                className="py-3 text-base text-foreground"
+                className="py-3 text-base text-foreground transition-colors hover:text-primary"
+                activeProps={{ className: "font-semibold text-primary" }}
               >
                 {item.label}
               </Link>
