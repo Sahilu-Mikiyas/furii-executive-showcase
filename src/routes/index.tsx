@@ -107,32 +107,32 @@ function FounderPage() {
       {/* Intro */}
       <section className="container-page pb-20">
         <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
-          <div>
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-surface">
+          <div className="flex flex-col items-start">
+            <div className="relative w-full max-w-[240px] sm:max-w-[260px] lg:max-w-none overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
               <img
                 src="/founder.jpg"
                 alt="Mikiyas Sahilu"
                 className="aspect-[4/5] w-full object-cover"
               />
             </div>
-            <div className="mt-6 flex flex-col gap-3 text-sm">
+            <div className="mt-6 flex flex-col gap-3 text-sm w-full max-w-[240px] sm:max-w-[260px] lg:max-w-none">
               <a
                 href="mailto:hello@furii.co"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
-                <Mail className="h-4 w-4" /> hello@furii.co
+                <Mail className="h-4 w-4 text-muted-foreground" /> hello@furii.co
               </a>
               <a
                 href="https://linkedin.com"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
-                <Linkedin className="h-4 w-4" /> LinkedIn
+                <Linkedin className="h-4 w-4 text-muted-foreground" /> LinkedIn
               </a>
               <a
                 href="https://github.com"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary"
+                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
-                <Github className="h-4 w-4" /> GitHub
+                <Github className="h-4 w-4 text-muted-foreground" /> GitHub
               </a>
             </div>
           </div>
