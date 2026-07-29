@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -14,9 +15,17 @@ import {
   Lock,
   Zap,
   BarChart3,
-  Users,
-  Clock,
   Quote,
+  LayoutDashboard,
+  FileText,
+  AlertTriangle,
+  FlaskConical,
+  Search,
+  Plus,
+  User,
+  Clock,
+  ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -24,7 +33,7 @@ import { ContactCtaBanner } from "../components/contact-cta-banner";
 export const Route = createFileRoute("/systems/pulse-os")({
   head: () => ({
     meta: [
-      { title: "Pulse OS | Enterprise Hospital Operating System | FURII" },
+      { title: "Pulse OS | Enterprise Hospital Operating System | GERJI General Hospital" },
       {
         name: "description",
         content:
@@ -134,7 +143,7 @@ const testimony = {
     "Pulse OS transformed the way our clinical staff operates. We went from paper-based chaos to a unified digital workflow in under six months. The AI triage module alone has reduced our emergency wait times by 35%. This is not just software, it is the backbone of our hospital.",
   name: "Dr. Alemayehu Tadesse",
   title: "Chief Medical Officer",
-  organization: "Addis General Hospital",
+  organization: "GERJI General Hospital",
   metric: "35% reduction in ER wait times",
 };
 
@@ -144,6 +153,400 @@ function stagger(index: number) {
   return {
     animationDelay: `${index * 120}ms`,
   };
+}
+
+/* ─── UI Snapshots Mock Component ─── */
+
+function PulseOsUiSnapshots() {
+  const [activeTab, setActiveTab] = useState<"dashboard" | "emr" | "triage" | "lab">("dashboard");
+
+  const tabs = [
+    { id: "dashboard", label: "Executive Dashboard", icon: LayoutDashboard },
+    { id: "emr", label: "Electronic Medical Records", icon: FileText },
+    { id: "triage", label: "AI Clinical Triage", icon: AlertTriangle },
+    { id: "lab", label: "Lab & Pharmacy Command", icon: FlaskConical },
+  ] as const;
+
+  return (
+    <div className="rounded-[28px] border border-border bg-card p-4 sm:p-6 shadow-2xl overflow-hidden">
+      {/* Top Header & Tab Bar */}
+      <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-3 w-3 items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+          </div>
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Pulse OS v4.2 • GERJI General Hospital Instance
+          </span>
+        </div>
+
+        {/* Tab Controls */}
+        <div className="flex flex-wrap gap-1.5 rounded-2xl border border-border bg-surface p-1">
+          {tabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ${
+                  isActive
+                    ? "bg-foreground text-background shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Screen Frame */}
+      <div className="mt-6 overflow-x-auto rounded-2xl border border-border/80 bg-background p-4 sm:p-6 font-sans">
+        {/* ── 1. Executive Dashboard Screen ── */}
+        {activeTab === "dashboard" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            {/* System Top Stats */}
+            <div className="grid grid-cols-4 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">ICU Bed Capacity</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-xl font-bold text-foreground">84%</span>
+                  <span className="text-[10px] font-mono text-emerald-500 font-semibold">18 / 22 Beds</span>
+                </div>
+                <div className="mt-2 h-1.5 w-full rounded-full bg-border overflow-hidden">
+                  <div className="h-full bg-sky-500 rounded-full" style={{ width: "84%" }} />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Emergency Wait Time</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-xl font-bold text-foreground">14 min</span>
+                  <span className="text-[10px] font-mono text-emerald-500 font-semibold">-35% vs Avg</span>
+                </div>
+                <div className="mt-2 h-1.5 w-full rounded-full bg-border overflow-hidden">
+                  <div className="h-full bg-emerald-500 rounded-full" style={{ width: "35%" }} />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Active Admissions</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-xl font-bold text-foreground">312</span>
+                  <span className="text-[10px] font-mono text-sky-400 font-semibold">4 Departments</span>
+                </div>
+                <div className="mt-2 h-1.5 w-full rounded-full bg-border overflow-hidden">
+                  <div className="h-full bg-sky-400 rounded-full" style={{ width: "72%" }} />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Lab Orders Pending</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-xl font-bold text-foreground">28</span>
+                  <span className="text-[10px] font-mono text-yellow-500 font-semibold">Fast-tracked</span>
+                </div>
+                <div className="mt-2 h-1.5 w-full rounded-full bg-border overflow-hidden">
+                  <div className="h-full bg-yellow-500 rounded-full" style={{ width: "40%" }} />
+                </div>
+              </div>
+            </div>
+
+            {/* Dashboard Middle Section */}
+            <div className="grid grid-cols-3 gap-4">
+              {/* Live Triage Queue */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <div className="flex items-center justify-between border-b border-border pb-3 mb-3">
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2">
+                    <Activity className="h-3.5 w-3.5 text-sky-500" /> Active Emergency Triage Stream
+                  </span>
+                  <span className="font-mono text-[10px] text-muted-foreground">GERJI Main Wing</span>
+                </div>
+                <div className="space-y-2.5">
+                  {[
+                    { id: "P-401", patient: "Marta Haile", triage: "Level 1 - Critical", time: "2 min ago", doctor: "Dr. Alemayehu", status: "In Trauma Room 2" },
+                    { id: "P-402", patient: "Solomon Worku", triage: "Level 2 - Urgent", time: "8 min ago", doctor: "Dr. Bethlem", status: "ECG Completed" },
+                    { id: "P-403", patient: "Tewodros Kassaye", triage: "Level 3 - Moderate", time: "15 min ago", doctor: "Dr. Yonas", status: "Triage Assessment" },
+                  ].map((row) => (
+                    <div key={row.id} className="flex items-center justify-between rounded-lg border border-border/60 bg-surface/40 p-2.5 text-xs">
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono font-bold text-sky-400">{row.id}</span>
+                        <div>
+                          <p className="font-medium text-foreground">{row.patient}</p>
+                          <p className="text-[10px] text-muted-foreground">{row.doctor} • {row.time}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className={`inline-block rounded-md px-2 py-0.5 text-[10px] font-mono font-semibold ${
+                          row.triage.includes("Level 1") ? "bg-red-500/10 text-red-500 border border-red-500/20" : "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"
+                        }`}>
+                          {row.triage}
+                        </span>
+                        <p className="text-[10px] text-muted-foreground mt-0.5">{row.status}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Department Vitals Gauge */}
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> Department Vitals
+                </span>
+                <div className="space-y-3">
+                  {[
+                    { dept: "Emergency Wing", status: "Optimal", count: "42 Active" },
+                    { dept: "Pediatrics", status: "Normal", count: "19 Active" },
+                    { dept: "Surgical Suite", status: "Busy", count: "6 Surgeries" },
+                    { dept: "Outpatient Clinic", status: "Normal", count: "128 Seen" },
+                  ].map((d) => (
+                    <div key={d.dept} className="flex items-center justify-between text-xs border-b border-border/40 pb-2">
+                      <span className="text-muted-foreground">{d.dept}</span>
+                      <div className="text-right">
+                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">{d.status}</span>
+                        <p className="text-[9px] text-muted-foreground">{d.count}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 2. Electronic Medical Record Screen ── */}
+        {activeTab === "emr" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Patient Header Card */}
+            <div className="flex items-center justify-between rounded-xl border border-border bg-card p-4">
+              <div className="flex items-center gap-4">
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-sky-500/10 text-sky-400 font-bold border border-sky-500/20">
+                  <User className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-base font-bold text-foreground">Kebede Tesfaye</h4>
+                    <span className="rounded-md border border-border bg-surface px-2 py-0.5 font-mono text-[10px] text-muted-foreground">ID: #GERJI-89241</span>
+                    <span className="rounded-md bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-mono text-emerald-500 font-semibold">Active Inpatient</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-0.5">45 Yrs • Male • Blood Type: O+ • Ward 3, Bed 12B</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <button className="flex items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">
+                  <FileText className="h-3.5 w-3.5" /> Order Lab
+                </button>
+                <button className="flex items-center gap-1.5 rounded-lg bg-foreground text-background px-3 py-1.5 text-xs font-medium">
+                  <Plus className="h-3.5 w-3.5" /> Prescribe Note
+                </button>
+              </div>
+            </div>
+
+            {/* Patient Clinical Grid */}
+            <div className="grid grid-cols-3 gap-4">
+              {/* Vital Signs Chart Card */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2">
+                    <Activity className="h-3.5 w-3.5 text-sky-400" /> Continuous Telemetry Vitals
+                  </span>
+                  <span className="font-mono text-[10px] text-emerald-400">Live Stream • Bed 12B</span>
+                </div>
+                <div className="grid grid-cols-4 gap-3 mb-4">
+                  <div className="rounded-lg bg-surface/50 p-2.5 text-center border border-border/60">
+                    <p className="text-[10px] font-mono text-muted-foreground">Heart Rate</p>
+                    <p className="text-lg font-bold text-sky-400">72 <span className="text-[10px] font-normal text-muted-foreground">bpm</span></p>
+                  </div>
+                  <div className="rounded-lg bg-surface/50 p-2.5 text-center border border-border/60">
+                    <p className="text-[10px] font-mono text-muted-foreground">Blood Pressure</p>
+                    <p className="text-lg font-bold text-emerald-400">120/80</p>
+                  </div>
+                  <div className="rounded-lg bg-surface/50 p-2.5 text-center border border-border/60">
+                    <p className="text-[10px] font-mono text-muted-foreground">SpO2</p>
+                    <p className="text-lg font-bold text-sky-400">98%</p>
+                  </div>
+                  <div className="rounded-lg bg-surface/50 p-2.5 text-center border border-border/60">
+                    <p className="text-[10px] font-mono text-muted-foreground">Temp</p>
+                    <p className="text-lg font-bold text-foreground">36.8°C</p>
+                  </div>
+                </div>
+                <div className="rounded-lg bg-surface/30 p-3 border border-border/50">
+                  <p className="text-xs font-semibold text-foreground mb-1">Doctor's Progress Note</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    "Patient responds well to IV fluids and antibiotic course. Lungs clear on auscultation. Scheduled for follow-up chest X-ray at 14:00."
+                  </p>
+                  <p className="text-[10px] font-mono text-muted-foreground mt-2 text-right">Dr. Alemayehu Tadesse • 10:45 AM</p>
+                </div>
+              </div>
+
+              {/* Prescriptions & Allergies */}
+              <div className="space-y-4">
+                <div className="rounded-xl border border-border bg-card p-4">
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-2">
+                    <Pill className="h-3.5 w-3.5 text-emerald-400" /> Active Medications
+                  </span>
+                  <div className="space-y-2">
+                    <div className="text-xs border-b border-border/40 pb-1.5">
+                      <p className="font-semibold text-foreground">Ceftriaxone 1g IV</p>
+                      <p className="text-[10px] text-muted-foreground">Every 12h • Dispensed by GERJI Pharmacy</p>
+                    </div>
+                    <div className="text-xs">
+                      <p className="font-semibold text-foreground">Paracetamol 500mg PO</p>
+                      <p className="text-[10px] text-muted-foreground">PRN Pain • Active</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-3.5">
+                  <span className="text-xs font-semibold text-red-400 flex items-center gap-2 mb-1">
+                    <AlertTriangle className="h-3.5 w-3.5" /> Allergy Alert
+                  </span>
+                  <p className="text-xs text-muted-foreground">Penicillin (Anaphylactic risk). Flagged by AI Triage on entry.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 3. AI Clinical Triage Screen ── */}
+        {activeTab === "triage" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* AI Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-sky-500/20 bg-sky-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-sky-500 text-background font-bold">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Pulse AI Triage Engine v2.4</h4>
+                  <p className="text-xs text-muted-foreground">Real-time symptom NLP processing & vital pattern risk scoring</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-500">
+                ● 100% Diagnostic Accuracy Verified
+              </span>
+            </div>
+
+            {/* AI Queue Table */}
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="flex items-center justify-between border-b border-border pb-3 mb-3">
+                <span className="text-xs font-semibold text-foreground">Incoming Emergency Triage Priority Queue</span>
+                <span className="font-mono text-[10px] text-muted-foreground">GERJI General Hospital ER</span>
+              </div>
+              <div className="space-y-3">
+                {[
+                  {
+                    name: "Aster Gebre",
+                    symptoms: "Acute dyspnea, SpO2 88%, elevated D-dimer risk",
+                    score: "Risk Index: 9.4 / 10",
+                    badge: "CRITICAL - IMMEDIATE ICU",
+                    badgeStyle: "bg-red-500/10 text-red-400 border-red-500/30",
+                    action: "Trauma Bay Assigned",
+                  },
+                  {
+                    name: "Binyam Yilma",
+                    symptoms: "Right lower quadrant abdominal pain, fever 38.5°C",
+                    score: "Risk Index: 7.1 / 10",
+                    badge: "HIGH - SURGICAL EVAL",
+                    badgeStyle: "bg-yellow-500/10 text-yellow-400 border-yellow-500/30",
+                    action: "Ultrasound Ordered",
+                  },
+                  {
+                    name: "Sara Mohammed",
+                    symptoms: "Mild laceration on forearm, vitals stable",
+                    score: "Risk Index: 2.1 / 10",
+                    badge: "ROUTINE - OUTPATIENT",
+                    badgeStyle: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+                    action: "Minor Procedure Room",
+                  },
+                ].map((item) => (
+                  <div key={item.name} className="flex items-center justify-between rounded-lg border border-border/80 bg-surface/50 p-3 text-xs">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-foreground">{item.name}</span>
+                        <span className={`rounded-md border px-2 py-0.5 text-[9px] font-mono font-semibold ${item.badgeStyle}`}>
+                          {item.badge}
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{item.symptoms}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-mono text-xs font-bold text-sky-400">{item.score}</p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">{item.action}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 4. Lab & Pharmacy Command ── */}
+        {activeTab === "lab" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Lab & Pharmacy Top Bar */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-[10px] font-mono uppercase text-muted-foreground">Lab Orders Processed Today</span>
+                <p className="text-2xl font-bold text-foreground mt-1">1,240</p>
+                <p className="text-[10px] font-mono text-emerald-400 mt-1">Automated Barcode Match: 99.9%</p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-[10px] font-mono uppercase text-muted-foreground">Pharmacy Dispense Time</span>
+                <p className="text-2xl font-bold text-foreground mt-1">3.2 min</p>
+                <p className="text-[10px] font-mono text-sky-400 mt-1">Integrated Prescriber Sync</p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-[10px] font-mono uppercase text-muted-foreground">Automated Reagent Stock</span>
+                <p className="text-2xl font-bold text-emerald-400 mt-1">Optimal</p>
+                <p className="text-[10px] font-mono text-muted-foreground mt-1">Auto-Restock Alert Active</p>
+              </div>
+            </div>
+
+            {/* Specimen Tracking Grid */}
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="flex items-center justify-between border-b border-border pb-3 mb-3">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2">
+                  <FlaskConical className="h-3.5 w-3.5 text-sky-400" /> Barcode Specimen Tracking Stream
+                </span>
+                <span className="font-mono text-[10px] text-muted-foreground">GERJI Central Pathology Lab</span>
+              </div>
+              <div className="space-y-2.5">
+                {[
+                  { specId: "SPEC-9901", test: "Complete Blood Count (CBC)", patient: "Patient #P-89241", status: "Analyzer Processing", time: "ETA 4 min" },
+                  { specId: "SPEC-9902", test: "Comprehensive Metabolic Panel", patient: "Patient #P-89244", status: "Verified & Sent to EMR", time: "Completed" },
+                  { specId: "SPEC-9903", test: "Blood Culture & Sensitivity", patient: "Patient #P-89249", status: "Incubation (24h)", time: "In Progress" },
+                ].map((spec) => (
+                  <div key={spec.specId} className="flex items-center justify-between rounded-lg border border-border/60 bg-surface/40 p-2.5 text-xs">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono font-bold text-sky-400">{spec.specId}</span>
+                      <div>
+                        <p className="font-medium text-foreground">{spec.test}</p>
+                        <p className="text-[10px] text-muted-foreground">{spec.patient}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <span className="rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] text-emerald-400 font-semibold">
+                        {spec.status}
+                      </span>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">{spec.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 /* ─── Component ─── */
@@ -170,7 +573,7 @@ function PulseOsPage() {
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5">
                 <ShieldCheck className="h-4 w-4 text-emerald-500" />
                 <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-                  Healthcare
+                  Healthcare • GERJI General Hospital
                 </span>
               </div>
               <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
@@ -216,6 +619,20 @@ function PulseOsPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── System UI Snapshots Showcase ── */}
+      <section className="border-b border-border bg-surface/30 px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading
+            tag="Interface Preview"
+            title="Interactive System Snapshots"
+            description="Explore the live clinical interfaces, EMR records view, AI triage engine, and lab command modules."
+          />
+          <div className="mt-12">
+            <PulseOsUiSnapshots />
           </div>
         </div>
       </section>
