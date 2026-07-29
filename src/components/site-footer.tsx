@@ -33,11 +33,11 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
             <Link to="/" className="group flex items-center gap-2.5">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-foreground text-[12px] font-mono font-bold tracking-tight text-background shadow-sm transition-transform duration-200 group-hover:scale-105">
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-[12px] font-mono font-bold tracking-tight text-background shadow-xs transition-transform duration-500 ease-out group-hover:scale-105">
                 MS
               </span>
               <span className="flex flex-col leading-none">
-                <span className="text-[16px] font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                <span className="text-[16px] font-bold tracking-tight text-foreground transition-colors duration-500">
                   Mikiyas Sahilu
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5">
@@ -60,7 +60,7 @@ export function SiteFooter() {
                   <li key={l.label}>
                     <Link
                       to={l.to}
-                      className="text-sm text-foreground transition-colors hover:text-primary"
+                      className="text-sm text-foreground transition-colors duration-500 hover:text-muted-foreground"
                     >
                       {l.label}
                     </Link>
@@ -73,16 +73,8 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 md:flex-row md:items-center">
           <p className="font-mono text-xs text-subtle">
-            © {new Date().getFullYear()} Mikiyas Sahilu. All rights reserved.
+            © {new Date().getFullYear()} Mikiyas Sahilu, FURII. All rights reserved.
           </p>
-          <div className="flex gap-6 text-xs text-muted-foreground">
-            <a href="mailto:furiimotionlabsceo@outlook.com" className="hover:text-primary transition-colors font-medium">
-              Email Us
-            </a>
-            <a href="tel:+251909312671" className="hover:text-primary transition-colors font-medium">
-              Call Us: +251 909 312 671
-            </a>
-          </div>
         </div>
       </div>
     </footer>

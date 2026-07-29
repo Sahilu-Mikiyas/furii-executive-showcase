@@ -108,7 +108,7 @@ function FounderPage() {
       <section className="container-page pb-12 sm:pb-16 md:pb-20">
         <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
           <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-6 lg:gap-6">
-            <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-none shrink-0 overflow-hidden rounded-3xl border border-border bg-surface shadow-sm transition-all duration-300 ease-in-out hover:border-foreground/30 hover:shadow-md">
+            <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-none shrink-0 overflow-hidden rounded-3xl border border-border bg-surface shadow-xs transition-all duration-500 ease-out hover:border-foreground/30 hover:shadow-md">
               <img
                 src="/founder.jpg"
                 alt="Mikiyas Sahilu"
@@ -118,13 +118,13 @@ function FounderPage() {
             <div className="flex flex-col gap-3 text-sm w-full max-w-[280px] lg:max-w-none pt-1">
               <a
                 href="mailto:furiimotionlabsceo@outlook.com"
-                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors text-xs sm:text-sm font-medium"
+                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors duration-500 text-xs sm:text-sm font-medium"
               >
                 <Mail className="h-4 w-4 text-foreground shrink-0" /> furiimotionlabsceo@outlook.com
               </a>
               <a
                 href="tel:+251909312671"
-                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors text-xs sm:text-sm font-medium"
+                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors duration-500 text-xs sm:text-sm font-medium"
               >
                 <Phone className="h-4 w-4 text-foreground shrink-0" /> +251 909 312 671
               </a>
@@ -166,14 +166,14 @@ function FounderPage() {
             <div className="mt-8 sm:mt-10 flex flex-wrap gap-3">
               <Link
                 to="/systems"
-                className="group inline-flex items-center gap-2 rounded-xl bg-foreground border border-foreground px-5 py-3 text-xs sm:text-sm font-medium text-background transition-all duration-300 ease-in-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
+                className="group inline-flex items-center gap-2 rounded-xl bg-foreground border border-foreground px-5 py-3 text-xs sm:text-sm font-medium text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
               >
                 Explore our platforms
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </Link>
               <a
                 href="mailto:furiimotionlabsceo@outlook.com"
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-xs sm:text-sm font-medium text-foreground transition-all duration-300 ease-in-out hover:bg-foreground hover:text-background hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-xs sm:text-sm font-medium text-foreground transition-all duration-500 ease-out hover:bg-foreground hover:text-background hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
               >
                 Work with us
               </a>
@@ -194,7 +194,7 @@ function FounderPage() {
             {capabilities.map((c) => (
               <div
                 key={c.title}
-                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
+                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
               >
                 <h3 className="text-base sm:text-lg font-semibold tracking-tight">{c.title}</h3>
                 <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{c.body}</p>
@@ -210,11 +210,11 @@ function FounderPage() {
           eyebrow="Selected work"
           title="Platforms we've architected and shipped."
         />
-        <ol className="mt-8 sm:mt-12 md:mt-14 divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+        <ol className="mt-8 sm:mt-12 md:mt-14 divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card shadow-xs">
           {highlights.map((h, i) => (
             <li
               key={h.name}
-              className="grid gap-3 sm:gap-4 p-5 sm:p-6 md:grid-cols-[60px_1fr_auto] md:items-center md:gap-8 md:p-8 transition-all duration-300 ease-in-out hover:bg-surface/70"
+              className="grid gap-3 sm:gap-4 p-5 sm:p-6 md:grid-cols-[60px_1fr_auto] md:items-center md:gap-8 md:p-8 transition-all duration-500 ease-out hover:bg-surface/70"
             >
               <span className="font-mono text-xs uppercase tracking-widest text-subtle">
                 {String(i + 1).padStart(2, "0")}
@@ -233,7 +233,7 @@ function FounderPage() {
                 className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-foreground hover:text-foreground/70 pt-1 md:pt-0"
               >
                 Details
-                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </Link>
             </li>
           ))}
@@ -248,7 +248,7 @@ function FounderPage() {
             {principles.map((p) => (
               <div
                 key={p.title}
-                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
+                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
               >
                 <h3 className="text-lg sm:text-xl font-semibold tracking-tight">{p.title}</h3>
                 <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{p.body}</p>
