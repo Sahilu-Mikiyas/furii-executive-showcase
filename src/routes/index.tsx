@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, Linkedin, Github } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 
 export const Route = createFileRoute("/")({
@@ -115,24 +115,18 @@ function FounderPage() {
                 className="aspect-[4/5] w-full object-cover"
               />
             </div>
-            <div className="flex flex-col gap-2.5 text-sm w-full max-w-[260px] lg:max-w-none pt-1">
+            <div className="flex flex-col gap-3 text-sm w-full max-w-[280px] lg:max-w-none pt-1">
               <a
-                href="mailto:hello@furii.co"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors text-xs sm:text-sm"
+                href="mailto:furiimotionlabsceo@outlook.com"
+                className="inline-flex items-center gap-2.5 text-foreground hover:text-primary transition-colors text-xs sm:text-sm font-medium"
               >
-                <Mail className="h-4 w-4 text-muted-foreground shrink-0" /> hello@furii.co
+                <Mail className="h-4 w-4 text-primary shrink-0" /> furiimotionlabsceo@outlook.com
               </a>
               <a
-                href="https://linkedin.com"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors text-xs sm:text-sm"
+                href="tel:+251909312671"
+                className="inline-flex items-center gap-2.5 text-foreground hover:text-primary transition-colors text-xs sm:text-sm font-medium"
               >
-                <Linkedin className="h-4 w-4 text-muted-foreground shrink-0" /> LinkedIn
-              </a>
-              <a
-                href="https://github.com"
-                className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors text-xs sm:text-sm"
-              >
-                <Github className="h-4 w-4 text-muted-foreground shrink-0" /> GitHub
+                <Phone className="h-4 w-4 text-primary shrink-0" /> +251 909 312 671
               </a>
             </div>
           </div>
@@ -177,12 +171,12 @@ function FounderPage() {
                 Explore our platforms
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-              <Link
-                to="/contact"
+              <a
+                href="mailto:furiimotionlabsceo@outlook.com"
                 className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-foreground hover:bg-surface transition-colors"
               >
                 Work with us
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -213,7 +207,7 @@ function FounderPage() {
           eyebrow="Selected work"
           title="Platforms we've architected and shipped."
         />
-        <ol className="mt-8 sm:mt-12 md:mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+        <ol className="mt-8 sm:mt-12 md:md:mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
           {highlights.map((h, i) => (
             <li key={h.name} className="grid gap-3 sm:gap-4 p-5 sm:p-6 md:grid-cols-[60px_1fr_auto] md:items-center md:gap-8 md:p-8">
               <span className="font-mono text-xs uppercase tracking-widest text-subtle">

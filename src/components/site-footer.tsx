@@ -76,14 +76,11 @@ export function SiteFooter() {
             © {new Date().getFullYear()} Mikiyas Sahilu. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs text-muted-foreground">
-            <a href="https://linkedin.com" className="hover:text-foreground">
-              LinkedIn
+            <a href="mailto:furiimotionlabsceo@outlook.com" className="hover:text-primary transition-colors font-medium">
+              Email Us
             </a>
-            <a href="https://github.com" className="hover:text-foreground">
-              GitHub
-            </a>
-            <a href="mailto:hello@furii.co" className="hover:text-foreground">
-              Email
+            <a href="tel:+251909312671" className="hover:text-primary transition-colors font-medium">
+              Call Us: +251 909 312 671
             </a>
           </div>
         </div>

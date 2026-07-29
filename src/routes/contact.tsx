@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, Github, Linkedin, ArrowRight } from "lucide-react";
+import { Mail, Phone, ArrowRight } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 
 export const Route = createFileRoute("/contact")({
@@ -89,22 +89,31 @@ function ContactPage() {
           <aside className="flex flex-col gap-6">
             <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
               <p className="font-mono text-[11px] uppercase tracking-widest text-subtle">
-                Direct
-              </p>
-              <p className="mt-3 text-lg font-medium">hello@furii.co</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                For partnerships, engineering, and press.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
-              <p className="font-mono text-[11px] uppercase tracking-widest text-subtle">
-                Elsewhere
+                Direct Contact
               </p>
               <div className="mt-4 flex flex-col gap-3">
-                <Social href="mailto:hello@furii.co" icon={Mail} label="hello@furii.co" />
-                <Social href="https://linkedin.com" icon={Linkedin} label="LinkedIn" />
-                <Social href="https://github.com" icon={Github} label="GitHub" />
+                <a
+                  href="mailto:furiimotionlabsceo@outlook.com"
+                  className="group flex items-center gap-3 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                >
+                  <span className="grid h-9 w-9 place-items-center rounded-md border border-border bg-background transition-colors group-hover:border-primary group-hover:text-primary">
+                    <Mail className="h-4 w-4" />
+                  </span>
+                  <span className="break-all">furiimotionlabsceo@outlook.com</span>
+                </a>
+                <a
+                  href="tel:+251909312671"
+                  className="group flex items-center gap-3 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                >
+                  <span className="grid h-9 w-9 place-items-center rounded-md border border-border bg-background transition-colors group-hover:border-primary group-hover:text-primary">
+                    <Phone className="h-4 w-4" />
+                  </span>
+                  <span>+251 909 312 671</span>
+                </a>
               </div>
+              <p className="mt-4 text-xs text-muted-foreground">
+                Click to send an email directly or call now.
+              </p>
             </div>
           </aside>
         </div>
@@ -142,27 +151,5 @@ function Field({
         className="mt-2 w-full rounded-md border border-border bg-background px-3.5 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-subtle focus:border-primary"
       />
     </div>
-  );
-}
-
-function Social({
-  href,
-  icon: Icon,
-  label,
-}: {
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="group inline-flex items-center gap-3 text-sm text-foreground transition-colors hover:text-primary"
-    >
-      <span className="grid h-8 w-8 place-items-center rounded-md border border-border bg-background transition-colors group-hover:border-primary group-hover:text-primary">
-        <Icon className="h-4 w-4" />
-      </span>
-      {label}
-    </a>
   );
 }
