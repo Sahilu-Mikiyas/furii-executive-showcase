@@ -28,156 +28,131 @@ export const Route = createFileRoute("/")({
 const capabilities = [
   {
     title: "System Architecture",
-    body: "We design resilient, multi-tenant platforms with clean service boundaries, event-driven workflows, and defensible security models. Built to scale from day one.",
+    body: "Designing distributed, resilient systems with microservices, event-driven pipelines, and high-throughput datastores tailored for enterprise scale.",
   },
   {
-    title: "Applied AI Workflows",
-    body: "We integrate pragmatic AI into real operational tools: clinical summaries, document intelligence, resume screening, and predictive analytics with zero gimmick chatbots.",
+    title: "Applied AI & Automation",
+    body: "Integrating practical AI models into daily operational workflows, document processing, intelligent triage, and predictive decision engines.",
   },
   {
-    title: "Product Engineering",
-    body: "We translate deep operational complexity into crisp, fast product experiences: the difference between software that gets tolerated and software people love using.",
+    title: "Product Strategy & Execution",
+    body: "Bridging business goals with modern technical strategy. Turning complex operational requirements into scalable software products.",
   },
   {
-    title: "CTO Leadership",
-    body: "I lead our engineering organization with a bias for taste, ownership, and long-term compounding. High standards, disciplined execution, and strong technical craft.",
+    title: "Engineering Leadership",
+    body: "Building disciplined, owner-minded engineering cultures focused on speed, reliability, and consumer-grade product polish.",
   },
 ];
 
 const highlights = [
   {
     name: "Pulse OS",
-    context: "Healthcare · Hospital Operating System",
-    detail:
-      "Architected a full hospital operating system covering EMR, appointments, pharmacy, labs and billing, with AI-assisted triage and clinical summaries.",
+    context: "Healthcare",
+    detail: "Full hospital operating system managing clinical workflows, patient histories, and diagnostic intelligence at enterprise scale.",
   },
   {
     name: "Nexus Campus",
-    context: "Education · University & School OS",
-    detail:
-      "Built an end-to-end school platform: student information, grading, attendance, parent portal and AI-driven performance insights.",
+    context: "Education",
+    detail: "Unified university and school management platform unifying academic records, grading, and automated student analytics.",
   },
   {
     name: "TalentGrid",
-    context: "HR · Enterprise Workforce Suite",
-    detail:
-      "Designed an HR suite spanning recruitment, onboarding, payroll, performance and workforce analytics with intelligent screening.",
-  },
-  {
-    name: "CivicPulse",
-    context: "Government · Citizen Services OS",
-    detail:
-      "Delivered citizen services, permits and workflow automation for public institutions with document intelligence at the core.",
+    context: "Human Resources",
+    detail: "Enterprise HR workforce suite covering global recruitment pipelines, payroll processing, and predictive performance reviews.",
   },
   {
     name: "Strata Ops",
-    context: "Real Estate · Property & Asset OS",
-    detail:
-      "Shipped property, lease and maintenance operations with predictive maintenance and lease summarisation.",
-  },
-  {
-    name: "Vector Dispatch",
-    context: "Logistics · Fleet & Last-Mile OS",
-    detail:
-      "Built fleet, dispatch, warehouse and last-mile intelligence for logistics operators running national-scale networks.",
+    context: "Real Estate",
+    detail: "Multi-property management OS providing lease automation, tenant portals, and IoT-driven predictive maintenance.",
   },
 ];
 
 const principles = [
   {
-    title: "Engineering Philosophy",
-    body: "Simplicity scales. Clear domain boundaries beat clever code. Every system we build must be understandable and maintainable years from now.",
+    title: "Simplicity Scales",
+    body: "Clear domain boundaries and simple abstractions outlive clever code. We build for maintainability over decades.",
   },
   {
-    title: "Leadership Philosophy",
-    body: "Empower engineers to think like owners. Ship with taste, respect the user, and optimize for long-term compounding value.",
+    title: "Pragmatic AI",
+    body: "AI is a component, not the whole strategy. We apply machine intelligence where it measurably reduces friction.",
   },
   {
-    title: "Product Vision",
-    body: "Enterprise software engineered with consumer-grade polish: intelligent, fast, and effortless to operate.",
+    title: "Consumer-Grade Polish",
+    body: "Enterprise software shouldn't feel like a legacy chore. Great design builds trust and accelerates adoption.",
   },
   {
-    title: "Core Values",
-    body: "Precision. Intentionality. Engineering excellence as a form of respect for the organizations relying on our systems.",
+    title: "Ownership & Standards",
+    body: "Small, highly disciplined teams beat large, unfocused organizations when backed by clear standards and high agency.",
   },
 ];
 
 function FounderPage() {
   return (
-    <div className="pt-24 sm:pt-28 lg:pt-32">
-      {/* Intro */}
-      <section className="container-page pb-12 sm:pb-16 md:pb-20">
-        <div className="grid gap-8 lg:grid-cols-[280px_1fr] lg:items-start lg:gap-16">
-          <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-6 lg:gap-6">
-            <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-none shrink-0 overflow-hidden rounded-3xl border border-border bg-surface shadow-xs transition-all duration-500 ease-out hover:border-foreground/30 hover:shadow-md">
-              <img
-                src="/founder.jpg"
-                alt="Mikiyas Sahilu"
-                className="aspect-[4/5] w-full object-cover"
-              />
+    <div className="space-y-0">
+      {/* Intro Hero */}
+      <section className="container-page pt-28 sm:pt-36 md:pt-40 pb-12 sm:pb-16 md:pb-24">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center lg:gap-16">
+          <div className="animate-fade-in">
+            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+              Mikiyas Sahilu • Executive Profile
+            </span>
+
+            <h1 className="mt-3 sm:mt-4 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
+              CTO & Enterprise Systems Architect
+            </h1>
+
+            <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground max-w-2xl font-normal">
+              Enterprise software shouldn't feel like a legacy chore. We build scalable platforms, applied AI workflows, and resilient digital infrastructure for organizations that demand excellence.
+            </p>
+
+            <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4 text-xs sm:text-sm text-foreground/80 border-l-2 border-border pl-4">
+              <p>
+                As Chief Technology Officer at <strong className="text-foreground">FURII</strong>, I lead our technical vision, core architecture, and software engineering teams. My focus spans high-throughput backend systems, applied AI integration, and modern product infrastructure.
+              </p>
+              <p>
+                Over the past decade, we have architected and deployed enterprise software across healthcare, education, human resources, logistics, and real estate, transforming how institutions run.
+              </p>
             </div>
-            <div className="flex flex-col gap-3 text-sm w-full max-w-[280px] lg:max-w-none pt-1">
+
+            {/* Direct Call-To-Action buttons */}
+            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
               <a
                 href="mailto:furiimotionlabsceo@outlook.com"
-                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors duration-500 text-xs sm:text-sm font-medium"
+                className="group inline-flex items-center gap-2 rounded-[20px] sm:rounded-[24px] bg-foreground border-2 border-foreground px-6 py-3.5 text-xs sm:text-sm font-semibold text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-lg"
               >
-                <Mail className="h-4 w-4 text-foreground shrink-0" /> furiimotionlabsceo@outlook.com
+                <Mail className="h-4 w-4" />
+                Email us
               </a>
               <a
                 href="tel:+251909312671"
-                className="inline-flex items-center gap-2.5 text-foreground hover:text-foreground/80 transition-colors duration-500 text-xs sm:text-sm font-medium"
+                className="group inline-flex items-center gap-2 rounded-[20px] sm:rounded-[24px] border-2 border-border bg-background px-6 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-0.5 hover:shadow-lg"
               >
-                <Phone className="h-4 w-4 text-foreground shrink-0" /> +251 909 312 671
+                <Phone className="h-4 w-4" />
+                Call us (+251 909 312 671)
               </a>
+              <Link
+                to="/systems"
+                className="group inline-flex items-center gap-2 rounded-[20px] sm:rounded-[24px] border-2 border-border bg-surface px-6 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                Explore systems
+                <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
 
-          <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-              About
-            </p>
-            <h1 className="mt-2 sm:mt-3 text-balance text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-              Mikiyas Sahilu
-            </h1>
-            <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted-foreground font-medium">
-              CTO & Enterprise Software Architect · FURII
-            </p>
-
-            <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
-              <p className="text-foreground font-medium text-base sm:text-lg leading-snug">
-                Enterprise software shouldn't feel like a legacy chore. We build scalable platforms,
-                applied AI workflows, and resilient digital infrastructure for organizations that demand excellence.
-              </p>
-              <p>
-                I bridge executive strategy and deep technical execution. As CTO at FURII, I lead our
-                engineering team in designing high-throughput, multi-tenant platforms across healthcare,
-                logistics, government, HR, real estate, and finance.
-              </p>
-              <p>
-                We focus on the non-negotiables: clean domain boundaries, pragmatic AI integrations
-                that automate real work, and consumer-grade interfaces built for enterprise scale.
-              </p>
-              <p>
-                We care about the details that make software feel considered: quiet reliability,
-                intentional API contracts, thoughtful security models, and systems engineered to compound
-                in value over time.
-              </p>
-            </div>
-
-            <div className="mt-8 sm:mt-10 flex flex-wrap gap-3">
-              <Link
-                to="/systems"
-                className="group inline-flex items-center gap-2 rounded-xl bg-foreground border border-foreground px-5 py-3 text-xs sm:text-sm font-medium text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
-              >
-                Explore our platforms
-                <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-              </Link>
-              <a
-                href="mailto:furiimotionlabsceo@outlook.com"
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-xs sm:text-sm font-medium text-foreground transition-all duration-500 ease-out hover:bg-foreground hover:text-background hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
-              >
-                Work with us
-              </a>
+          <div className="relative animate-fade-in sm:mx-auto sm:max-w-md md:max-w-none">
+            <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-lg transition-all duration-500 hover:shadow-2xl hover:border-foreground/20">
+              <img
+                src="/founder.jpg"
+                alt="Mikiyas Sahilu"
+                className="aspect-[4/5] w-full object-cover grayscale contrast-105 transition-all duration-500 hover:grayscale-0 hover:scale-102"
+              />
+              <div className="p-4 sm:p-5 border-t border-border bg-surface/80 backdrop-blur-xs">
+                <p className="font-semibold text-sm sm:text-base text-foreground">Mikiyas Sahilu, FURII</p>
+                <p className="font-mono text-[10px] sm:text-xs uppercase tracking-wider text-muted-foreground mt-0.5">
+                  CTO & Systems Architect
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -239,6 +214,17 @@ function FounderPage() {
             </li>
           ))}
         </ol>
+
+        {/* Large Prominent CTA Button to Systems Page */}
+        <div className="mt-10 sm:mt-14 flex justify-center">
+          <Link
+            to="/systems"
+            className="group inline-flex items-center justify-center gap-3 rounded-[24px] sm:rounded-[28px] bg-foreground border-2 border-foreground px-8 sm:px-10 py-4 sm:py-5 text-sm sm:text-base md:text-lg font-bold text-background shadow-md transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <span>Look at more of our projects in detail</span>
+            <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-500 ease-out group-hover:translate-x-2" />
+          </Link>
+        </div>
       </section>
 
       {/* Principles */}
