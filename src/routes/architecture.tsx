@@ -18,13 +18,13 @@ import {
 export const Route = createFileRoute("/architecture")({
   head: () => ({
     meta: [
-      { title: "Architecture — Engineering Enterprise Software for Scale" },
+      { title: "Systems Architecture | Mikiyas Sahilu" },
       {
         name: "description",
         content:
-          "How FURII engineers enterprise software: microservices, RBAC, gateways, observability, CI/CD, and cloud-native infrastructure.",
+          "Enterprise software architecture: microservices, RBAC, gateways, observability, CI/CD, and cloud-native infrastructure.",
       },
-      { property: "og:title", content: "Architecture — FURII" },
+      { property: "og:title", content: "Systems Architecture | Mikiyas Sahilu" },
       {
         property: "og:description",
         content: "Engineering enterprise software for scale.",
@@ -51,19 +51,19 @@ const pillars = [
 
 function ArchitecturePage() {
   return (
-    <div className="pt-32">
-      <section className="container-page pb-16">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
+      <section className="container-page pb-12 sm:pb-16">
         <SectionHeading
           eyebrow="Architecture"
           title="Engineering enterprise software for scale."
-          description="Every platform inherits the same reliability, security, and observability foundations — proven across industries."
+          description="Every platform inherits the same reliability, security, and observability foundations proven across industries."
         />
       </section>
 
-      <section className="container-page pb-32">
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+      <section className="container-page pb-24 sm:pb-32">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p) => (
-            <div key={p.title} className="group bg-card p-8 transition-colors hover:bg-surface">
+            <div key={p.title} className="group bg-card p-6 sm:p-8 transition-colors hover:bg-surface">
               <div className="grid h-10 w-10 place-items-center rounded-lg border border-border bg-surface text-foreground transition-colors group-hover:border-primary group-hover:text-primary">
                 <p.icon className="h-5 w-5" />
               </div>

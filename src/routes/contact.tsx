@@ -6,12 +6,12 @@ import { SectionHeading } from "../components/section-heading";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Let's Build the Future Together" },
+      { title: "Contact | Mikiyas Sahilu" },
       {
         name: "description",
-        content: "Start a conversation with FURII. Enterprise software, AI workflows, and creative production.",
+        content: "Start a conversation. Enterprise software, AI workflows, and software architecture.",
       },
-      { property: "og:title", content: "Contact FURII" },
+      { property: "og:title", content: "Contact | Mikiyas Sahilu" },
       { property: "og:description", content: "Let's build the future together." },
     ],
   }),
@@ -22,8 +22,8 @@ function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div className="pt-32">
-      <section className="container-page pb-16">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
+      <section className="container-page pb-12 sm:pb-16">
         <SectionHeading
           eyebrow="Contact"
           title="Let's build the future together."
@@ -31,14 +31,14 @@ function ContactPage() {
         />
       </section>
 
-      <section className="container-page pb-32">
-        <div className="grid gap-16 lg:grid-cols-[1.3fr_1fr]">
+      <section className="container-page pb-24 sm:pb-32">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               setSubmitted(true);
             }}
-            className="rounded-2xl border border-border bg-card p-8 md:p-10"
+            className="rounded-2xl border border-border bg-card p-6 sm:p-8 md:p-10"
           >
             {submitted ? (
               <div className="py-12 text-center">
@@ -49,7 +49,7 @@ function ContactPage() {
                   Thank you. We'll be in touch.
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground">
-                  A member of the FURII team will reach out shortly.
+                  Our team will reach out shortly.
                 </p>
               </div>
             ) : (
@@ -87,7 +87,7 @@ function ContactPage() {
           </form>
 
           <aside className="flex flex-col gap-6">
-            <div className="rounded-2xl border border-border bg-surface p-8">
+            <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
               <p className="font-mono text-[11px] uppercase tracking-widest text-subtle">
                 Direct
               </p>
@@ -96,7 +96,7 @@ function ContactPage() {
                 For partnerships, engineering, and press.
               </p>
             </div>
-            <div className="rounded-2xl border border-border bg-surface p-8">
+            <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8">
               <p className="font-mono text-[11px] uppercase tracking-widest text-subtle">
                 Elsewhere
               </p>

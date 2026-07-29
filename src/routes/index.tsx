@@ -5,13 +5,13 @@ import { SectionHeading } from "../components/section-heading";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mikiyas Sahilu — CTO & Enterprise Systems Architect" },
+      { title: "Mikiyas Sahilu | CTO & Enterprise Systems Architect" },
       {
         name: "description",
         content:
           "Mikiyas Sahilu is CTO and enterprise software architect. He leads engineering and applied AI at FURII, building high-throughput platforms for modern enterprises.",
       },
-      { property: "og:title", content: "Mikiyas Sahilu — CTO & Enterprise Systems Architect" },
+      { property: "og:title", content: "Mikiyas Sahilu | CTO & Enterprise Systems Architect" },
       {
         property: "og:description",
         content:
@@ -31,11 +31,11 @@ const capabilities = [
   },
   {
     title: "Applied AI Workflows",
-    body: "We integrate pragmatic AI into real operational tools — clinical summaries, document intelligence, resume screening, and predictive analytics — with zero gimmick chatbots.",
+    body: "We integrate pragmatic AI into real operational tools: clinical summaries, document intelligence, resume screening, and predictive analytics with zero gimmick chatbots.",
   },
   {
     title: "Product Engineering",
-    body: "We translate deep operational complexity into crisp, fast product experiences — the difference between software that gets tolerated and software people love using.",
+    body: "We translate deep operational complexity into crisp, fast product experiences: the difference between software that gets tolerated and software people love using.",
   },
   {
     title: "CTO Leadership",
@@ -93,7 +93,7 @@ const principles = [
   },
   {
     title: "Product Vision",
-    body: "Enterprise software engineered with consumer-grade polish — intelligent, fast, and effortless to operate.",
+    body: "Enterprise software engineered with consumer-grade polish: intelligent, fast, and effortless to operate.",
   },
   {
     title: "Core Values",
@@ -145,7 +145,7 @@ function FounderPage() {
               Mikiyas Sahilu
             </h1>
             <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted-foreground">
-              CTO & Enterprise Systems Architect · FURII
+              CTO & Enterprise Software Architect · FURII
             </p>
 
             <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
@@ -155,7 +155,7 @@ function FounderPage() {
               </p>
               <p>
                 I bridge executive strategy and deep technical execution. As CTO at FURII, I lead our
-                engineering team in designing high-throughput, multi-tenant platforms — across healthcare,
+                engineering team in designing high-throughput, multi-tenant platforms across healthcare,
                 logistics, government, HR, real estate, and finance.
               </p>
               <p>
@@ -163,7 +163,7 @@ function FounderPage() {
                 that automate real work, and consumer-grade interfaces built for enterprise scale.
               </p>
               <p>
-                We care about the details that make software feel considered — quiet reliability,
+                We care about the details that make software feel considered: quiet reliability,
                 intentional API contracts, thoughtful security models, and systems engineered to compound
                 in value over time.
               </p>

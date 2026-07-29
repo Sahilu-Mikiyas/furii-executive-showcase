@@ -5,13 +5,13 @@ import { Play } from "lucide-react";
 export const Route = createFileRoute("/media")({
   head: () => ({
     meta: [
-      { title: "Media & Production — FURII Studios" },
+      { title: "Media & Production | Mikiyas Sahilu" },
       {
         name: "description",
         content:
-          "Cinematic commercial films, corporate videos, photography, motion graphics, and brand identity work by FURII.",
+          "Cinematic commercial films, corporate videos, photography, motion graphics, and brand identity work.",
       },
-      { property: "og:title", content: "Media & Production — FURII" },
+      { property: "og:title", content: "Media & Production | Mikiyas Sahilu" },
       {
         property: "og:description",
         content: "Creative production for brands that value cinematic craft.",
@@ -32,17 +32,17 @@ const categories = [
 
 function MediaPage() {
   return (
-    <div className="pt-32">
-      <section className="container-page pb-16">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
+      <section className="container-page pb-12 sm:pb-16">
         <SectionHeading
           eyebrow="Media & Production"
           title="Craft that moves brands."
-          description="FURII's creative studio produces cinematic films, brand identities, and visual systems for organisations that value considered craft."
+          description="Producing cinematic films, brand identities, and visual systems for organisations that value considered craft."
         />
       </section>
 
-      <section className="container-page pb-32">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container-page pb-24 sm:pb-32">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c, i) => (
             <figure
               key={c.title}

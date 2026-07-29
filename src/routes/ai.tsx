@@ -5,16 +5,16 @@ import { Building2, GraduationCap, Users, Home, Landmark } from "lucide-react";
 export const Route = createFileRoute("/ai")({
   head: () => ({
     meta: [
-      { title: "AI — Embedded Into Every Workflow" },
+      { title: "Applied AI Workflows | Mikiyas Sahilu" },
       {
         name: "description",
         content:
-          "FURII embeds AI as integrated workflows — not chatbots — across healthcare, education, HR, real estate, and government platforms.",
+          "We embed AI as integrated workflows across healthcare, education, HR, real estate, and government platforms.",
       },
-      { property: "og:title", content: "AI Workflows — FURII" },
+      { property: "og:title", content: "Applied AI Workflows | Mikiyas Sahilu" },
       {
         property: "og:description",
-        content: "AI embedded into every enterprise workflow.",
+        content: "AI embedded into enterprise operational workflows.",
       },
     ],
   }),
@@ -60,21 +60,21 @@ const domains = [
 
 function AIPage() {
   return (
-    <div className="pt-32">
-      <section className="container-page pb-16">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
+      <section className="container-page pb-12 sm:pb-16">
         <SectionHeading
           eyebrow="Applied AI"
           title="AI embedded into every workflow."
-          description="Not a chatbot. AI is woven into the systems people already use — quietly making them faster, more accurate, and more insightful."
+          description="Not a chatbot. AI is woven directly into the tools people already use, quietly making them faster, more accurate, and more insightful."
         />
       </section>
 
-      <section className="container-page pb-32">
+      <section className="container-page pb-24 sm:pb-32">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {domains.map((d) => (
             <div
               key={d.domain}
-              className="group rounded-2xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)]"
+              className="group rounded-2xl border border-border bg-card p-6 sm:p-8 transition-all hover:-translate-y-1 hover:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)]"
             >
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">

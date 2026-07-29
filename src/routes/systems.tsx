@@ -6,16 +6,16 @@ import { systems } from "../lib/systems";
 export const Route = createFileRoute("/systems")({
   head: () => ({
     meta: [
-      { title: "Systems — FURII Enterprise Platforms" },
+      { title: "Enterprise Platforms | Mikiyas Sahilu" },
       {
         name: "description",
         content:
-          "Twelve enterprise platforms engineered by FURII — from healthcare and education to logistics and government.",
+          "Twelve enterprise platforms engineered for scale: from healthcare and education to logistics and government.",
       },
-      { property: "og:title", content: "FURII Systems — Enterprise Platforms" },
+      { property: "og:title", content: "Enterprise Platforms | Mikiyas Sahilu" },
       {
         property: "og:description",
-        content: "Explore FURII's portfolio of enterprise platforms.",
+        content: "Portfolio of enterprise software platforms.",
       },
     ],
   }),
@@ -24,16 +24,16 @@ export const Route = createFileRoute("/systems")({
 
 function SystemsPage() {
   return (
-    <div className="pt-32">
-      <section className="container-page pb-16">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
+      <section className="container-page pb-12 sm:pb-16">
         <SectionHeading
           eyebrow="Enterprise Systems"
           title="Platforms built to run organisations."
-          description="Each system solves a category of enterprise operations end-to-end — with shared architecture, security, and AI foundations."
+          description="Each system solves a category of enterprise operations end-to-end with shared architecture, security, and AI foundations."
         />
       </section>
-      <section className="container-page pb-32">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container-page pb-24 sm:pb-32">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {systems.map((s) => (
             <SystemCard key={s.slug} s={s} />
           ))}
