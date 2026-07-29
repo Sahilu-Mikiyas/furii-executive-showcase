@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
+import { ContactCtaBanner } from "../components/contact-cta-banner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -257,6 +258,9 @@ function FounderPage() {
           </div>
         </div>
       </section>
+
+      {/* Giant Animated CTA Banner */}
+      <ContactCtaBanner />
     </div>
   );
 }

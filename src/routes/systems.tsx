@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SectionHeading } from "../components/section-heading";
 import { SystemCard } from "../components/system-card";
+import { ContactCtaBanner } from "../components/contact-cta-banner";
 import { systems } from "../lib/systems";
 
 export const Route = createFileRoute("/systems")({
@@ -32,13 +33,14 @@ function SystemsPage() {
           description="Each system solves a category of enterprise operations end-to-end with shared architecture, security, and AI foundations."
         />
       </section>
-      <section className="container-page pb-24 sm:pb-32">
+      <section className="container-page pb-12 sm:pb-16">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {systems.map((s) => (
             <SystemCard key={s.slug} s={s} />
           ))}
         </div>
       </section>
+      <ContactCtaBanner />
     </div>
   );
 }
