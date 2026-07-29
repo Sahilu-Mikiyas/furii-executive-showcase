@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FounderRouteImport } from './routes/founder'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as SystemsRouteImport } from './routes/systems'
+import { Route as SystemsIndexRouteImport } from './routes/systems.index'
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const SystemsRoute = SystemsRouteImport.update({
   path: '/systems',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SystemsIndexRoute = SystemsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const SystemsPulseOsRoute = SystemsPulseOsRouteImport.update({
   id: '/pulse-os',
   path: '/pulse-os',
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
   '/systems/pulse-os': typeof SystemsPulseOsRoute
+  '/systems/': typeof SystemsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,8 +83,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/media': typeof MediaRoute
-  '/systems': typeof SystemsRouteWithChildren
   '/systems/pulse-os': typeof SystemsPulseOsRoute
+  '/systems': typeof SystemsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +96,7 @@ export interface FileRoutesById {
   '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
   '/systems/pulse-os': typeof SystemsPulseOsRoute
+  '/systems/': typeof SystemsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +109,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/systems'
     | '/systems/pulse-os'
+    | '/systems/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,8 +118,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/founder'
     | '/media'
-    | '/systems'
     | '/systems/pulse-os'
+    | '/systems'
   id:
     | '__root__'
     | '/'
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/systems'
     | '/systems/pulse-os'
+    | '/systems/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/systems/': {
+      id: '/systems/'
+      path: '/'
+      fullPath: '/systems/'
+      preLoaderRoute: typeof SystemsIndexRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/pulse-os': {
       id: '/systems/pulse-os'
       path: '/pulse-os'
@@ -196,10 +213,12 @@ declare module '@tanstack/react-router' {
 
 interface SystemsRouteChildren {
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
+  SystemsIndexRoute: typeof SystemsIndexRoute
 }
 
 const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsPulseOsRoute: SystemsPulseOsRoute,
+  SystemsIndexRoute: SystemsIndexRoute,
 }
 
 const SystemsRouteWithChildren =
