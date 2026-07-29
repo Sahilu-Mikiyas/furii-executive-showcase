@@ -3,7 +3,12 @@ import { ArrowUpRight, CheckCircle2, Cpu, ShieldCheck } from "lucide-react";
 import type { SystemInfo } from "../lib/systems";
 
 export function SystemCard({ s }: { s: SystemInfo }) {
-  const hasDetailPage = s.slug === "pulse-os";
+  const detailPages: Record<string, string> = {
+    "pulse-os": "/systems/pulse-os",
+    "nexus-campus": "/systems/nexus-campus",
+  };
+
+  const targetPath = detailPages[s.slug];
 
   const card = (
     <article className="group relative flex flex-col overflow-hidden rounded-[28px] border border-border bg-card shadow-xs transition-all duration-500 ease-out hover:-translate-y-2 hover:border-foreground/30 hover:shadow-2xl">
@@ -87,9 +92,9 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     </article>
   );
 
-  if (hasDetailPage) {
+  if (targetPath) {
     return (
-      <Link to="/systems/pulse-os" className="block cursor-pointer no-underline">
+      <Link to={targetPath} className="block cursor-pointer no-underline">
         {card}
       </Link>
     );
