@@ -20,6 +20,7 @@ import { Route as SystemsIndexRouteImport } from './routes/systems.index'
 import { Route as SystemsCivicPulseRouteImport } from './routes/systems.civic-pulse'
 import { Route as SystemsEquinoxLedgerRouteImport } from './routes/systems.equinox-ledger'
 import { Route as SystemsNexusCampusRouteImport } from './routes/systems.nexus-campus'
+import { Route as SystemsPrismImpactRouteImport } from './routes/systems.prism-impact'
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
 import { Route as SystemsStrataOpsRouteImport } from './routes/systems.strata-ops'
 import { Route as SystemsTalentGridRouteImport } from './routes/systems.talent-grid'
@@ -80,6 +81,11 @@ const SystemsNexusCampusRoute = SystemsNexusCampusRouteImport.update({
   path: '/nexus-campus',
   getParentRoute: () => SystemsRoute,
 } as any)
+const SystemsPrismImpactRoute = SystemsPrismImpactRouteImport.update({
+  id: '/prism-impact',
+  path: '/prism-impact',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const SystemsPulseOsRoute = SystemsPulseOsRouteImport.update({
   id: '/pulse-os',
   path: '/pulse-os',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
+  '/systems/prism-impact': typeof SystemsPrismImpactRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByTo {
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
+  '/systems/prism-impact': typeof SystemsPrismImpactRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
+  '/systems/prism-impact': typeof SystemsPrismImpactRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
     | '/systems/nexus-campus'
+    | '/systems/prism-impact'
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
     | '/systems/nexus-campus'
+    | '/systems/prism-impact'
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
     | '/systems/nexus-campus'
+    | '/systems/prism-impact'
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
@@ -294,6 +306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsNexusCampusRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/prism-impact': {
+      id: '/systems/prism-impact'
+      path: '/prism-impact'
+      fullPath: '/systems/prism-impact'
+      preLoaderRoute: typeof SystemsPrismImpactRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/pulse-os': {
       id: '/systems/pulse-os'
       path: '/pulse-os'
@@ -329,6 +348,7 @@ interface SystemsRouteChildren {
   SystemsCivicPulseRoute: typeof SystemsCivicPulseRoute
   SystemsEquinoxLedgerRoute: typeof SystemsEquinoxLedgerRoute
   SystemsNexusCampusRoute: typeof SystemsNexusCampusRoute
+  SystemsPrismImpactRoute: typeof SystemsPrismImpactRoute
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
   SystemsStrataOpsRoute: typeof SystemsStrataOpsRoute
   SystemsTalentGridRoute: typeof SystemsTalentGridRoute
@@ -340,6 +360,7 @@ const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsCivicPulseRoute: SystemsCivicPulseRoute,
   SystemsEquinoxLedgerRoute: SystemsEquinoxLedgerRoute,
   SystemsNexusCampusRoute: SystemsNexusCampusRoute,
+  SystemsPrismImpactRoute: SystemsPrismImpactRoute,
   SystemsPulseOsRoute: SystemsPulseOsRoute,
   SystemsStrataOpsRoute: SystemsStrataOpsRoute,
   SystemsTalentGridRoute: SystemsTalentGridRoute,

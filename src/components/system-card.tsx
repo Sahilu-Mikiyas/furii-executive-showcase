@@ -11,6 +11,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "velox-commerce": "/systems/velox-commerce",
     "civic-pulse": "/systems/civic-pulse",
     "equinox-ledger": "/systems/equinox-ledger",
+    "prism-impact": "/systems/prism-impact",
   };
 
   const targetPath = detailPages[s.slug];
