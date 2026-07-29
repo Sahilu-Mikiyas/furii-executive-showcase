@@ -12,6 +12,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "civic-pulse": "/systems/civic-pulse",
     "equinox-ledger": "/systems/equinox-ledger",
     "prism-impact": "/systems/prism-impact",
+    "forge-mes": "/systems/forge-mes",
   };
 
   const targetPath = detailPages[s.slug];

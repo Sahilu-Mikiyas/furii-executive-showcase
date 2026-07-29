@@ -19,6 +19,7 @@ import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as SystemsIndexRouteImport } from './routes/systems.index'
 import { Route as SystemsCivicPulseRouteImport } from './routes/systems.civic-pulse'
 import { Route as SystemsEquinoxLedgerRouteImport } from './routes/systems.equinox-ledger'
+import { Route as SystemsForgeMesRouteImport } from './routes/systems.forge-mes'
 import { Route as SystemsNexusCampusRouteImport } from './routes/systems.nexus-campus'
 import { Route as SystemsPrismImpactRouteImport } from './routes/systems.prism-impact'
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
@@ -76,6 +77,11 @@ const SystemsEquinoxLedgerRoute = SystemsEquinoxLedgerRouteImport.update({
   path: '/equinox-ledger',
   getParentRoute: () => SystemsRoute,
 } as any)
+const SystemsForgeMesRoute = SystemsForgeMesRouteImport.update({
+  id: '/forge-mes',
+  path: '/forge-mes',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const SystemsNexusCampusRoute = SystemsNexusCampusRouteImport.update({
   id: '/nexus-campus',
   path: '/nexus-campus',
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/systems': typeof SystemsRouteWithChildren
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
+  '/systems/forge-mes': typeof SystemsForgeMesRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/prism-impact': typeof SystemsPrismImpactRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/media': typeof MediaRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
+  '/systems/forge-mes': typeof SystemsForgeMesRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/prism-impact': typeof SystemsPrismImpactRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/systems': typeof SystemsRouteWithChildren
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/equinox-ledger': typeof SystemsEquinoxLedgerRoute
+  '/systems/forge-mes': typeof SystemsForgeMesRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/prism-impact': typeof SystemsPrismImpactRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/systems'
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
+    | '/systems/forge-mes'
     | '/systems/nexus-campus'
     | '/systems/prism-impact'
     | '/systems/pulse-os'
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
+    | '/systems/forge-mes'
     | '/systems/nexus-campus'
     | '/systems/prism-impact'
     | '/systems/pulse-os'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/systems'
     | '/systems/civic-pulse'
     | '/systems/equinox-ledger'
+    | '/systems/forge-mes'
     | '/systems/nexus-campus'
     | '/systems/prism-impact'
     | '/systems/pulse-os'
@@ -299,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsEquinoxLedgerRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/forge-mes': {
+      id: '/systems/forge-mes'
+      path: '/forge-mes'
+      fullPath: '/systems/forge-mes'
+      preLoaderRoute: typeof SystemsForgeMesRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/nexus-campus': {
       id: '/systems/nexus-campus'
       path: '/nexus-campus'
@@ -347,6 +366,7 @@ declare module '@tanstack/react-router' {
 interface SystemsRouteChildren {
   SystemsCivicPulseRoute: typeof SystemsCivicPulseRoute
   SystemsEquinoxLedgerRoute: typeof SystemsEquinoxLedgerRoute
+  SystemsForgeMesRoute: typeof SystemsForgeMesRoute
   SystemsNexusCampusRoute: typeof SystemsNexusCampusRoute
   SystemsPrismImpactRoute: typeof SystemsPrismImpactRoute
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
@@ -359,6 +379,7 @@ interface SystemsRouteChildren {
 const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsCivicPulseRoute: SystemsCivicPulseRoute,
   SystemsEquinoxLedgerRoute: SystemsEquinoxLedgerRoute,
+  SystemsForgeMesRoute: SystemsForgeMesRoute,
   SystemsNexusCampusRoute: SystemsNexusCampusRoute,
   SystemsPrismImpactRoute: SystemsPrismImpactRoute,
   SystemsPulseOsRoute: SystemsPulseOsRoute,
