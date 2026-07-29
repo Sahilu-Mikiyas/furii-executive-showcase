@@ -1,79 +1,83 @@
 import { Link } from "@tanstack/react-router";
+import { ArrowUp } from "lucide-react";
 
-const columns = [
-  {
-    title: "Systems",
-    links: [
-      { to: "/systems", label: "Enterprise Platforms" },
-      { to: "/architecture", label: "Architecture" },
-      { to: "/ai", label: "AI Workflows" },
-      { to: "/media", label: "Media & Production" },
-    ],
-  },
-  {
-    title: "Navigation",
-    links: [
-      { to: "/", label: "About" },
-      { to: "/contact", label: "Contact" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { to: "/contact", label: "Privacy" },
-      { to: "/contact", label: "Terms" },
-    ],
-  },
+const navLinks = [
+  { to: "/", label: "About" },
+  { to: "/systems", label: "Systems" },
+  { to: "/architecture", label: "Architecture" },
+  { to: "/ai", label: "AI" },
+  { to: "/media", label: "Media" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function SiteFooter() {
-  return (
-    <footer className="border-t border-border bg-surface">
-      <div className="container-page py-16">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-          <div>
-            <Link to="/" className="group flex items-center gap-2.5">
-              <span className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-[12px] font-mono font-bold tracking-tight text-background shadow-xs transition-transform duration-500 ease-out group-hover:scale-105">
-                MS
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="text-[16px] font-bold tracking-tight text-foreground transition-colors duration-500">
-                  Mikiyas Sahilu
-                </span>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5">
-                  CTO & Enterprise Architect
-                </span>
-              </span>
-            </Link>
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Intelligent, beautifully engineered enterprise software platforms and AI workflows built for organisations that demand excellence.
-            </p>
-          </div>
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h4 className="text-xs font-medium uppercase tracking-widest text-subtle">
-                {col.title}
-              </h4>
-              <ul className="mt-4 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      to={l.to}
-                      className="text-sm text-foreground transition-colors duration-500 hover:text-muted-foreground"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  return (
+    <footer className="border-t border-border bg-surface/80 py-12 sm:py-16">
+      <div className="container-page flex flex-col gap-10">
+        {/* Top Bar: Brand Monogram & Live Status */}
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <Link to="/" className="group inline-flex items-center gap-3">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-foreground text-[13px] font-mono font-bold tracking-tight text-background shadow-xs transition-transform duration-500 ease-out group-hover:scale-105">
+              MS
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="text-[16px] font-bold tracking-tight text-foreground transition-colors duration-500">
+                Mikiyas Sahilu
+              </span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5 font-medium">
+                CTO & Enterprise Systems Architect · FURII
+              </span>
+            </span>
+          </Link>
+
+          {/* Status Indicator */}
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-background px-3.5 py-1.5 shadow-2xs">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            <span className="font-mono text-[11px] text-muted-foreground font-medium">
+              Addis Ababa / GMT+3 · Available Worldwide
+            </span>
+          </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 md:flex-row md:items-center">
+        {/* Middle Bar: Inline Navigation Links & Back to Top */}
+        <div className="flex flex-col gap-6 border-y border-border/80 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <nav className="flex flex-wrap items-center gap-6 sm:gap-8">
+            {navLinks.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                activeOptions={{ exact: true }}
+                className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground"
+                activeProps={{ className: "text-foreground font-semibold" }}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          <button
+            onClick={scrollToTop}
+            className="group inline-flex items-center gap-2 self-start rounded-xl border border-border bg-background px-4 py-2 text-xs font-mono uppercase tracking-widest text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
+          >
+            <span>Back to Top</span>
+            <ArrowUp className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-y-0.5" />
+          </button>
+        </div>
+
+        {/* Bottom Bar: Clean Copyright */}
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p className="font-mono text-xs text-subtle">
             © {new Date().getFullYear()} Mikiyas Sahilu, FURII. All rights reserved.
+          </p>
+          <p className="font-mono text-[10px] text-subtle uppercase tracking-widest">
+            Engineering High-Throughput Systems
           </p>
         </div>
       </div>
