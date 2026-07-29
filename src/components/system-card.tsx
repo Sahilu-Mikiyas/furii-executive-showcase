@@ -8,6 +8,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "nexus-campus": "/systems/nexus-campus",
     "talent-grid": "/systems/talent-grid",
     "strata-ops": "/systems/strata-ops",
+    "velox-commerce": "/systems/velox-commerce",
   };
 
   const targetPath = detailPages[s.slug];

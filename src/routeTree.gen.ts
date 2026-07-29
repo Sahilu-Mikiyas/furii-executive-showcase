@@ -21,6 +21,7 @@ import { Route as SystemsNexusCampusRouteImport } from './routes/systems.nexus-c
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
 import { Route as SystemsStrataOpsRouteImport } from './routes/systems.strata-ops'
 import { Route as SystemsTalentGridRouteImport } from './routes/systems.talent-grid'
+import { Route as SystemsVeloxCommerceRouteImport } from './routes/systems.velox-commerce'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -82,6 +83,11 @@ const SystemsTalentGridRoute = SystemsTalentGridRouteImport.update({
   path: '/talent-grid',
   getParentRoute: () => SystemsRoute,
 } as any)
+const SystemsVeloxCommerceRoute = SystemsVeloxCommerceRouteImport.update({
+  id: '/velox-commerce',
+  path: '/velox-commerce',
+  getParentRoute: () => SystemsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
+  '/systems/velox-commerce': typeof SystemsVeloxCommerceRoute
   '/systems/': typeof SystemsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
+  '/systems/velox-commerce': typeof SystemsVeloxCommerceRoute
   '/systems': typeof SystemsIndexRoute
 }
 export interface FileRoutesById {
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
+  '/systems/velox-commerce': typeof SystemsVeloxCommerceRoute
   '/systems/': typeof SystemsIndexRoute
 }
 export interface FileRouteTypes {
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
+    | '/systems/velox-commerce'
     | '/systems/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
+    | '/systems/velox-commerce'
     | '/systems'
   id:
     | '__root__'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
+    | '/systems/velox-commerce'
     | '/systems/'
   fileRoutesById: FileRoutesById
 }
@@ -265,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsTalentGridRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/velox-commerce': {
+      id: '/systems/velox-commerce'
+      path: '/velox-commerce'
+      fullPath: '/systems/velox-commerce'
+      preLoaderRoute: typeof SystemsVeloxCommerceRouteImport
+      parentRoute: typeof SystemsRoute
+    }
   }
 }
 
@@ -273,6 +292,7 @@ interface SystemsRouteChildren {
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
   SystemsStrataOpsRoute: typeof SystemsStrataOpsRoute
   SystemsTalentGridRoute: typeof SystemsTalentGridRoute
+  SystemsVeloxCommerceRoute: typeof SystemsVeloxCommerceRoute
   SystemsIndexRoute: typeof SystemsIndexRoute
 }
 
@@ -281,6 +301,7 @@ const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsPulseOsRoute: SystemsPulseOsRoute,
   SystemsStrataOpsRoute: SystemsStrataOpsRoute,
   SystemsTalentGridRoute: SystemsTalentGridRoute,
+  SystemsVeloxCommerceRoute: SystemsVeloxCommerceRoute,
   SystemsIndexRoute: SystemsIndexRoute,
 }
 
