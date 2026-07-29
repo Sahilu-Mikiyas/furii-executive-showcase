@@ -7,6 +7,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "pulse-os": "/systems/pulse-os",
     "nexus-campus": "/systems/nexus-campus",
     "talent-grid": "/systems/talent-grid",
+    "strata-ops": "/systems/strata-ops",
   };
 
   const targetPath = detailPages[s.slug];

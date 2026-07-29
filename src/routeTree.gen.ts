@@ -19,6 +19,7 @@ import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as SystemsIndexRouteImport } from './routes/systems.index'
 import { Route as SystemsNexusCampusRouteImport } from './routes/systems.nexus-campus'
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
+import { Route as SystemsStrataOpsRouteImport } from './routes/systems.strata-ops'
 import { Route as SystemsTalentGridRouteImport } from './routes/systems.talent-grid'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const SystemsPulseOsRoute = SystemsPulseOsRouteImport.update({
   path: '/pulse-os',
   getParentRoute: () => SystemsRoute,
 } as any)
+const SystemsStrataOpsRoute = SystemsStrataOpsRouteImport.update({
+  id: '/strata-ops',
+  path: '/strata-ops',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const SystemsTalentGridRoute = SystemsTalentGridRouteImport.update({
   id: '/talent-grid',
   path: '/talent-grid',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/systems': typeof SystemsRouteWithChildren
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
+  '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
   '/systems/': typeof SystemsIndexRoute
 }
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/media': typeof MediaRoute
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
+  '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
   '/systems': typeof SystemsIndexRoute
 }
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/systems': typeof SystemsRouteWithChildren
   '/systems/nexus-campus': typeof SystemsNexusCampusRoute
   '/systems/pulse-os': typeof SystemsPulseOsRoute
+  '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
   '/systems/': typeof SystemsIndexRoute
 }
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/systems'
     | '/systems/nexus-campus'
     | '/systems/pulse-os'
+    | '/systems/strata-ops'
     | '/systems/talent-grid'
     | '/systems/'
   fileRoutesByTo: FileRoutesByTo
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/systems/nexus-campus'
     | '/systems/pulse-os'
+    | '/systems/strata-ops'
     | '/systems/talent-grid'
     | '/systems'
   id:
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/systems'
     | '/systems/nexus-campus'
     | '/systems/pulse-os'
+    | '/systems/strata-ops'
     | '/systems/talent-grid'
     | '/systems/'
   fileRoutesById: FileRoutesById
@@ -239,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsPulseOsRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/strata-ops': {
+      id: '/systems/strata-ops'
+      path: '/strata-ops'
+      fullPath: '/systems/strata-ops'
+      preLoaderRoute: typeof SystemsStrataOpsRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/talent-grid': {
       id: '/systems/talent-grid'
       path: '/talent-grid'
@@ -252,6 +271,7 @@ declare module '@tanstack/react-router' {
 interface SystemsRouteChildren {
   SystemsNexusCampusRoute: typeof SystemsNexusCampusRoute
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
+  SystemsStrataOpsRoute: typeof SystemsStrataOpsRoute
   SystemsTalentGridRoute: typeof SystemsTalentGridRoute
   SystemsIndexRoute: typeof SystemsIndexRoute
 }
@@ -259,6 +279,7 @@ interface SystemsRouteChildren {
 const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsNexusCampusRoute: SystemsNexusCampusRoute,
   SystemsPulseOsRoute: SystemsPulseOsRoute,
+  SystemsStrataOpsRoute: SystemsStrataOpsRoute,
   SystemsTalentGridRoute: SystemsTalentGridRoute,
   SystemsIndexRoute: SystemsIndexRoute,
 }
