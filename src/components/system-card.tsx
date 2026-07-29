@@ -4,7 +4,7 @@ import type { SystemInfo } from "../lib/systems";
 export function SystemCard({ s }: { s: SystemInfo }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-[28px] border border-border bg-card shadow-xs transition-all duration-500 ease-out hover:-translate-y-2 hover:border-foreground/30 hover:shadow-2xl">
-      {/* Visual Mini Dashboard Header */}
+      {/* Logo Header */}
       <div className={`relative aspect-[16/9] overflow-hidden bg-gradient-to-br ${s.accent}`}>
         <div className="absolute inset-0 grid-bg opacity-50" />
         <div className="absolute top-3 left-4 right-4 flex items-center justify-between z-10">
@@ -15,8 +15,13 @@ export function SystemCard({ s }: { s: SystemInfo }) {
             ● Active Engine
           </span>
         </div>
-        <div className="absolute inset-4 top-12 flex items-end">
-          <MiniDashboard name={s.name} industry={s.industry} />
+        {/* System Logo */}
+        <div className="absolute inset-0 flex items-center justify-center p-8 pt-14">
+          <img
+            src={s.logo}
+            alt={`${s.name} logo`}
+            className="max-h-full max-w-full object-contain drop-shadow-lg transition-transform duration-500 ease-out group-hover:scale-110"
+          />
         </div>
       </div>
 
@@ -77,36 +82,5 @@ export function SystemCard({ s }: { s: SystemInfo }) {
         </div>
       </div>
     </article>
-  );
-}
-
-function MiniDashboard({ name, industry }: { name: string; industry: string }) {
-  return (
-    <div className="w-full rounded-2xl border border-border/80 bg-background/95 p-3.5 shadow-sm backdrop-blur transition-all duration-500 ease-out">
-      <div className="flex items-center justify-between border-b border-border pb-2">
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-foreground/40" />
-          <span className="h-2 w-2 rounded-full bg-foreground/25" />
-          <span className="h-2 w-2 rounded-full bg-foreground/15" />
-        </div>
-        <span className="font-mono text-[9px] font-medium text-subtle uppercase tracking-wider">
-          {industry.toLowerCase()}.furii.co
-        </span>
-      </div>
-      <div className="mt-3 grid grid-cols-3 gap-2">
-        {[80, 55, 95, 45, 75, 60].map((val, i) => (
-          <div key={i} className="rounded-xl bg-foreground/5 p-2 border border-foreground/5">
-            <div className="h-1 w-8 rounded bg-foreground/15" />
-            <div
-              className="mt-2 h-1.5 rounded-full"
-              style={{
-                width: `${val}%`,
-                background: "color-mix(in oklab, var(--color-foreground) 50%, transparent)",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }

@@ -8,6 +8,7 @@ export type SystemInfo = {
   tags: string[];
   techStack: string;
   accent: string;
+  logo: string;
 };
 
 export const systems: SystemInfo[] = [
@@ -22,6 +23,7 @@ export const systems: SystemInfo[] = [
     tags: ["EMR", "HL7", "AI Triage"],
     techStack: "Microservices · PostgreSQL · Redis · Kafka",
     accent: "from-sky-500/10 to-transparent",
+    logo: "/logos/pulse-os.png",
   },
   {
     slug: "nexus-campus",
@@ -34,6 +36,7 @@ export const systems: SystemInfo[] = [
     tags: ["SIS", "LMS", "AI Insights"],
     techStack: "Event-Driven · GraphQL · PostgreSQL · WebSockets",
     accent: "from-indigo-500/10 to-transparent",
+    logo: "/logos/nexus-campus.png",
   },
   {
     slug: "talent-grid",
@@ -46,6 +49,7 @@ export const systems: SystemInfo[] = [
     tags: ["HRIS", "Payroll", "ATS"],
     techStack: "Serverless Workers · Node.js · TimescaleDB",
     accent: "from-emerald-500/10 to-transparent",
+    logo: "/logos/talent-grid.png",
   },
   {
     slug: "strata-ops",
@@ -57,6 +61,7 @@ export const systems: SystemInfo[] = [
     tags: ["Leases", "IoT", "Predictive"],
     techStack: "Go · TimescaleDB · MQTT · WebSockets",
     accent: "from-amber-500/10 to-transparent",
+    logo: "/logos/strata-ops.png",
   },
   {
     slug: "velox-commerce",
@@ -68,6 +73,7 @@ export const systems: SystemInfo[] = [
     tags: ["POS", "Inventory", "Omni"],
     techStack: "Rust · Redis Cluster · SQLite · Edge Nodes",
     accent: "from-rose-500/10 to-transparent",
+    logo: "/logos/velox-commerce.png",
   },
   {
     slug: "civic-pulse",
@@ -80,6 +86,7 @@ export const systems: SystemInfo[] = [
     tags: ["Workflows", "e-Gov", "OCR"],
     techStack: "Kubernetes · PostgreSQL · Python AI · MinIO",
     accent: "from-blue-500/10 to-transparent",
+    logo: "/logos/civic-pulse.png",
   },
   {
     slug: "equinox-ledger",
@@ -91,6 +98,7 @@ export const systems: SystemInfo[] = [
     tags: ["GL", "Budgeting", "Audit"],
     techStack: "Go · CockroachDB · Kafka · Event Sourcing",
     accent: "from-teal-500/10 to-transparent",
+    logo: "/logos/equinox-ledger.png",
   },
   {
     slug: "prism-impact",
@@ -102,6 +110,7 @@ export const systems: SystemInfo[] = [
     tags: ["M&E", "Donors", "Programs"],
     techStack: "PWA · PouchDB · CouchDB · Node.js",
     accent: "from-lime-500/10 to-transparent",
+    logo: "/logos/prism-impact.png",
   },
   {
     slug: "forge-mes",
@@ -114,6 +123,7 @@ export const systems: SystemInfo[] = [
     tags: ["MES", "QA", "OEE"],
     techStack: "C++ Microservices · InfluxDB · OPC-UA · Grafana",
     accent: "from-orange-500/10 to-transparent",
+    logo: "/logos/forge-mes.png",
   },
   {
     slug: "aura-hospitality",
@@ -125,6 +135,7 @@ export const systems: SystemInfo[] = [
     tags: ["PMS", "POS", "Guest"],
     techStack: "Node.js · PostgreSQL · Redis · WebSockets",
     accent: "from-fuchsia-500/10 to-transparent",
+    logo: "/logos/aura-hospitality.png",
   },
   {
     slug: "construct-x",
@@ -136,6 +147,7 @@ export const systems: SystemInfo[] = [
     tags: ["Projects", "Procure", "Field"],
     techStack: "React Native · Node.js · S3 · GraphQL",
     accent: "from-yellow-500/10 to-transparent",
+    logo: "/logos/construct-x.png",
   },
   {
     slug: "vector-dispatch",
@@ -147,5 +159,6 @@ export const systems: SystemInfo[] = [
     tags: ["TMS", "WMS", "Route AI"],
     techStack: "Python OR-Tools · Go · PostGIS · Redis",
     accent: "from-cyan-500/10 to-transparent",
+    logo: "/logos/vector-dispatch.png",
   },
 ];
