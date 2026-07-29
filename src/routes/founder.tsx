@@ -10,7 +10,7 @@ export const Route = createFileRoute("/founder")({
       {
         name: "description",
         content:
-          "Mikiyas Sahilu is a CTO and enterprise software architect. He leads engineering and applied AI at FURII, building platforms that run mission-critical operations at scale.",
+          "Mikiyas Sahilu is CTO and enterprise software architect. He leads engineering and applied AI at FURII, building platforms that run mission-critical operations at scale.",
       },
       { property: "og:title", content: "About — Mikiyas Sahilu" },
       {
@@ -28,19 +28,19 @@ export const Route = createFileRoute("/founder")({
 const capabilities = [
   {
     title: "System Architecture",
-    body: "I design multi-tenant, service-oriented platforms with clean domain boundaries, event-driven workflows, and defensible security models. Every platform I ship is built to scale from day one.",
+    body: "We design multi-tenant, service-oriented platforms with clean domain boundaries, event-driven workflows, and defensible security models. Every platform we ship is built to scale from day one.",
   },
   {
     title: "Applied AI",
-    body: "I integrate AI directly into operational workflows — clinical summaries, document intelligence, resume screening, predictive maintenance — as quiet, useful capabilities rather than bolted-on chatbots.",
+    body: "We integrate AI directly into operational workflows — clinical summaries, document intelligence, resume screening, predictive maintenance — as quiet, useful capabilities rather than bolted-on chatbots.",
   },
   {
     title: "Product Engineering",
-    body: "I translate deep enterprise complexity into product experiences that feel simple, considered, and fast — the difference between software that gets tolerated and software that gets loved.",
+    body: "We translate deep enterprise complexity into product experiences that feel simple, considered, and fast — the difference between software that gets tolerated and software that gets loved.",
   },
   {
     title: "CTO Leadership",
-    body: "I lead engineering organisations with a bias for taste, ownership, and long-term compounding. My teams ship with discipline, care, and a strong sense of craft.",
+    body: "I lead our engineering organization with a bias for taste, ownership, and long-term compounding. Our team ships with discipline, care, and a strong sense of craft.",
   },
 ];
 
@@ -86,11 +86,11 @@ const highlights = [
 const principles = [
   {
     title: "Engineering Philosophy",
-    body: "Simplicity scales. Clear boundaries beat clever code. Every system I build should still be understandable a year from now.",
+    body: "Simplicity scales. Clear boundaries beat clever code. Every system we build should still be understandable years from now.",
   },
   {
     title: "Leadership Philosophy",
-    body: "I empower engineers to think like owners. Ship with taste, respect the user, and optimise for long-term compounding.",
+    body: "We empower engineers to think like owners. Ship with taste, respect the user, and optimise for long-term compounding.",
   },
   {
     title: "Vision",
@@ -151,18 +151,18 @@ function FounderPage() {
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>
-                I'm a software architect and CTO who designs and builds enterprise platforms
-                for organisations that expect reliability, scale, and craft. My work sits at
+                As CTO at FURII, I lead an engineering team that designs and builds enterprise platforms
+                for organisations that expect reliability, scale, and craft. Our work sits at
                 the intersection of systems engineering, applied AI, and product design.
               </p>
               <p>
                 At FURII I lead engineering and architecture — shaping how our platforms are
                 designed, how they're built, and how AI is embedded into the workflows people
-                actually use. I've architected and shipped platforms across healthcare,
+                actually use. Together with our team, we've architected and shipped platforms across healthcare,
                 education, HR, government, real estate, logistics, manufacturing, and finance.
               </p>
               <p>
-                I care about the details that make software feel considered: clean domain
+                We care about the details that make software feel considered: clean domain
                 models, intentional interfaces, thoughtful defaults, and the quiet reliability
                 that lets an organisation depend on a system every day without thinking about
                 it.
@@ -174,14 +174,14 @@ function FounderPage() {
                 to="/systems"
                 className="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-95"
               >
-                See what I've built
+                See what we've built
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-medium text-foreground hover:bg-surface"
               >
-                Work with me
+                Work with us
               </Link>
             </div>
           </div>
@@ -192,9 +192,9 @@ function FounderPage() {
       <section className="border-y border-border bg-surface py-24">
         <div className="container-page">
           <SectionHeading
-            eyebrow="What I do"
+            eyebrow="What we do"
             title="Architecture, AI, and product engineering."
-            description="Four disciplines I bring to every engagement."
+            description="Four disciplines our team brings to every engagement."
           />
           <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
             {capabilities.map((c) => (
@@ -211,7 +211,7 @@ function FounderPage() {
       <section className="container-page py-24">
         <SectionHeading
           eyebrow="Selected work"
-          title="Platforms I've architected and shipped."
+          title="Platforms we've architected and shipped."
         />
         <ol className="mt-14 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
           {highlights.map((h, i) => (
@@ -243,7 +243,7 @@ function FounderPage() {
       {/* Principles */}
       <section className="border-t border-border bg-surface py-24">
         <div className="container-page">
-          <SectionHeading eyebrow="How I work" title="Principles that shape my craft." />
+          <SectionHeading eyebrow="How we work" title="Principles that shape our craft." />
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             {principles.map((p) => (
               <div key={p.title} className="rounded-2xl border border-border bg-card p-8">

@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Mikiyas Sahilu — CTO at FURII. I design and engineer enterprise software platforms, AI-powered workflows, and large-scale systems for organisations that demand excellence.",
+          "Mikiyas Sahilu — CTO at FURII. We design and engineer enterprise software platforms, AI-powered workflows, and large-scale systems for organisations that demand excellence.",
       },
       {
         property: "og:title",
@@ -75,11 +75,11 @@ function Home() {
             </div>
 
             <h1 className="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-              I engineer enterprise software for organisations that demand excellence.
+              We engineer enterprise software for organisations that demand excellence.
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I'm a software architect and CTO focused on designing scalable platforms,
+              As CTO, I lead engineering and architecture focused on designing scalable platforms,
               AI-powered workflows, and enterprise systems that transform how organisations
               operate — from hospitals and schools to governments and factories.
             </p>
@@ -89,14 +89,14 @@ function Home() {
                 to="/systems"
                 className="group inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:opacity-95"
               >
-                Explore my work
+                Explore our work
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
                 to="/founder"
                 className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface"
               >
-                About me
+                About our team
               </Link>
             </div>
 
@@ -141,13 +141,13 @@ function Home() {
         </div>
       </section>
 
-      {/* DISCIPLINES / WHAT I DO */}
+      {/* DISCIPLINES / WHAT WE DO */}
       <section className="py-24 md:py-32">
         <div className="container-page">
           <SectionHeading
-            eyebrow="What I do"
+            eyebrow="What we do"
             title="Engineering the systems modern organisations run on."
-            description="My work spans architecture, applied AI, and product engineering — turning complex operational problems into clean, dependable platforms."
+            description="Our work spans architecture, applied AI, and product engineering — turning complex operational problems into clean, dependable platforms."
           />
           <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
             {disciplines.map((d) => (
@@ -165,9 +165,9 @@ function Home() {
         <div className="container-page">
           <div className="flex flex-col items-end justify-between gap-6 md:flex-row">
             <SectionHeading
-              eyebrow="Systems I've built"
+              eyebrow="Systems we've built"
               title="Enterprise platforms, engineered end-to-end."
-              description="A selection of platforms I've architected and shipped at FURII — each running mission-critical operations at organisational scale."
+              description="A selection of platforms we've architected and shipped at FURII — each running mission-critical operations at organisational scale."
             />
             <Link
               to="/systems"
@@ -198,7 +198,7 @@ function Home() {
               Have an ambitious system to build?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-background/70">
-              I take on a small number of engagements each year — architecture reviews,
+              We take on a small number of engagements each year — architecture reviews,
               platform builds, and CTO-level advisory.
             </p>
             <div className="mt-8">
