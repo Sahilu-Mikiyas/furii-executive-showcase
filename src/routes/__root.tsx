@@ -23,7 +23,7 @@ function NotFoundComponent() {
         <div className="mt-8">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl bg-foreground border border-foreground px-5 py-2.5 text-sm font-medium text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground"
           >
             Return home
           </Link>
@@ -55,13 +55,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl bg-foreground border border-foreground px-4 py-2 text-sm font-medium text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface"
+            className="inline-flex items-center justify-center rounded-xl border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-all duration-500 ease-out hover:bg-foreground hover:text-background"
           >
             Go home
           </a>
@@ -82,9 +82,22 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-dvh flex-col bg-background text-foreground">
+      <div className="relative flex min-h-dvh flex-col bg-background text-foreground overflow-x-hidden">
+        {/* Luxury Background Brand Watermark "FURII" */}
+        <div
+          className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
+          aria-hidden="true"
+        >
+          <span className="absolute -top-12 -right-8 font-mono text-[24vw] sm:text-[20vw] font-black uppercase leading-none tracking-tighter text-foreground/[0.035]">
+            FURII
+          </span>
+          <span className="absolute top-[48%] -left-12 font-mono text-[22vw] sm:text-[18vw] font-black uppercase leading-none tracking-tighter text-foreground/[0.025]">
+            FURII
+          </span>
+        </div>
+
         <SiteNav />
-        <main className="flex-1">
+        <main className="relative z-10 flex-1">
           <Outlet />
         </main>
         <SiteFooter />
