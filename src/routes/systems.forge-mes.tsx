@@ -157,13 +157,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function ForgeMesUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "opcua" | "qa" | "maintenance">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "opcua" | "qa" | "maintenance" | "production" | "quality" | "energy">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Plant Command", icon: LayoutDashboard },
     { id: "opcua", label: "OPC-UA Machine Telemetry", icon: Cog },
     { id: "qa", label: "Real-Time QA Inspection", icon: CheckSquare },
     { id: "maintenance", label: "Tooling & Maintenance", icon: Wrench },
+      { id: "production", label: "Production Analytics", icon: TrendingUp },
+    { id: "quality", label: "Quality Trends Dashboard", icon: BarChart3 },
+    { id: "energy", label: "Energy & Cost Dashboard", icon: Zap },
   ] as const;
 
   return (
@@ -478,6 +481,172 @@ function ForgeMesUiSnapshots() {
             </div>
           </div>
         )}
+
+        {/* ── 5. Production Analytics ── */}
+        {activeTab === "production" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-3.5 w-3.5 text-orange-400" /> Hourly Production Output
+                </span>
+                <div className="flex items-end gap-2 h-32 mt-4 px-2">
+                  {[60, 65, 80, 85, 40, 90, 95, 100, 85, 90].map((h, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1 group relative">
+                      <div className={`w-full ${h < 50 ? 'bg-red-500' : 'bg-gradient-to-t from-orange-600 to-amber-400'} rounded-t-sm transition-all duration-300`} style={{ height: `${h}%` }}></div>
+                      <div className="text-[8px] font-mono text-muted-foreground text-center">{i+8}h</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center justify-center">
+                <span className="text-xs font-semibold text-foreground mb-4">Capacity Utilization</span>
+                <div className="relative w-24 h-24 rounded-full" style={{ background: "conic-gradient(from 0deg, #f97316 0% 88%, #1e293b 88% 100%)" }}>
+                  <div className="absolute inset-2 bg-card rounded-full flex items-center justify-center">
+                    <span className="text-xl font-bold text-orange-400">88%</span>
+                  </div>
+                </div>
+                <div className="w-full mt-4 flex justify-between text-[10px] font-mono px-2">
+                  <span className="text-orange-400">● Utilized</span>
+                  <span className="text-muted-foreground">● Idle</span>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Yield Rate Trend</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">99.2%</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  <TrendingUp className="h-3 w-3" /> Trending positive
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Cycle Time by Line</p>
+                <div className="mt-2 text-lg font-bold text-foreground">Avg: 4.2s / unit</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  Optimized by dynamic scheduler
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Quality Trends Dashboard ── */}
+        {activeTab === "quality" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-3.5 w-3.5 text-orange-400" /> Scrap Rate Breakdown
+                </span>
+                <div className="flex justify-center mt-2">
+                  <div className="relative w-28 h-28 rounded-full" style={{ background: "conic-gradient(from 0deg, #f59e0b 0% 60%, #f97316 60% 85%, #ef4444 85% 100%)" }}>
+                    <div className="absolute inset-3 bg-card rounded-full flex items-center justify-center">
+                      <span className="text-[10px] font-mono">0.8% Total</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 space-y-1 text-[9px] font-mono">
+                  <div className="flex justify-between"><span className="text-amber-500">● Dimensions</span><span>60%</span></div>
+                  <div className="flex justify-between"><span className="text-orange-500">● Surface</span><span>25%</span></div>
+                  <div className="flex justify-between"><span className="text-red-500">● Material</span><span>15%</span></div>
+                </div>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  First Pass Yield by Line (Bar Chart)
+                </span>
+                <div className="flex items-end gap-6 h-32 mt-4 px-4">
+                  {[
+                    { val: 99.5, lbl: "Line 1" },
+                    { val: 98.2, lbl: "Line 2" },
+                    { val: 99.8, lbl: "Line 3" },
+                    { val: 97.5, lbl: "Line 4" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                      <div className="text-[9px] font-mono text-center text-emerald-400 font-bold">{item.val}%</div>
+                      <div className="w-full bg-gradient-to-t from-orange-600 to-amber-500 rounded-t-sm" style={{ height: `${item.val * 0.8}%` }}></div>
+                      <div className="text-[10px] font-mono text-muted-foreground text-center">{item.lbl}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4 border-l-2 border-l-emerald-500">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">SPC Control Chart Status</p>
+                <div className="mt-2 text-lg font-bold text-foreground">All metrics in-control</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  CpK &gt; 1.33 achieved
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4 border-l-2 border-l-red-500">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Defect Rate Trend</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">0.18%</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-red-400 font-semibold">
+                  Minor spike on Line 2 (Tool wear)
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Energy & Cost Dashboard ── */}
+        {activeTab === "energy" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4 mb-4">
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Cost Per Unit</p>
+                  <p className="mt-1 text-xl font-bold text-emerald-400">$2.14</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Total Power (kW)</p>
+                  <p className="mt-1 text-xl font-bold text-orange-400">4,250</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Idle Cost Tracking</p>
+                  <p className="mt-1 text-xl font-bold text-red-400">$450/hr</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">CO2 Emissions</p>
+                  <p className="mt-1 text-xl font-bold text-foreground">-12% YTD</p>
+               </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <Zap className="h-3.5 w-3.5 text-amber-400" /> Energy Consumption by Line (kWh)
+                </span>
+                <div className="space-y-3">
+                  {[
+                    { label: "L1: Heavy Rolling", val: 85 },
+                    { label: "L2: CNC Cut", val: 55 },
+                    { label: "L3: Welding Bay", val: 70 },
+                  ].map((p, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                       <span className="w-28 text-[10px] font-mono truncate">{p.label}</span>
+                       <div className="flex-1 h-3 bg-surface rounded-sm overflow-hidden border border-border/50">
+                          <div className="h-full bg-gradient-to-r from-amber-500 to-orange-400" style={{ width: `${p.val}%` }}></div>
+                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block text-center">Power Factor</span>
+                <div className="flex justify-center mt-2">
+                  <div className="relative w-20 h-20 rounded-full" style={{ background: "conic-gradient(from 0deg, #f59e0b 0% 92%, #334155 92% 100%)" }}>
+                    <div className="absolute inset-2 bg-card rounded-full flex items-center justify-center">
+                       <span className="font-bold text-amber-500">0.92</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 text-[10px] font-mono text-center text-muted-foreground">Optimal efficiency range</div>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

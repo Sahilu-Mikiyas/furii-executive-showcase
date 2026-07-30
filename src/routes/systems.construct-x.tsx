@@ -26,6 +26,7 @@ import {
   Check,
   Hammer,
   DollarSign,
+  TrendingUp,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -158,13 +159,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function ConstructXUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "logs" | "bids" | "materials">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "logs" | "bids" | "materials" | "timeline-analytics" | "budget-analytics" | "safety-compliance">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Project Command", icon: LayoutDashboard },
     { id: "logs", label: "Field Logs & Safety", icon: HardHat },
     { id: "bids", label: "Subcontractor Bids", icon: ClipboardList },
     { id: "materials", label: "Material Procurement", icon: Truck },
+    { id: "timeline-analytics", label: "Project Timeline", icon: TrendingUp },
+    { id: "budget-analytics", label: "Budget & Cost", icon: DollarSign },
+    { id: "safety-compliance", label: "Safety & Compliance", icon: ShieldCheck },
   ] as const;
 
   return (
@@ -456,6 +460,220 @@ function ConstructXUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {/* ── 5. Project Timeline Analytics Screen ── */}
+        {activeTab === "timeline-analytics" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Timeline Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-yellow-500 text-background font-bold">
+                  <TrendingUp className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Project Timeline Analytics</h4>
+                  <p className="text-xs text-muted-foreground">Milestone progress tracking, schedule variance, and critical path analysis</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● Overall Schedule +2.5%
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Gantt-style progress bars */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <Calendar className="h-3.5 w-3.5 text-yellow-400" /> Milestone Schedule Variance
+                </span>
+                <div className="space-y-4">
+                  {[
+                    { label: "Foundation & Substructure", progress: "100%", width: "100%", color: "bg-emerald-500" },
+                    { label: "Superstructure & Core", progress: "65%", width: "65%", color: "bg-yellow-500" },
+                    { label: "MEP Rough-in", progress: "30%", width: "30%", color: "bg-yellow-400" },
+                    { label: "Interior Finishes", progress: "5%", width: "5%", color: "bg-orange-500" },
+                  ].map((item) => (
+                    <div key={item.label}>
+                      <div className="flex justify-between text-[10px] font-mono text-muted-foreground mb-1.5">
+                        <span>{item.label}</span>
+                        <span>{item.progress}</span>
+                      </div>
+                      <div className="h-2.5 w-full rounded-full bg-border overflow-hidden">
+                        <div className={`h-full ${item.color} rounded-full`} style={{ width: item.width }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Critical Path Donut & Metrics */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <Clock className="h-3.5 w-3.5 text-yellow-400" /> Delay Causes
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#eab308 45%, #f97316 35%, #27272a 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold">14 Days</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-yellow-500">■ Weather (45%)</p>
+                      <p className="text-[10px] font-mono text-orange-500 mt-1">■ Supply (35%)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Critical Path</p>
+                  <p className="text-lg font-bold text-emerald-400 mt-1">On Track <span className="text-xs font-normal text-muted-foreground">0 slip</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Budget & Cost Analytics Screen ── */}
+        {activeTab === "budget-analytics" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Budget Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-yellow-500 text-background font-bold">
+                  <DollarSign className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Budget & Cost Analytics</h4>
+                  <p className="text-xs text-muted-foreground">Budget vs actual spend, cost variance, and change order tracking</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● CPI: 1.08 (Under Budget)
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Budget vs Actual Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <DollarSign className="h-3.5 w-3.5 text-yellow-400" /> Spend by Phase ($M)
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "Site Prep", bud: "12", act: "11", bh: "60%", ah: "55%" },
+                    { label: "Foundation", bud: "28", act: "29", bh: "90%", ah: "95%" },
+                    { label: "Structural", bud: "45", act: "42", bh: "100%", ah: "85%" },
+                    { label: "MEP", bud: "35", act: "15", bh: "80%", ah: "40%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 items-end justify-center gap-1 group">
+                      <div className="flex flex-col items-center justify-end w-4">
+                        <div className="w-full rounded-t-sm bg-yellow-500/30" style={{ height: bar.bh }} />
+                      </div>
+                      <div className="flex flex-col items-center justify-end w-4">
+                        <span className="text-[8px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity absolute -mt-4">{bar.act}</span>
+                        <div className="w-full rounded-t-sm bg-gradient-to-t from-yellow-600 to-yellow-400" style={{ height: bar.ah }} />
+                      </div>
+                      <span className="absolute -mb-6 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Change Order Donut & EVM */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <AlertTriangle className="h-3.5 w-3.5 text-yellow-400" /> Change Orders
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#f59e0b 68%, #ef4444 32%)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold">$4.2M</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-yellow-500">■ Approved (68%)</p>
+                      <p className="text-[10px] font-mono text-rose-500 mt-1">■ Pending (32%)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Earned Value (EV)</p>
+                  <p className="text-lg font-bold text-foreground mt-1">$142.5M <span className="text-xs font-normal text-emerald-400">+12% Planned</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Safety & Compliance Dashboard Screen ── */}
+        {activeTab === "safety-compliance" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Safety Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-yellow-500 text-background font-bold">
+                  <ShieldCheck className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Safety & Compliance</h4>
+                  <p className="text-xs text-muted-foreground">Incident reporting, near-miss trends, and workforce certification tracking</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● 240 Days LTI Free
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Near Miss Reports Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-3.5 w-3.5 text-yellow-400" /> Near-Miss Observations (Last 6 Months)
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "Jan", value: 12, height: "60%" },
+                    { label: "Feb", value: 15, height: "75%" },
+                    { label: "Mar", value: 8, height: "40%" },
+                    { label: "Apr", value: 18, height: "90%" },
+                    { label: "May", value: 6, height: "30%" },
+                    { label: "Jun", value: 4, height: "20%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center justify-end group">
+                      <span className="text-[10px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity">{bar.value}</span>
+                      <div className="w-full max-w-[32px] rounded-t-md bg-gradient-to-t from-yellow-600 to-yellow-400" style={{ height: bar.height }} />
+                      <span className="mt-2 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Compliance Donut & Certs */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <UserCheck className="h-3.5 w-3.5 text-yellow-400" /> Site Compliance Score
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#10b981 94%, #27272a 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold text-emerald-400">94%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-muted-foreground">Total Audits: 48</p>
+                      <p className="text-[10px] font-mono text-muted-foreground mt-1">Resolved: 45</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Safety Training Rate</p>
+                  <p className="text-lg font-bold text-foreground mt-1">98.5% <span className="text-xs font-normal text-emerald-400">Compliant</span></p>
+                </div>
               </div>
             </div>
           </div>

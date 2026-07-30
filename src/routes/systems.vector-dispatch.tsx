@@ -26,6 +26,7 @@ import {
   Check,
   Radio,
   FileCheck,
+  TrendingUp,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -158,13 +159,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function VectorDispatchUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "tracking" | "routing" | "pod">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "tracking" | "routing" | "pod" | "fleet-analytics" | "route-efficiency" | "driver-scoreboard">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Fleet Command", icon: LayoutDashboard },
     { id: "tracking", label: "GPS Telematics", icon: MapPin },
     { id: "routing", label: "AI Route Optimizer", icon: Navigation },
     { id: "pod", label: "Driver Mobile e-POD", icon: FileCheck },
+    { id: "fleet-analytics", label: "Fleet Performance", icon: TrendingUp },
+    { id: "route-efficiency", label: "Route Efficiency", icon: BarChart3 },
+    { id: "driver-scoreboard", label: "Driver Scoreboard", icon: UserCheck },
   ] as const;
 
   return (
@@ -458,6 +462,215 @@ function VectorDispatchUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {/* ── 5. Fleet Performance Analytics Screen ── */}
+        {activeTab === "fleet-analytics" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Fleet Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-purple-500 text-background font-bold">
+                  <TrendingUp className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Fleet Performance Analytics</h4>
+                  <p className="text-xs text-muted-foreground">Truck utilization rates, idle time trends, and vehicle availability</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● Utilization +8.4%
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Truck Utilization Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-3.5 w-3.5 text-purple-400" /> Truck Utilization by Corridor
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "Corridor 1", value: 92, height: "92%" },
+                    { label: "Corridor 2", value: 85, height: "85%" },
+                    { label: "Corridor 3", value: 78, height: "78%" },
+                    { label: "Corridor 4", value: 88, height: "88%" },
+                    { label: "Corridor 5", value: 95, height: "95%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center justify-end group">
+                      <span className="text-[10px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity">{bar.value}%</span>
+                      <div className="w-full max-w-[32px] rounded-t-md bg-gradient-to-t from-purple-600 to-purple-400" style={{ height: bar.height }} />
+                      <span className="mt-2 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Vehicle Availability Donut & Metrics */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <Truck className="h-3.5 w-3.5 text-purple-400" /> Vehicle Availability
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#a855f7 85%, #6366f1 10%, #27272a 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold">85%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-purple-400">■ Active (85%)</p>
+                      <p className="text-[10px] font-mono text-indigo-400 mt-1">■ Maint. (10%)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Idle Time</p>
+                  <p className="text-lg font-bold text-foreground mt-1">1.2 Hrs/Day <span className="text-xs font-normal text-emerald-400">↓ 15%</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Route Efficiency Dashboard Screen ── */}
+        {activeTab === "route-efficiency" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Route Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-purple-500 text-background font-bold">
+                  <BarChart3 className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Route Efficiency Dashboard</h4>
+                  <p className="text-xs text-muted-foreground">On-time delivery performance, AI route savings, and traffic delays</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● 14,200 km Saved
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* On-Time Delivery Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-3.5 w-3.5 text-purple-400" /> On-Time Delivery by Route (%)
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "North", value: 96, height: "96%" },
+                    { label: "South", value: 92, height: "92%" },
+                    { label: "East", value: 88, height: "88%" },
+                    { label: "West", value: 94, height: "94%" },
+                    { label: "Central", value: 98, height: "98%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center justify-end group">
+                      <span className="text-[10px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity">{bar.value}%</span>
+                      <div className="w-full max-w-[32px] rounded-t-md bg-gradient-to-t from-indigo-500 to-purple-500" style={{ height: bar.height }} />
+                      <span className="mt-2 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Optimization Savings Donut */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <Database className="h-3.5 w-3.5 text-purple-400" /> AI Route Savings
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#10b981 75%, #27272a 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold text-emerald-400">75%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-muted-foreground">Optimal Routes</p>
+                      <p className="text-[10px] font-mono text-muted-foreground mt-1">Generated</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Traffic Delay</p>
+                  <p className="text-lg font-bold text-foreground mt-1">22 Mins <span className="text-xs font-normal text-emerald-400">↓ 8 Mins</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Driver Scoreboard Screen ── */}
+        {activeTab === "driver-scoreboard" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Driver Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-purple-500 text-background font-bold">
+                  <UserCheck className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Driver Scoreboard</h4>
+                  <p className="text-xs text-muted-foreground">Driver efficiency rankings, safety score distribution, and HOS compliance</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● Fleet Safety 96/100
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Driver Rankings Horizontal Bars */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <UserCheck className="h-3.5 w-3.5 text-purple-400" /> Top Driver Efficiency Rankings
+                </span>
+                <div className="space-y-4">
+                  {[
+                    { label: "Driver 1042 (Solomon)", score: 98, width: "98%", color: "bg-emerald-500" },
+                    { label: "Driver 8091 (Dawit)", score: 95, width: "95%", color: "bg-purple-500" },
+                    { label: "Driver 3301 (Abebe)", score: 91, width: "91%", color: "bg-indigo-400" },
+                    { label: "Driver 9912 (Kebede)", score: 88, width: "88%", color: "bg-violet-400" },
+                  ].map((item) => (
+                    <div key={item.label}>
+                      <div className="flex justify-between text-[10px] font-mono text-muted-foreground mb-1.5">
+                        <span>{item.label}</span>
+                        <span>{item.score} Score</span>
+                      </div>
+                      <div className="h-2.5 w-full rounded-full bg-border overflow-hidden">
+                        <div className={`h-full ${item.color} rounded-full`} style={{ width: item.width }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* HOS Compliance Donut */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <Clock className="h-3.5 w-3.5 text-purple-400" /> HOS Compliance
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#10b981 99%, #ef4444 1%)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold text-emerald-400">99.1%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-muted-foreground">Hours of Service</p>
+                      <p className="text-[10px] font-mono text-emerald-400 mt-1">Compliant</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Fuel Efficiency</p>
+                  <p className="text-lg font-bold text-foreground mt-1">3.4 km/L <span className="text-xs font-normal text-emerald-400">+0.2 km/L</span></p>
+                </div>
               </div>
             </div>
           </div>

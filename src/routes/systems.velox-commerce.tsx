@@ -26,6 +26,7 @@ import {
   Check,
   Package,
   TrendingUp,
+  Users,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -158,13 +159,18 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function VeloxCommerceUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "pos" | "inventory" | "loyalty">("dashboard");
+  const [activeTab, setActiveTab] = useState<
+    "dashboard" | "pos" | "inventory" | "loyalty" | "sales" | "cohorts" | "margins"
+  >("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Command", icon: LayoutDashboard },
     { id: "pos", label: "Offline-First POS", icon: ShoppingCart },
     { id: "inventory", label: "Multi-Store Inventory", icon: Package },
     { id: "loyalty", label: "AI Loyalty & Promo", icon: Brain },
+    { id: "sales", label: "Sales Performance", icon: TrendingUp },
+    { id: "cohorts", label: "Customer Cohorts", icon: Users },
+    { id: "margins", label: "Product & Margin", icon: Package },
   ] as const;
 
   return (
@@ -507,6 +513,239 @@ function VeloxCommerceUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 5. Sales Performance Analytics ── */}
+        {activeTab === "sales" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-4 w-4 text-rose-500" /> Hourly Sales Volume (Peak vs Avg)
+                </span>
+                <div className="flex h-32 items-end gap-2 px-1">
+                  {[30, 45, 80, 100, 90, 60, 50, 75, 85, 40].map((val, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                      <div className="w-full bg-gradient-to-t from-rose-600 to-rose-400 rounded-t-sm" style={{ height: `${val}%` }}></div>
+                      <span className="text-[8px] font-mono text-center text-muted-foreground">{i + 8}h</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="col-span-2 grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border bg-surface/50 p-4 flex flex-col justify-center">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Basket Size</p>
+                  <span className="text-3xl font-bold text-foreground mt-2">$84.50</span>
+                  <div className="mt-2 text-[10px] font-mono text-emerald-500 flex items-center">
+                    <TrendingUp className="h-3 w-3 mr-1" /> +12.4% vs Last Wk
+                  </div>
+                </div>
+                <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center justify-center">
+                  <span className="text-[10px] font-mono uppercase text-muted-foreground mb-3">Top Categories</span>
+                  <div className="relative h-20 w-20 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #f43f5e 0% 40%, #fb7185 40% 70%, #fda4af 70% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">Groceries</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <span className="text-xs font-semibold text-foreground mb-3 block">Revenue by Store Location (Real-Time)</span>
+              <div className="space-y-3">
+                {[
+                  { name: "Bole Main Branch", rev: "$285,400", prog: 92 },
+                  { name: "Kazanchis Hub", rev: "$210,120", prog: 78 },
+                  { name: "Sarbet Superstore", rev: "$185,900", prog: 65 },
+                  { name: "CMC Plaza", rev: "$142,300", prog: 50 },
+                ].map((item) => (
+                  <div key={item.name} className="flex items-center gap-4 text-xs">
+                    <div className="w-1/4 truncate font-medium text-foreground">{item.name}</div>
+                    <div className="flex-1">
+                      <div className="h-2 w-full bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-rose-500 rounded-full" style={{ width: `${item.prog}%` }}></div>
+                      </div>
+                    </div>
+                    <div className="w-20 text-right font-mono text-rose-400 font-semibold">{item.rev}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Customer Cohort Analytics ── */}
+        {activeTab === "cohorts" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Repeat Purchase Rate</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">64.2%</span>
+                  <span className="flex items-center text-[10px] font-mono text-emerald-500 font-semibold">
+                    <TrendingUp className="h-3 w-3 mr-1" />+5.1%
+                  </span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Active Members</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">1.2M</span>
+                  <span className="text-[10px] font-mono text-rose-400 font-semibold">Loyalty Program</span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Customer LTV (Avg)</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">$1,450</span>
+                  <span className="text-[10px] font-mono text-emerald-500 font-semibold">12-Month Base</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <Users className="h-4 w-4 text-rose-500" /> LTV by Customer Segment
+                </span>
+                <div className="flex h-32 items-end gap-3 px-2">
+                  {[
+                    { label: "New", val: 30, color: "bg-rose-300" },
+                    { label: "Casual", val: 55, color: "bg-rose-400" },
+                    { label: "Regular", val: 80, color: "bg-rose-500" },
+                    { label: "VIP", val: 100, color: "bg-rose-600" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center gap-2 group">
+                      <div
+                        className={`w-full rounded-t-sm ${bar.color} transition-all duration-300 group-hover:opacity-80`}
+                        style={{ height: `${bar.val}%` }}
+                      />
+                      <span className="text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-2">
+                  <Brain className="h-4 w-4 text-rose-500" /> Acquisition Channels
+                </span>
+                <div className="flex items-center gap-6 mt-2">
+                  <div className="relative h-24 w-24 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #e11d48 0% 50%, #fb7185 50% 85%, #fecdd3 85% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">50%</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2 flex-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-rose-600"></span> In-Store Signups
+                      </span>
+                      <span className="font-mono font-medium text-foreground">50%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-rose-400"></span> Mobile App
+                      </span>
+                      <span className="font-mono font-medium text-foreground">35%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-rose-200"></span> Promo Codes
+                      </span>
+                      <span className="font-mono font-medium text-foreground">15%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Product & Margin Dashboard ── */}
+        {activeTab === "margins" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4 col-span-1 flex flex-col justify-between">
+                <span className="text-[10px] font-mono uppercase text-muted-foreground">Gross Margin Avg</span>
+                <span className="text-3xl font-bold text-foreground">32.4%</span>
+                <div className="flex items-center text-[10px] text-emerald-500 font-mono mt-1">
+                  <Check className="h-3 w-3 mr-1" /> +1.2% Optimised
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 col-span-3">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <Package className="h-4 w-4 text-rose-500" /> Gross Margin by Category
+                </span>
+                <div className="flex h-16 items-end gap-2">
+                  {[
+                    { h: 60, c: "bg-rose-400", t: "Dairy" },
+                    { h: 40, c: "bg-pink-400", t: "Meat" },
+                    { h: 80, c: "bg-rose-500", t: "Produce" },
+                    { h: 50, c: "bg-red-400", t: "Bakery" },
+                    { h: 90, c: "bg-rose-600", t: "Beauty" },
+                    { h: 30, c: "bg-pink-500", t: "Snacks" },
+                  ].map((b, i) => (
+                    <div key={i} className="flex-1 flex flex-col gap-1 items-center group">
+                      <div className={`w-full rounded-t-sm ${b.c} transition-all duration-300 opacity-90 group-hover:opacity-100`} style={{ height: `${b.h}%` }}></div>
+                      <span className="text-[8px] font-mono text-muted-foreground truncate w-full text-center">{b.t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-3 block">Stock Turnover Rates (High Velocity)</span>
+                <div className="space-y-3">
+                  {[
+                    { sku: "Fresh Milk 1L", turn: "Daily", v: "14,500 units/wk", p: 95 },
+                    { sku: "Artisanal Bread", turn: "Daily", v: "8,200 units/wk", p: 85 },
+                    { sku: "Local Eggs (30pk)", turn: "2 Days", v: "5,400 units/wk", p: 70 },
+                  ].map((v) => (
+                    <div key={v.sku} className="flex justify-between items-center bg-surface/50 p-2 rounded-lg text-xs">
+                      <div>
+                        <p className="font-medium text-foreground">{v.sku}</p>
+                        <p className="text-[10px] text-muted-foreground">{v.v}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-rose-400 font-semibold">{v.turn}</span>
+                        <div className="w-16 h-1.5 bg-border rounded-full">
+                          <div className="h-full bg-rose-500 rounded-full" style={{ width: `${v.p}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <span className="text-xs font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-amber-500" /> Dead Stock Analysis
+                </span>
+                <p className="text-[10px] text-muted-foreground mb-4">Items with zero movement in 90 days</p>
+                <div className="flex items-center justify-between">
+                  <div className="relative h-20 w-20 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #f43f5e 0% 8%, #27272a 8% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">8.2%</span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-bold text-foreground">$142,500</p>
+                    <p className="text-[10px] text-muted-foreground">Capital Tied Up</p>
+                    <button className="mt-2 text-[10px] font-mono font-semibold text-rose-500 border border-rose-500/30 rounded px-2 py-1 hover:bg-rose-500/10 transition-colors">
+                      Trigger Clearance Markdown
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

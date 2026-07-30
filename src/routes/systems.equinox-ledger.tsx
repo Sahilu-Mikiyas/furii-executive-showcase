@@ -157,13 +157,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function EquinoxLedgerUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "gl" | "reconcile" | "audit">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "gl" | "reconcile" | "audit" | "cashflow" | "risk" | "revenue">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Command", icon: LayoutDashboard },
     { id: "gl", label: "General Ledger", icon: Scale },
     { id: "reconcile", label: "Bank Reconciliation", icon: DollarSign },
     { id: "audit", label: "Audit & Compliance", icon: Lock },
+      { id: "cashflow", label: "Cash Flow Analytics", icon: TrendingUp },
+    { id: "risk", label: "Risk & Exposure Dashboard", icon: AlertTriangle },
+    { id: "revenue", label: "Revenue & P&L Trends", icon: BarChart3 },
   ] as const;
 
   return (
@@ -481,6 +484,177 @@ function EquinoxLedgerUiSnapshots() {
             </div>
           </div>
         )}
+
+        {/* ── 5. Cash Flow Analytics ── */}
+        {activeTab === "cashflow" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-3.5 w-3.5 text-teal-400" /> Daily Cash Inflow vs Outflow
+                </span>
+                <div className="flex items-end gap-2 h-32 mt-4">
+                  {[40, 60, 45, 75, 50, 85, 90, 65, 80].map((h, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1 group relative">
+                      <div className="w-full bg-teal-500/20 rounded-t-sm" style={{ height: `${h}%` }}>
+                        <div className="w-full bg-teal-400 rounded-t-sm transition-all duration-300" style={{ height: `${h * 0.7}%` }}></div>
+                      </div>
+                      <div className="text-[9px] font-mono text-muted-foreground text-center">D{i+1}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center justify-center">
+                <span className="text-xs font-semibold text-foreground mb-4">Operating vs Investing vs Financing</span>
+                <div className="relative w-24 h-24 rounded-full" style={{ background: "conic-gradient(from 0deg, #14b8a6 0% 55%, #06b6d4 55% 85%, #10b981 85% 100%)" }}>
+                  <div className="absolute inset-2 bg-card rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold text-foreground">Cash</span>
+                  </div>
+                </div>
+                <div className="w-full mt-4 space-y-1">
+                  <div className="flex justify-between text-[10px] font-mono"><span className="text-teal-400">● Ops</span><span>55%</span></div>
+                  <div className="flex justify-between text-[10px] font-mono"><span className="text-cyan-400">● Inv</span><span>30%</span></div>
+                  <div className="flex justify-between text-[10px] font-mono"><span className="text-emerald-400">● Fin</span><span>15%</span></div>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Net Cash Position Trend</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">$824.5M</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-teal-400 font-semibold">
+                  <TrendingUp className="h-3 w-3" /> +12.4% vs last month
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Liquidity Ratio Gauge</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">1.8x</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  Above target (1.5x)
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Risk & Exposure Dashboard ── */}
+        {activeTab === "risk" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <AlertTriangle className="h-3.5 w-3.5 text-red-400" /> Currency Exposure
+                </span>
+                <div className="flex justify-center mt-2">
+                  <div className="relative w-28 h-28 rounded-full" style={{ background: "conic-gradient(from 0deg, #14b8a6 0% 45%, #06b6d4 45% 75%, #3b82f6 75% 90%, #f43f5e 90% 100%)" }}>
+                    <div className="absolute inset-3 bg-card rounded-full flex items-center justify-center">
+                      <span className="text-[10px] font-mono">FX Risk</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  Credit Risk Distribution
+                </span>
+                <div className="space-y-3">
+                  {[
+                    { label: "AAA / AA Rated", width: "65%", color: "bg-emerald-500" },
+                    { label: "A / BBB Rated", width: "25%", color: "bg-teal-500" },
+                    { label: "Sub-Investment", width: "10%", color: "bg-cyan-500" },
+                  ].map((r, i) => (
+                    <div key={i}>
+                      <div className="flex justify-between text-[10px] font-mono text-muted-foreground mb-1">
+                        <span>{r.label}</span><span>{r.width}</span>
+                      </div>
+                      <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
+                        <div className={`h-full ${r.color} rounded-full`} style={{ width: r.width }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4 border-l-2 border-l-red-500">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Counterparty Exposure Heat</p>
+                <div className="mt-2 text-lg font-bold text-foreground">Top 5 Clients = 14.2%</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-red-400 font-semibold">
+                  <AlertTriangle className="h-3 w-3" /> Concentration warning
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">VaR (Value at Risk) Trend</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">$12.5M</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  Within 99% confidence interval
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Revenue & P&L Trends ── */}
+        {activeTab === "revenue" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4 mb-4">
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">YTD Revenue</p>
+                  <p className="mt-1 text-xl font-bold text-foreground">$4.2B</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">EBITDA Margin</p>
+                  <p className="mt-1 text-xl font-bold text-teal-400">32.4%</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">OpEx Trend</p>
+                  <p className="mt-1 text-xl font-bold text-foreground">-4.2%</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Net Income</p>
+                  <p className="mt-1 text-xl font-bold text-emerald-400">$850M</p>
+               </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-3.5 w-3.5 text-teal-400" /> Monthly Revenue Trend
+                </span>
+                <div className="flex items-end gap-3 h-32 mt-4 px-2">
+                  {[40, 45, 55, 50, 65, 75, 80, 85, 95, 90, 100, 110].map((h, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                      <div className="w-full bg-gradient-to-t from-teal-500 to-cyan-400 rounded-sm" style={{ height: `${h * 0.8}%` }}></div>
+                      <div className="text-[8px] font-mono text-muted-foreground text-center">M{i+1}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block text-center">Expense Breakdown</span>
+                <div className="flex justify-center mt-2">
+                  <div className="relative w-24 h-24 rounded-full" style={{ background: "conic-gradient(from 0deg, #14b8a6 0% 40%, #06b6d4 40% 70%, #10b981 70% 90%, #64748b 90% 100%)" }}>
+                    <div className="absolute inset-2 bg-card rounded-full flex items-center justify-center">
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 space-y-1.5">
+                   <div className="flex justify-between text-[9px] font-mono"><span className="text-teal-400">● Payroll</span><span>40%</span></div>
+                   <div className="flex justify-between text-[9px] font-mono"><span className="text-cyan-400">● Tech</span><span>30%</span></div>
+                   <div className="flex justify-between text-[9px] font-mono"><span className="text-emerald-400">● Real Estate</span><span>20%</span></div>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-3 block">Department-Level P&L Comparison</span>
+                <div className="space-y-2 text-[10px] font-mono">
+                   <div className="flex justify-between bg-surface/50 p-2 rounded"><span className="font-bold">Retail Banking</span><span className="text-teal-400">+$1.2B</span></div>
+                   <div className="flex justify-between bg-surface/50 p-2 rounded"><span className="font-bold">Corporate Finance</span><span className="text-teal-400">+$2.4B</span></div>
+                   <div className="flex justify-between bg-surface/50 p-2 rounded"><span className="font-bold">Wealth Mgmt</span><span className="text-emerald-400">+$600M</span></div>
+                </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

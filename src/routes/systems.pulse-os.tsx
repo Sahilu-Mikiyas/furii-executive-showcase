@@ -26,6 +26,8 @@ import {
   Clock,
   ChevronRight,
   Sparkles,
+  DollarSign,
+  TrendingUp,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -158,13 +160,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function PulseOsUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "emr" | "triage" | "lab">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "emr" | "triage" | "lab" | "flow" | "revenue" | "outcomes">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Dashboard", icon: LayoutDashboard },
     { id: "emr", label: "Electronic Medical Records", icon: FileText },
     { id: "triage", label: "AI Clinical Triage", icon: AlertTriangle },
     { id: "lab", label: "Lab & Pharmacy Command", icon: FlaskConical },
+    { id: "flow", label: "Patient Flow Analytics", icon: Activity },
+    { id: "revenue", label: "Revenue Cycle Dashboard", icon: DollarSign },
+    { id: "outcomes", label: "Clinical Outcomes", icon: TrendingUp },
   ] as const;
 
   return (
@@ -540,6 +545,131 @@ function PulseOsUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 5. Patient Flow Analytics ── */}
+        {activeTab === "flow" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block">Patient Flow & Bed Occupancy</span>
+                <div className="flex h-32 items-end gap-2 border-b border-border/50 pb-2">
+                  {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
+                    <div key={i} className="flex-1 bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-t-sm transition-all" style={{ height: `${h}%` }}></div>
+                  ))}
+                </div>
+                <div className="flex justify-between mt-2 text-[10px] font-mono text-muted-foreground">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center justify-center">
+                <span className="text-xs font-semibold text-foreground mb-4 w-full text-left">Readmission Rate</span>
+                <div className="relative w-24 h-24 rounded-full" style={{ background: 'conic-gradient(rgb(16 185 129) 0% 12%, rgb(39 39 42) 12% 100%)' }}>
+                  <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                    <span className="text-xl font-bold text-foreground">12%</span>
+                  </div>
+                </div>
+                <p className="mt-4 text-[10px] text-muted-foreground text-center">30-day readmissions across all departments</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-4 gap-4">
+              {['ER Arrivals', 'Admissions', 'Discharges', 'Transfers'].map((t, i) => (
+                <div key={i} className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">{t}</p>
+                  <p className="mt-1 text-xl font-bold text-foreground">{[142, 45, 38, 12][i]}</p>
+                  <p className="mt-1 text-[10px] text-emerald-500 flex items-center gap-1">
+                    <TrendingUp className="h-3 w-3" /> +{[5, 2, 8, 1][i]}% vs last week
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Revenue Cycle Dashboard ── */}
+        {activeTab === "revenue" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Daily Revenue</p>
+                <p className="mt-1 text-xl font-bold text-foreground">$124.5k</p>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Outstanding AR</p>
+                <p className="mt-1 text-xl font-bold text-foreground">$2.1M</p>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-surface/50 p-3.5 flex items-center gap-4">
+                <div className="relative w-12 h-12 rounded-full shrink-0" style={{ background: 'conic-gradient(rgb(16 185 129) 0% 94%, rgb(39 39 42) 94% 100%)' }}>
+                  <div className="absolute inset-1.5 rounded-full bg-surface/50 flex items-center justify-center">
+                    <span className="text-xs font-bold text-foreground">94%</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-foreground">Insurance Claim Approval Rate</p>
+                  <p className="text-[10px] text-muted-foreground">First-pass clean claim rate across all payers.</p>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <span className="text-xs font-semibold text-foreground mb-4 block">Revenue by Department</span>
+              <div className="space-y-3">
+                {[ { d: 'Surgery', v: 85 }, { d: 'Emergency', v: 60 }, { d: 'Outpatient', v: 45 }, { d: 'Pharmacy', v: 30 } ].map((row, i) => (
+                  <div key={i}>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span>{row.d}</span>
+                      <span className="font-mono text-emerald-400">${(row.v * 1.2).toFixed(1)}k</span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-border overflow-hidden">
+                      <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${row.v}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Clinical Outcomes ── */}
+        {activeTab === "outcomes" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-3 block">Mortality Rate Trend</span>
+                <div className="flex h-24 items-end gap-1">
+                  {[3, 2.8, 2.5, 2.6, 2.2, 1.9, 1.8].map((v, i) => (
+                    <div key={i} className="flex-1 bg-emerald-500/80 rounded-t-sm" style={{ height: `${(v/3)*100}%` }}></div>
+                  ))}
+                </div>
+                <p className="mt-2 text-[10px] font-mono text-emerald-400 text-center">Currently 1.8% (Below avg)</p>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-3 block">Clinical Quality Metrics</span>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] w-24">Patient Satisfaction</span>
+                    <div className="flex-1 h-2 rounded-full bg-border overflow-hidden">
+                      <div className="h-full bg-emerald-400" style={{ width: '92%' }}></div>
+                    </div>
+                    <span className="text-[10px] font-mono w-8">92%</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] w-24">Surgical Success</span>
+                    <div className="flex-1 h-2 rounded-full bg-border overflow-hidden">
+                      <div className="h-full bg-emerald-500" style={{ width: '98%' }}></div>
+                    </div>
+                    <span className="text-[10px] font-mono w-8">98%</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] w-24">Infection Rate</span>
+                    <div className="flex-1 h-2 rounded-full bg-border overflow-hidden">
+                      <div className="h-full bg-red-400" style={{ width: '4%' }}></div>
+                    </div>
+                    <span className="text-[10px] font-mono w-8">4.2%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

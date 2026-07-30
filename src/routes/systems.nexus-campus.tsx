@@ -22,9 +22,10 @@ import {
   Calendar,
   Sparkles,
   UserCheck,
-  Building2,
   Clock,
   Check,
+  TrendingUp,
+  PieChart,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -157,13 +158,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function NexusCampusUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "sis" | "analytics" | "portal">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "sis" | "analytics" | "portal" | "performance_analytics" | "enrollment" | "faculty">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Overview", icon: LayoutDashboard },
     { id: "sis", label: "Student Information (SIS)", icon: FileText },
     { id: "analytics", label: "AI Academic Analytics", icon: Brain },
     { id: "portal", label: "Parent & Exam Command", icon: Calendar },
+    { id: "performance_analytics", label: "Student Performance", icon: TrendingUp },
+    { id: "enrollment", label: "Enrollment Trends", icon: Users },
+    { id: "faculty", label: "Faculty Resources", icon: BookOpen },
   ] as const;
 
   return (
@@ -517,6 +521,133 @@ function NexusCampusUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 5. Student Performance Analytics ── */}
+        {activeTab === "performance_analytics" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block">GPA Distribution</span>
+                <div className="flex h-32 items-end gap-1 border-b border-border/50 pb-2">
+                  {[10, 20, 45, 80, 60, 30, 15].map((h, i) => (
+                    <div key={i} className="flex-1 bg-gradient-to-t from-purple-500 to-purple-400 rounded-t-sm" style={{ height: `${h}%` }}></div>
+                  ))}
+                </div>
+                <div className="flex justify-between mt-2 text-[10px] font-mono text-muted-foreground">
+                  <span>&lt;2.0</span><span>2.5</span><span>3.0</span><span>3.5</span><span>4.0</span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block">Course Pass Rates</span>
+                <div className="space-y-3">
+                  {[ { c: 'Computer Science', p: 92 }, { c: 'Engineering', p: 88 }, { c: 'Mathematics', p: 76 } ].map((row, i) => (
+                    <div key={i}>
+                      <div className="flex justify-between text-[10px] mb-1">
+                        <span>{row.c}</span><span className="text-purple-400">{row.p}%</span>
+                      </div>
+                      <div className="h-1.5 w-full rounded-full bg-border overflow-hidden">
+                        <div className="h-full bg-purple-500 rounded-full" style={{ width: `${row.p}%` }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-3.5 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Dropout Risk</p>
+                  <p className="text-xl font-bold text-foreground">4.2%</p>
+                </div>
+                <div className="relative w-10 h-10 rounded-full" style={{ background: 'conic-gradient(rgb(168 85 247) 0% 4%, rgb(39 39 42) 4% 100%)' }}>
+                  <div className="absolute inset-1 rounded-full bg-surface/50"></div>
+                </div>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-surface/50 p-3.5 flex items-center gap-3">
+                <TrendingUp className="h-8 w-8 text-purple-400" />
+                <div>
+                  <p className="text-sm font-bold text-foreground">Semester-over-Semester Growth</p>
+                  <p className="text-xs text-muted-foreground">Overall campus GPA has improved by 0.12 points since Fall 2025.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Enrollment Trends ── */}
+        {activeTab === "enrollment" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center">
+                <span className="text-xs font-semibold text-foreground mb-4 w-full text-left">Gender Diversity</span>
+                <div className="relative w-28 h-28 rounded-full mb-2" style={{ background: 'conic-gradient(rgb(168 85 247) 0% 52%, rgb(99 102 241) 52% 100%)' }}>
+                  <div className="absolute inset-2 rounded-full bg-card flex flex-col items-center justify-center">
+                    <span className="text-xs font-bold text-foreground">52% F</span>
+                    <span className="text-[9px] text-muted-foreground">48% M</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block">Application Funnel</span>
+                <div className="space-y-4 relative">
+                  {[ { s: 'Applied', v: 100, n: '12,500' }, { s: 'Admitted', v: 65, n: '8,125' }, { s: 'Enrolled', v: 40, n: '5,000' } ].map((step, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <span className="text-[10px] w-16 text-right">{step.s}</span>
+                      <div className="flex-1 bg-border h-6 rounded-md overflow-hidden flex">
+                        <div className="bg-purple-500 h-full flex items-center px-2 text-[10px] font-bold text-white" style={{ width: `${step.v}%` }}>{step.n}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl border border-border bg-surface/50 p-4">
+               <span className="text-xs font-semibold text-foreground mb-3 block">Enrollment by Program</span>
+               <div className="grid grid-cols-2 gap-4">
+                 {[ { p: 'BSc Computer Science', v: '2,400' }, { p: 'MSc Data Science', v: '850' }, { p: 'BSc Software Eng', v: '1,750' }, { p: 'Phd AI Research', v: '120' }].map((prog, i) => (
+                    <div key={i} className="flex justify-between items-center text-xs border-b border-border/50 pb-1">
+                      <span className="text-muted-foreground">{prog.p}</span>
+                      <span className="font-mono text-purple-400 font-semibold">{prog.v}</span>
+                    </div>
+                 ))}
+               </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Faculty & Resource Dashboard ── */}
+        {activeTab === "faculty" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Classroom Utilization</p>
+                <div className="mt-2 h-3 w-full rounded-full bg-border overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-purple-500 to-indigo-500" style={{ width: '82%' }}></div>
+                </div>
+                <p className="text-xs mt-2 text-foreground font-semibold">82% Peak Time Usage (09:00 - 15:00)</p>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Student-Faculty</p>
+                <p className="mt-1 text-2xl font-bold text-foreground">18:1</p>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Research Pubs</p>
+                <p className="mt-1 text-2xl font-bold text-foreground">342</p>
+              </div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <span className="text-xs font-semibold text-foreground mb-4 block">Faculty Workload (Teaching Hours / Week)</span>
+              <div className="flex h-24 items-end gap-2">
+                {[12, 15, 8, 18, 14, 10, 16, 9].map((h, i) => (
+                  <div key={i} className="flex-1 bg-indigo-500/80 rounded-t-sm" style={{ height: `${(h/20)*100}%` }}></div>
+                ))}
+              </div>
+              <div className="flex justify-between mt-2 text-[9px] font-mono text-muted-foreground">
+                <span>Dept 1</span><span>Dept 2</span><span>Dept 3</span><span>Dept 4</span><span>Dept 5</span><span>Dept 6</span><span>Dept 7</span><span>Dept 8</span>
               </div>
             </div>
           </div>

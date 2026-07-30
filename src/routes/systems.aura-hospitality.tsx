@@ -26,6 +26,8 @@ import {
   Check,
   PhoneCall,
   Sparkle,
+  TrendingUp,
+  DollarSign,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -158,13 +160,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function AuraHospitalityUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "crs" | "housekeeping" | "guest">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "crs" | "housekeeping" | "guest" | "guest-analytics" | "revenue-management" | "channel-performance">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Command", icon: LayoutDashboard },
     { id: "crs", label: "Central Reservations", icon: Hotel },
     { id: "housekeeping", label: "Housekeeping OS", icon: BedDouble },
     { id: "guest", label: "Guest Concierge & POS", icon: KeyRound },
+    { id: "guest-analytics", label: "Guest Experience", icon: TrendingUp },
+    { id: "revenue-management", label: "Revenue Management", icon: DollarSign },
+    { id: "channel-performance", label: "Channel Performance", icon: BarChart3 },
   ] as const;
 
   return (
@@ -463,6 +468,210 @@ function AuraHospitalityUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {/* ── 5. Guest Experience Analytics Screen ── */}
+        {activeTab === "guest-analytics" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Guest Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-fuchsia-500/20 bg-fuchsia-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-fuchsia-500 text-background font-bold">
+                  <TrendingUp className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Guest Experience Analytics</h4>
+                  <p className="text-xs text-muted-foreground">Guest satisfaction by touchpoint, NPS score trend, and complaint resolution</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● 72 NPS Score (+8)
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Satisfaction by Touchpoint Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-3.5 w-3.5 text-fuchsia-400" /> Satisfaction by Touchpoint
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "Check-in", value: 92, height: "92%" },
+                    { label: "Room", value: 85, height: "85%" },
+                    { label: "Dining", value: 78, height: "78%" },
+                    { label: "Spa", value: 95, height: "95%" },
+                    { label: "Checkout", value: 88, height: "88%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center justify-end group">
+                      <span className="text-[10px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity">{bar.value}%</span>
+                      <div className="w-full max-w-[32px] rounded-t-md bg-gradient-to-t from-fuchsia-600 to-fuchsia-400" style={{ height: bar.height }} />
+                      <span className="mt-2 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Resolution Donut & Metrics */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-fuchsia-400" /> Resolution & Repeat
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#d946ef 82%, #27272a 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold">82%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-muted-foreground">&lt;15m Resolution</p>
+                      <p className="text-sm font-bold text-emerald-400 mt-1">↑ 12% vs LY</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Repeat Guest Rate</p>
+                  <p className="text-lg font-bold text-foreground mt-1">34.8%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Revenue Management Screen ── */}
+        {activeTab === "revenue-management" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Revenue Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-fuchsia-500/20 bg-fuchsia-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-fuchsia-500 text-background font-bold">
+                  <DollarSign className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Revenue Management</h4>
+                  <p className="text-xs text-muted-foreground">ADR trends, booking lead times, and upsell conversion tracking</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● RevPAR +14% YoY
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Revenue by Channel Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <DollarSign className="h-3.5 w-3.5 text-fuchsia-400" /> Revenue by Channel (Trailing 30D)
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "Direct", value: "$420k", height: "85%" },
+                    { label: "Booking.com", value: "$310k", height: "60%" },
+                    { label: "Expedia", value: "$180k", height: "40%" },
+                    { label: "Corp", value: "$290k", height: "55%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center justify-end group">
+                      <span className="text-[10px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity">{bar.value}</span>
+                      <div className="w-full max-w-[40px] rounded-t-md bg-gradient-to-t from-fuchsia-600 to-fuchsia-400" style={{ height: bar.height }} />
+                      <span className="mt-2 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Lead Time Donut & Upsell */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <Clock className="h-3.5 w-3.5 text-fuchsia-400" /> Booking Lead Time
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#d946ef 45%, #a855f7 30%, #27272a 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold">28D Avg</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-muted-foreground">■ &gt;30 Days (45%)</p>
+                      <p className="text-[10px] font-mono text-muted-foreground">■ 7-30 Days (30%)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Upsell Conversion</p>
+                  <p className="text-lg font-bold text-emerald-400 mt-1">18.2% <span className="text-xs font-normal text-muted-foreground">room upgrades</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Channel Performance Screen ── */}
+        {activeTab === "channel-performance" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            {/* Channel Banner */}
+            <div className="flex items-center justify-between rounded-xl border border-fuchsia-500/20 bg-fuchsia-500/5 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-fuchsia-500 text-background font-bold">
+                  <BarChart3 className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">Channel Performance</h4>
+                  <p className="text-xs text-muted-foreground">OTA bookings, direct revenue split, and commission costs</p>
+                </div>
+              </div>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-[10px] font-semibold text-emerald-400">
+                ● Direct Share 42%
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {/* Commission Cost Bar Chart */}
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-3.5 w-3.5 text-fuchsia-400" /> Commission Cost by OTA (YTD)
+                </span>
+                <div className="flex h-32 items-end gap-3 border-b border-border/40 pb-2">
+                  {[
+                    { label: "B.com", value: "$85k", height: "85%" },
+                    { label: "Expedia", value: "$45k", height: "45%" },
+                    { label: "Agoda", value: "$25k", height: "25%" },
+                    { label: "Trip.com", value: "$15k", height: "15%" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center justify-end group">
+                      <span className="text-[10px] font-mono mb-1 opacity-0 group-hover:opacity-100 transition-opacity text-rose-400">{bar.value}</span>
+                      <div className="w-full max-w-[32px] rounded-t-md bg-gradient-to-t from-rose-500 to-rose-400" style={{ height: bar.height }} />
+                      <span className="mt-2 text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Direct vs OTA Donut & Metrics */}
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                    <Database className="h-3.5 w-3.5 text-fuchsia-400" /> Revenue Split
+                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative h-16 w-16 rounded-full" style={{ background: "conic-gradient(#10b981 42%, #d946ef 0)" }}>
+                      <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                        <span className="text-xs font-bold">Split</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono text-emerald-400">■ Direct (42%)</p>
+                      <p className="text-[10px] font-mono text-fuchsia-400 mt-1">■ OTA (58%)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Overall Cancellation</p>
+                  <p className="text-lg font-bold text-foreground mt-1">11.4% <span className="text-xs font-normal text-emerald-400">↓ 2.1%</span></p>
+                </div>
               </div>
             </div>
           </div>

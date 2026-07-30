@@ -25,6 +25,8 @@ import {
   Check,
   Shield,
   FileCode,
+  TrendingUp,
+  DollarSign,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -156,13 +158,18 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function CivicPulseUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "ocr" | "permit" | "audit">("dashboard");
+  const [activeTab, setActiveTab] = useState<
+    "dashboard" | "ocr" | "permit" | "audit" | "citizen" | "bureau" | "revenue"
+  >("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Command", icon: LayoutDashboard },
     { id: "ocr", label: "Document OCR AI", icon: FileCheck },
     { id: "permit", label: "Permit Workflows", icon: Landmark },
     { id: "audit", label: "Audit & Security", icon: Shield },
+    { id: "citizen", label: "Citizen Service", icon: TrendingUp },
+    { id: "bureau", label: "Bureau Matrix", icon: BarChart3 },
+    { id: "revenue", label: "Revenue Collection", icon: DollarSign },
   ] as const;
 
   return (
@@ -485,6 +492,274 @@ function CivicPulseUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 5. Citizen Service Analytics ── */}
+        {activeTab === "citizen" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-4 w-4 text-blue-500" /> Service Requests by Type (30 Days)
+                </span>
+                <div className="flex h-32 items-end gap-2 px-1">
+                  {[45, 60, 50, 85, 70, 95, 40].map((val, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                      <div className="w-full bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-sm" style={{ height: `${val}%` }}></div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-between mt-2 px-1 text-[8px] font-mono text-muted-foreground">
+                  <span>ID</span>
+                  <span>Tax</span>
+                  <span>Trade</span>
+                  <span>Land</span>
+                  <span>Birth</span>
+                  <span>Health</span>
+                  <span>Visa</span>
+                </div>
+              </div>
+
+              <div className="col-span-2 grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border bg-surface/50 p-4 flex flex-col justify-center">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Processing Time</p>
+                  <span className="text-3xl font-bold text-foreground mt-2">1.8 Days</span>
+                  <div className="mt-2 text-[10px] font-mono text-emerald-500 flex items-center">
+                    <TrendingUp className="h-3 w-3 mr-1" /> -14% vs Last Month
+                  </div>
+                </div>
+                <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center justify-center">
+                  <span className="text-[10px] font-mono uppercase text-muted-foreground mb-3">Citizen Satisfaction</span>
+                  <div className="relative h-20 w-20 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #3b82f6 0% 88%, #1e293b 88% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">4.4/5</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <span className="text-xs font-semibold text-foreground mb-3 block">Digital vs In-Person Service Ratio</span>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 text-xs">
+                  <div className="w-24 font-medium text-foreground text-right">Digital Portal</div>
+                  <div className="flex-1">
+                    <div className="h-2 w-full bg-border rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-500 rounded-full" style={{ width: "72%" }}></div>
+                    </div>
+                  </div>
+                  <div className="w-12 text-right font-mono text-blue-400 font-semibold">72%</div>
+                </div>
+                <div className="flex items-center gap-4 text-xs">
+                  <div className="w-24 font-medium text-foreground text-right">In-Person Kiosk</div>
+                  <div className="flex-1">
+                    <div className="h-2 w-full bg-border rounded-full overflow-hidden">
+                      <div className="h-full bg-slate-500 rounded-full" style={{ width: "28%" }}></div>
+                    </div>
+                  </div>
+                  <div className="w-12 text-right font-mono text-slate-400 font-semibold">28%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Bureau Performance Matrix ── */}
+        {activeTab === "bureau" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Total Backlog</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">4,280</span>
+                  <span className="flex items-center text-[10px] font-mono text-emerald-500 font-semibold">
+                    <TrendingUp className="h-3 w-3 mr-1 transform rotate-180" />-12% MoM
+                  </span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Staff Productivity</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">94.2%</span>
+                  <span className="text-[10px] font-mono text-blue-400 font-semibold">Efficiency Score</span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Auto-Approval Rate</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">38.5%</span>
+                  <span className="text-[10px] font-mono text-emerald-500 font-semibold">AI Handled</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-4 w-4 text-blue-500" /> Bureau Efficiency Rankings
+                </span>
+                <div className="space-y-4">
+                  {[
+                    { label: "Revenue & Tax", val: 95, color: "bg-blue-600" },
+                    { label: "Trade Registry", val: 82, color: "bg-blue-500" },
+                    { label: "Civil Identity", val: 76, color: "bg-sky-500" },
+                    { label: "Land Management", val: 64, color: "bg-sky-400" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="space-y-1">
+                      <div className="flex justify-between text-[10px] font-mono text-muted-foreground">
+                        <span>{bar.label}</span>
+                        <span>{bar.val} Score</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-border rounded-full overflow-hidden">
+                        <div className={`h-full ${bar.color} rounded-full transition-all duration-500`} style={{ width: `${bar.val}%` }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-2">
+                  <ShieldCheck className="h-4 w-4 text-blue-500" /> Approval Rate by Dept
+                </span>
+                <div className="flex items-center gap-6 mt-2">
+                  <div className="relative h-24 w-24 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #2563eb 0% 65%, #38bdf8 65% 85%, #818cf8 85% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">88% Avg</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2 flex-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-blue-600"></span> Trade
+                      </span>
+                      <span className="font-mono font-medium text-foreground">92%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-sky-400"></span> ID
+                      </span>
+                      <span className="font-mono font-medium text-foreground">84%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-indigo-400"></span> Land
+                      </span>
+                      <span className="font-mono font-medium text-foreground">68%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Revenue Collection Dashboard ── */}
+        {activeTab === "revenue" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4 col-span-1 flex flex-col justify-between">
+                <span className="text-[10px] font-mono uppercase text-muted-foreground">Total Collected YTD</span>
+                <span className="text-3xl font-bold text-foreground">$4.2B</span>
+                <div className="flex items-center text-[10px] text-emerald-500 font-mono mt-1">
+                  <Check className="h-3 w-3 mr-1" /> 98% Collection Rate
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 col-span-3">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <Landmark className="h-4 w-4 text-blue-500" /> Tax Revenue by Category
+                </span>
+                <div className="flex h-16 items-end gap-2">
+                  {[
+                    { h: 80, c: "bg-blue-600", t: "Income Tax" },
+                    { h: 65, c: "bg-blue-500", t: "Corporate" },
+                    { h: 45, c: "bg-sky-500", t: "VAT" },
+                    { h: 30, c: "bg-sky-400", t: "Property" },
+                    { h: 20, c: "bg-indigo-400", t: "Customs" },
+                  ].map((b, i) => (
+                    <div key={i} className="flex-1 flex flex-col gap-1 items-center group">
+                      <div className={`w-full rounded-t-sm ${b.c} transition-all duration-300 opacity-90 group-hover:opacity-100`} style={{ height: `${b.h}%` }}></div>
+                      <span className="text-[8px] font-mono text-muted-foreground truncate w-full text-center">{b.t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-3 block">Payment Method Distribution</span>
+                <div className="flex items-center justify-between">
+                  <div className="relative h-20 w-20 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #2563eb 0% 55%, #0ea5e9 55% 85%, #64748b 85% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">Mix</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2 flex-1 ml-6">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-blue-600"></span> Bank Transfer
+                      </span>
+                      <span className="font-mono font-medium text-foreground">55%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-sky-500"></span> Digital Wallet
+                      </span>
+                      <span className="font-mono font-medium text-foreground">30%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-slate-500"></span> Cash/In-Person
+                      </span>
+                      <span className="font-mono font-medium text-foreground">15%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <span className="text-xs font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-amber-500" /> Delinquency Aging Buckets
+                </span>
+                <p className="text-[10px] text-muted-foreground mb-4">Outstanding balances by age</p>
+                
+                <div className="space-y-2.5 mt-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="w-16 font-mono text-muted-foreground">30-60 Days</span>
+                    <div className="flex-1 mx-3">
+                      <div className="h-1.5 w-full bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: "40%" }}></div>
+                      </div>
+                    </div>
+                    <span className="w-16 text-right font-mono text-foreground font-semibold">$14.2M</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="w-16 font-mono text-muted-foreground">60-90 Days</span>
+                    <div className="flex-1 mx-3">
+                      <div className="h-1.5 w-full bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-orange-500 rounded-full" style={{ width: "25%" }}></div>
+                      </div>
+                    </div>
+                    <span className="w-16 text-right font-mono text-foreground font-semibold">$8.5M</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="w-16 font-mono text-muted-foreground">90+ Days</span>
+                    <div className="flex-1 mx-3">
+                      <div className="h-1.5 w-full bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-red-500 rounded-full" style={{ width: "60%" }}></div>
+                      </div>
+                    </div>
+                    <span className="w-16 text-right font-mono text-foreground font-semibold">$22.4M</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

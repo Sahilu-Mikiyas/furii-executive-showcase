@@ -26,6 +26,7 @@ import {
   Clock,
   Check,
   Key,
+  TrendingUp,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
@@ -158,13 +159,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function StrataOpsUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "lease" | "iot" | "tenant">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "lease" | "iot" | "tenant" | "valuation" | "revenue" | "operations">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Command", icon: LayoutDashboard },
     { id: "lease", label: "Lease & Rent Core", icon: FileText },
     { id: "iot", label: "IoT Telemetry", icon: Radio },
     { id: "tenant", label: "Tenant Hub", icon: Key },
+    { id: "valuation", label: "Portfolio Valuation", icon: TrendingUp },
+    { id: "revenue", label: "Occupancy & Revenue", icon: DollarSign },
+    { id: "operations", label: "Maintenance & Ops", icon: Wrench },
   ] as const;
 
   return (
@@ -503,6 +507,240 @@ function StrataOpsUiSnapshots() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 5. Portfolio Valuation Analytics ── */}
+        {activeTab === "valuation" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Total AUM</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">$1.45B</span>
+                  <span className="flex items-center text-[10px] font-mono text-emerald-500 font-semibold">
+                    <TrendingUp className="h-3 w-3 mr-1" />+4.2% YTD
+                  </span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Cap Rate</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">6.8%</span>
+                  <span className="text-[10px] font-mono text-amber-500 font-semibold">Target: 6.5%</span>
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Net Asset Value</p>
+                <div className="mt-1 flex items-baseline justify-between">
+                  <span className="text-2xl font-bold text-foreground">$1.12B</span>
+                  <span className="text-[10px] font-mono text-emerald-500 font-semibold">Audited Q2</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <Building2 className="h-4 w-4 text-amber-500" /> Property Value by Region
+                </span>
+                <div className="flex h-32 items-end gap-3 px-2">
+                  {[
+                    { label: "East", val: 85, color: "bg-amber-500" },
+                    { label: "West", val: 60, color: "bg-orange-400" },
+                    { label: "North", val: 40, color: "bg-yellow-500" },
+                    { label: "South", val: 75, color: "bg-amber-400" },
+                    { label: "Central", val: 95, color: "bg-amber-600" },
+                  ].map((bar) => (
+                    <div key={bar.label} className="flex flex-1 flex-col items-center gap-2 group">
+                      <div
+                        className={`w-full rounded-t-sm ${bar.color} transition-all duration-300 group-hover:opacity-80`}
+                        style={{ height: `${bar.val}%` }}
+                      />
+                      <span className="text-[9px] font-mono text-muted-foreground">{bar.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col justify-between">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-2">
+                  <LayoutDashboard className="h-4 w-4 text-amber-500" /> Portfolio Diversity
+                </span>
+                <div className="flex items-center gap-6 mt-2">
+                  <div className="relative h-24 w-24 rounded-full border-4 border-surface shadow-inner"
+                       style={{ background: "conic-gradient(from 0deg, #f59e0b 0% 45%, #fbbf24 45% 75%, #d97706 75% 100%)" }}>
+                    <div className="absolute inset-2 rounded-full bg-card flex items-center justify-center">
+                      <span className="text-[10px] font-bold text-foreground">45%</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2 flex-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-amber-500"></span> Commercial
+                      </span>
+                      <span className="font-mono font-medium text-foreground">45%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-yellow-400"></span> Residential
+                      </span>
+                      <span className="font-mono font-medium text-foreground">30%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="h-2 w-2 rounded-full bg-amber-600"></span> Industrial
+                      </span>
+                      <span className="font-mono font-medium text-foreground">25%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Occupancy & Revenue Dashboard ── */}
+        {activeTab === "revenue" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <DollarSign className="h-4 w-4 text-amber-500" /> Revenue vs Target (Monthly)
+                </span>
+                <div className="flex h-28 items-end gap-2 px-1">
+                  {[45, 60, 55, 75, 70, 85, 90, 88, 95].map((val, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                      <div className="w-full bg-surface rounded-t-sm h-full relative">
+                        <div className="absolute bottom-0 w-full bg-gradient-to-t from-amber-600 to-amber-400 rounded-t-sm" style={{ height: `${val}%` }}></div>
+                      </div>
+                      <span className="text-[8px] font-mono text-center text-muted-foreground text-opacity-50">M{i+1}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="col-span-2 grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border bg-surface/50 p-4 flex flex-col justify-center">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg Rev Per Sqm</p>
+                  <span className="text-3xl font-bold text-foreground mt-2">$42.50</span>
+                  <div className="mt-2 text-[10px] font-mono text-emerald-500 flex items-center">
+                    <TrendingUp className="h-3 w-3 mr-1" /> +2.1% MoM
+                  </div>
+                </div>
+                <div className="rounded-xl border border-border bg-surface/50 p-4 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-10" style={{ background: "radial-gradient(circle, #f59e0b 0%, transparent 70%)" }}></div>
+                  <div className="text-center z-10">
+                    <p className="text-[10px] font-mono uppercase text-muted-foreground mb-1">Lease Renewal Rate</p>
+                    <span className="text-3xl font-bold text-amber-500">87.4%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <span className="text-xs font-semibold text-foreground mb-3 block">Top Performing Properties (Revenue)</span>
+              <div className="space-y-2">
+                {[
+                  { name: "Sunshine Financial Center", rev: "$4.2M", occ: "99%", prog: 90 },
+                  { name: "Gift Real Estate Heights", rev: "$2.8M", occ: "95%", prog: 75 },
+                  { name: "Central Plaza Plaza B", rev: "$1.9M", occ: "92%", prog: 60 },
+                ].map((item) => (
+                  <div key={item.name} className="flex items-center gap-4 text-xs">
+                    <div className="w-1/3 truncate font-medium text-foreground">{item.name}</div>
+                    <div className="flex-1">
+                      <div className="h-1.5 w-full bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-500 rounded-full" style={{ width: `${item.prog}%` }}></div>
+                      </div>
+                    </div>
+                    <div className="w-16 text-right font-mono text-amber-400 font-semibold">{item.rev}</div>
+                    <div className="w-12 text-right font-mono text-muted-foreground">{item.occ}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Maintenance & Operations ── */}
+        {activeTab === "operations" && (
+          <div className="min-w-[640px] space-y-6 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4 col-span-1 flex flex-col justify-between">
+                <span className="text-[10px] font-mono uppercase text-muted-foreground">Work Orders</span>
+                <span className="text-3xl font-bold text-foreground">1,248</span>
+                <div className="flex items-center text-[10px] text-emerald-500 font-mono mt-1">
+                  <Check className="h-3 w-3 mr-1" /> 92% SLA Met
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 col-span-3">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <Wrench className="h-4 w-4 text-amber-500" /> Work Orders by Category
+                </span>
+                <div className="flex h-16 items-end gap-1">
+                  {[
+                    { h: 80, c: "bg-amber-600", t: "HVAC" },
+                    { h: 40, c: "bg-amber-500", t: "Plumbing" },
+                    { h: 60, c: "bg-yellow-500", t: "Electrical" },
+                    { h: 30, c: "bg-orange-400", t: "Access" },
+                    { h: 50, c: "bg-amber-400", t: "Janitorial" },
+                    { h: 90, c: "bg-yellow-400", t: "Elevator" },
+                  ].map((b, i) => (
+                    <div key={i} className="flex-1 flex flex-col gap-1 items-center group">
+                      <div className={`w-full rounded-t-sm ${b.c} transition-all duration-300 opacity-90 group-hover:opacity-100`} style={{ height: `${b.h}%` }}></div>
+                      <span className="text-[8px] font-mono text-muted-foreground truncate w-full text-center">{b.t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-3 block">Vendor Performance Scores</span>
+                <div className="space-y-3">
+                  {[
+                    { v: "EthioFacilities Ltd", s: "4.8/5", m: "32m avg response", p: 96 },
+                    { v: "Apex Elevator Tech", s: "4.5/5", m: "45m avg response", p: 90 },
+                    { v: "CleanSpace Pro", s: "4.2/5", m: "2h avg response", p: 84 },
+                  ].map((v) => (
+                    <div key={v.v} className="flex justify-between items-center bg-surface/50 p-2 rounded-lg text-xs">
+                      <div>
+                        <p className="font-medium text-foreground">{v.v}</p>
+                        <p className="text-[10px] text-muted-foreground">{v.m}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-amber-400 font-semibold">{v.s}</span>
+                        <div className="w-16 h-1.5 bg-border rounded-full">
+                          <div className="h-full bg-amber-500 rounded-full" style={{ width: `${v.p}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/30 p-4">
+                <span className="text-xs font-semibold text-foreground mb-2 block">Maintenance Cost Trends</span>
+                <p className="text-[10px] text-muted-foreground mb-4">Cost per unit tracking across quarters</p>
+                
+                <div className="relative h-24 w-full flex items-end">
+                  <div className="absolute inset-0 border-b border-l border-border/50"></div>
+                  <div className="w-full flex justify-between items-end h-full px-2 relative z-10">
+                    {[70, 65, 55, 45, 50, 40].map((val, i) => (
+                      <div key={i} className="w-6 bg-gradient-to-t from-amber-600/80 to-amber-400/80 rounded-t-sm" style={{ height: `${val}%` }}></div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex justify-between px-2 mt-2">
+                  <span className="text-[9px] font-mono text-muted-foreground">Q1</span>
+                  <span className="text-[9px] font-mono text-muted-foreground">Q2</span>
+                  <span className="text-[9px] font-mono text-muted-foreground">Q3</span>
+                  <span className="text-[9px] font-mono text-muted-foreground">Q4</span>
+                  <span className="text-[9px] font-mono text-muted-foreground">Q1</span>
+                  <span className="text-[9px] font-mono text-muted-foreground">Q2</span>
+                </div>
               </div>
             </div>
           </div>

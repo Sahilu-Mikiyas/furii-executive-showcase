@@ -157,13 +157,16 @@ function stagger(index: number) {
 /* ─── UI Snapshots Mock Component ─── */
 
 function PrismImpactUiSnapshots() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "beneficiary" | "grants" | "pwa">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "beneficiary" | "grants" | "pwa" | "impact" | "geo" | "outcomes">("dashboard");
 
   const tabs = [
     { id: "dashboard", label: "Executive Impact Command", icon: LayoutDashboard },
     { id: "beneficiary", label: "Beneficiary Registry", icon: Users },
     { id: "grants", label: "Donor Grant Engine", icon: DollarSign },
     { id: "pwa", label: "Offline Field Sync", icon: WifiOff },
+      { id: "impact", label: "Impact Metrics Dashboard", icon: TrendingUp },
+    { id: "geo", label: "Geographic Coverage", icon: Globe },
+    { id: "outcomes", label: "Program Outcomes", icon: BarChart3 },
   ] as const;
 
   return (
@@ -491,6 +494,178 @@ function PrismImpactUiSnapshots() {
             </div>
           </div>
         )}
+
+        {/* ── 5. Impact Metrics Dashboard ── */}
+        {activeTab === "impact" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-3.5 w-3.5 text-lime-400" /> SDG Progress by Goal
+                </span>
+                <div className="space-y-3">
+                  {[
+                    { label: "SDG 1: No Poverty", width: "75%", color: "bg-lime-500" },
+                    { label: "SDG 2: Zero Hunger", width: "60%", color: "bg-green-500" },
+                    { label: "SDG 3: Good Health", width: "85%", color: "bg-emerald-500" },
+                    { label: "SDG 4: Quality Ed", width: "45%", color: "bg-lime-400" },
+                  ].map((r, i) => (
+                    <div key={i}>
+                      <div className="flex justify-between text-[10px] font-mono text-muted-foreground mb-1">
+                        <span>{r.label}</span><span>{r.width}</span>
+                      </div>
+                      <div className="h-2.5 w-full bg-surface rounded-full overflow-hidden">
+                        <div className={`h-full ${r.color} rounded-full`} style={{ width: r.width }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col items-center justify-center">
+                <span className="text-xs font-semibold text-foreground mb-4">Program Effectiveness</span>
+                <div className="relative w-24 h-24 rounded-full" style={{ background: "conic-gradient(from 0deg, #84cc16 0% 82%, #1e293b 82% 100%)" }}>
+                  <div className="absolute inset-2 bg-card rounded-full flex items-center justify-center">
+                    <span className="text-xl font-bold text-lime-400">82<span className="text-[10px]">pts</span></span>
+                  </div>
+                </div>
+                <div className="mt-4 text-[10px] font-mono text-center text-muted-foreground">
+                  Composite effectiveness score based on real-time field M&E data.
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Beneficiary Reach Over Time</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">1.24M Lives</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-lime-400 font-semibold">
+                  <TrendingUp className="h-3 w-3" /> Exceeding Q3 targets by 14%
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Impact Per Dollar Spent Trend</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">3.8x ROI</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  Social Return on Investment
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. Geographic Coverage ── */}
+        {activeTab === "geo" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <Globe className="h-3.5 w-3.5 text-lime-400" /> Urban vs Rural Reach
+                </span>
+                <div className="flex justify-center mt-2">
+                  <div className="relative w-28 h-28 rounded-full" style={{ background: "conic-gradient(from 0deg, #84cc16 0% 70%, #10b981 70% 100%)" }}>
+                    <div className="absolute inset-3 bg-card rounded-full flex items-center justify-center">
+                      <span className="text-[10px] font-mono">Demographics</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between px-2 text-[10px] font-mono">
+                  <span className="text-lime-400">● Rural (70%)</span>
+                  <span className="text-emerald-400">● Urban (30%)</span>
+                </div>
+              </div>
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  Beneficiaries by Region (Bar Chart)
+                </span>
+                <div className="flex items-end gap-4 h-32 mt-4 px-2">
+                  {[
+                    { val: 85, lbl: "Afar" },
+                    { val: 65, lbl: "Somali" },
+                    { val: 40, lbl: "Tigray" },
+                    { val: 55, lbl: "Oromia" },
+                    { val: 30, lbl: "Amhara" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end gap-1">
+                      <div className="w-full bg-gradient-to-t from-lime-600 to-lime-400 rounded-t-md" style={{ height: `${item.val}%` }}></div>
+                      <div className="text-[9px] font-mono text-muted-foreground text-center">{item.lbl}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-surface/50 p-4 border-l-2 border-l-amber-500">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Coverage Gap Analysis Indicators</p>
+                <div className="mt-2 text-lg font-bold text-foreground">2 Regions Underserved</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-amber-400 font-semibold">
+                  Resource reallocation required
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface/50 p-4">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground">Field Station Distribution</p>
+                <div className="mt-2 text-2xl font-bold text-foreground">42 Active Sites</div>
+                <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-emerald-400 font-semibold">
+                  Fully synchronized via PouchDB
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 7. Program Outcomes ── */}
+        {activeTab === "outcomes" && (
+          <div className="min-w-[640px] space-y-5 animate-fade-in">
+            <div className="grid grid-cols-4 gap-4 mb-4">
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Food Security Index</p>
+                  <p className="mt-1 text-xl font-bold text-lime-400">+24.5%</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Health Outcomes</p>
+                  <p className="mt-1 text-xl font-bold text-emerald-400">+18.2%</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Education Gains</p>
+                  <p className="mt-1 text-xl font-bold text-lime-400">+32% Enrolled</p>
+               </div>
+               <div className="rounded-xl border border-border bg-surface/50 p-3.5">
+                  <p className="text-[10px] font-mono uppercase text-muted-foreground">Avg. Completion</p>
+                  <p className="mt-1 text-xl font-bold text-foreground">88%</p>
+               </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-2 rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground flex items-center gap-2 mb-4">
+                  <BarChart3 className="h-3.5 w-3.5 text-lime-400" /> Program Completion Rates
+                </span>
+                <div className="space-y-3">
+                  {[
+                    { label: "WASH Projects", val: 92 },
+                    { label: "Nutrition Packs", val: 88 },
+                    { label: "Vaccinations", val: 95 },
+                  ].map((p, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                       <span className="w-24 text-[10px] font-mono truncate">{p.label}</span>
+                       <div className="flex-1 h-2 bg-surface rounded-full overflow-hidden">
+                          <div className="h-full bg-lime-500" style={{ width: `${p.val}%` }}></div>
+                       </div>
+                       <span className="w-8 text-right text-[10px] font-mono font-bold">{p.val}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4">
+                <span className="text-xs font-semibold text-foreground mb-4 block text-center">Food Security Trend</span>
+                <div className="flex items-end justify-center gap-1 h-24 mt-2">
+                  {[20, 30, 45, 60, 75, 85].map((h, i) => (
+                     <div key={i} className="w-4 bg-gradient-to-t from-green-600 to-lime-400 rounded-t-sm" style={{ height: `${h}%` }}></div>
+                  ))}
+                </div>
+                <div className="mt-3 text-[10px] font-mono text-center text-muted-foreground">Consistent MoM Growth</div>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
