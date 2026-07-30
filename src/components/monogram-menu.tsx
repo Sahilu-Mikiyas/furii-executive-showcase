@@ -7,7 +7,6 @@ const menuLinks = [
   { to: "/systems", label: "Systems", description: "12 enterprise platforms we've built" },
   { to: "/architecture", label: "Architecture", description: "Infrastructure & engineering philosophy" },
   { to: "/ai", label: "AI", description: "Applied AI & automation workflows" },
-  { to: "/media", label: "Media", description: "Press, appearances & publications" },
   { to: "/contact", label: "Contact", description: "Book a meeting or get in touch" },
 ] as const;
 

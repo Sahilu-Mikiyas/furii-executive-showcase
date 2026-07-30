@@ -14,7 +14,6 @@ import { Route as AiRouteImport } from './routes/ai'
 import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FounderRouteImport } from './routes/founder'
-import { Route as MediaRouteImport } from './routes/media'
 import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as SystemsIndexRouteImport } from './routes/systems.index'
 import { Route as SystemsAuraHospitalityRouteImport } from './routes/systems.aura-hospitality'
@@ -53,11 +52,6 @@ const ContactRoute = ContactRouteImport.update({
 const FounderRoute = FounderRouteImport.update({
   id: '/founder',
   path: '/founder',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MediaRoute = MediaRouteImport.update({
-  id: '/media',
-  path: '/media',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SystemsRoute = SystemsRouteImport.update({
@@ -137,7 +131,6 @@ export interface FileRoutesByFullPath {
   '/architecture': typeof ArchitectureRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
-  '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
   '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
@@ -159,7 +152,6 @@ export interface FileRoutesByTo {
   '/architecture': typeof ArchitectureRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
-  '/media': typeof MediaRoute
   '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
   '/systems/construct-x': typeof SystemsConstructXRoute
@@ -181,7 +173,6 @@ export interface FileRoutesById {
   '/architecture': typeof ArchitectureRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
-  '/media': typeof MediaRoute
   '/systems': typeof SystemsRouteWithChildren
   '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
   '/systems/civic-pulse': typeof SystemsCivicPulseRoute
@@ -205,7 +196,6 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/contact'
     | '/founder'
-    | '/media'
     | '/systems'
     | '/systems/aura-hospitality'
     | '/systems/civic-pulse'
@@ -227,7 +217,6 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/contact'
     | '/founder'
-    | '/media'
     | '/systems/aura-hospitality'
     | '/systems/civic-pulse'
     | '/systems/construct-x'
@@ -248,7 +237,6 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/contact'
     | '/founder'
-    | '/media'
     | '/systems'
     | '/systems/aura-hospitality'
     | '/systems/civic-pulse'
@@ -271,7 +259,6 @@ export interface RootRouteChildren {
   ArchitectureRoute: typeof ArchitectureRoute
   ContactRoute: typeof ContactRoute
   FounderRoute: typeof FounderRoute
-  MediaRoute: typeof MediaRoute
   SystemsRoute: typeof SystemsRouteWithChildren
 }
 
@@ -310,13 +297,6 @@ declare module '@tanstack/react-router' {
       path: '/founder'
       fullPath: '/founder'
       preLoaderRoute: typeof FounderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/media': {
-      id: '/media'
-      path: '/media'
-      fullPath: '/media'
-      preLoaderRoute: typeof MediaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/systems': {
@@ -461,7 +441,6 @@ const rootRouteChildren: RootRouteChildren = {
   ArchitectureRoute: ArchitectureRoute,
   ContactRoute: ContactRoute,
   FounderRoute: FounderRoute,
-  MediaRoute: MediaRoute,
   SystemsRoute: SystemsRouteWithChildren,
 }
 export const routeTree = rootRouteImport

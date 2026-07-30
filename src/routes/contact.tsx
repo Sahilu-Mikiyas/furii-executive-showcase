@@ -63,7 +63,6 @@ function ContactPage() {
                     <option>Enterprise Platform</option>
                     <option>AI Integration</option>
                     <option>Architecture Consulting</option>
-                    <option>Media & Production</option>
                     <option>Other</option>
                   </select>
                 </div>

@@ -2,11 +2,10 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUp } from "lucide-react";
 
 const navLinks = [
-  { to: "/", label: "About" },
+  { to: "/", label: "The Architect" },
   { to: "/systems", label: "Systems" },
   { to: "/architecture", label: "Architecture" },
   { to: "/ai", label: "AI" },
-  { to: "/media", label: "Media" },
   { to: "/contact", label: "Contact" },
 ] as const;
 

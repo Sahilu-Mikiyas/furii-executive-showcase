@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
-  { to: "/", label: "About" },
+  { to: "/", label: "The Architect" },
   { to: "/systems", label: "Systems" },
   { to: "/architecture", label: "Architecture" },
   { to: "/ai", label: "AI" },
-  { to: "/media", label: "Media" },
 ] as const;
 
 export function SiteNav() {
