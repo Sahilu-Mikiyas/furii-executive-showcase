@@ -13,9 +13,10 @@ export function CompassNav({ sections }: CompassNavProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isDarkSection, setIsDarkSection] = useState(false);
   const rafRef = useRef<number>(0);
 
-  /* ── Reliable scroll-position tracking ── */
+  /* ── Reliable scroll-position tracking & Dark section detection ── */
   useEffect(() => {
     const update = () => {
       const viewportCenter = window.innerHeight / 2;
@@ -36,6 +37,11 @@ export function CompassNav({ sections }: CompassNavProps) {
       });
 
       setActiveIndex(bestIndex);
+
+      // Check if current active section has a dark background
+      const activeId = sections[bestIndex]?.id;
+      const isDark = activeId === "architecture" || activeId === "applied-ai";
+      setIsDarkSection(isDark);
     };
 
     const onScroll = () => {
@@ -90,7 +96,7 @@ export function CompassNav({ sections }: CompassNavProps) {
   return (
     <nav
       aria-label="Section compass"
-      className={`fixed right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 transition-all duration-1000 ease-out ${
+      className={`fixed right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 transition-all duration-700 ease-out ${
         visible
           ? "opacity-100 scale-100 translate-x-0"
           : "opacity-0 scale-75 translate-x-8"
@@ -102,7 +108,7 @@ export function CompassNav({ sections }: CompassNavProps) {
           viewBox={`0 0 ${size} ${size}`}
           width={size}
           height={size}
-          className="drop-shadow-lg"
+          className="drop-shadow-xl transition-all duration-700"
         >
           {/* Outer ring */}
           <circle
@@ -111,8 +117,10 @@ export function CompassNav({ sections }: CompassNavProps) {
             r={outerR - 1}
             fill="none"
             stroke="currentColor"
-            strokeWidth="0.5"
-            className="text-foreground/15"
+            strokeWidth="0.75"
+            className={`transition-colors duration-700 ${
+              isDarkSection ? "text-white/30" : "text-foreground/15"
+            }`}
           />
 
           {/* Inner filled circle (the dial face) */}
@@ -120,14 +128,18 @@ export function CompassNav({ sections }: CompassNavProps) {
             cx={cx}
             cy={cy}
             r={innerR}
-            className="fill-card/90 stroke-border"
-            strokeWidth="0.5"
+            className={`transition-all duration-700 ${
+              isDarkSection
+                ? "fill-neutral-950/95 stroke-white/40 shadow-2xl"
+                : "fill-card/95 stroke-border shadow-md"
+            }`}
+            strokeWidth="0.75"
           />
 
           {/* Subtle radial gradient glow behind active tick */}
           <defs>
             <radialGradient id="compass-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="currentColor" stopOpacity="0.12" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.15" />
               <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </radialGradient>
           </defs>
@@ -136,7 +148,9 @@ export function CompassNav({ sections }: CompassNavProps) {
             cy={cy}
             r={outerR - 2}
             fill="url(#compass-glow)"
-            className="text-foreground"
+            className={`transition-colors duration-700 ${
+              isDarkSection ? "text-white" : "text-foreground"
+            }`}
           />
 
           {/* Section tick marks */}
@@ -160,12 +174,18 @@ export function CompassNav({ sections }: CompassNavProps) {
                 y2={y2}
                 strokeWidth={isActive ? 2.5 : isHovered ? 1.5 : 1}
                 strokeLinecap="round"
-                className={`transition-all duration-500 ${
-                  isActive
-                    ? "stroke-foreground"
-                    : isHovered
-                      ? "stroke-foreground/60"
-                      : "stroke-foreground/20"
+                className={`transition-all duration-700 ${
+                  isDarkSection
+                    ? isActive
+                      ? "stroke-white"
+                      : isHovered
+                        ? "stroke-white/80"
+                        : "stroke-white/30"
+                    : isActive
+                      ? "stroke-foreground"
+                      : isHovered
+                        ? "stroke-foreground/60"
+                        : "stroke-foreground/20"
                 }`}
               />
             );
@@ -189,7 +209,9 @@ export function CompassNav({ sections }: CompassNavProps) {
                   y2={y2}
                   strokeWidth={0.5}
                   strokeLinecap="round"
-                  className="stroke-foreground/10"
+                  className={`transition-colors duration-700 ${
+                    isDarkSection ? "stroke-white/20" : "stroke-foreground/10"
+                  }`}
                 />
               );
             })}
@@ -210,27 +232,35 @@ export function CompassNav({ sections }: CompassNavProps) {
               y2={cy - innerR + 6}
               strokeWidth="2"
               strokeLinecap="round"
-              className="stroke-foreground"
+              className={`transition-colors duration-700 ${
+                isDarkSection ? "stroke-white" : "stroke-foreground"
+              }`}
             />
             {/* Needle tip (arrowhead dot) */}
             <circle
               cx={cx}
               cy={cy - innerR + 4}
               r="2.5"
-              className="fill-foreground"
+              className={`transition-colors duration-700 ${
+                isDarkSection ? "fill-white" : "fill-foreground"
+              }`}
             />
             {/* Center pivot */}
             <circle
               cx={cx}
               cy={cy}
               r="3.5"
-              className="fill-foreground"
+              className={`transition-colors duration-700 ${
+                isDarkSection ? "fill-white" : "fill-foreground"
+              }`}
             />
             <circle
               cx={cx}
               cy={cy}
               r="2"
-              className="fill-card"
+              className={`transition-colors duration-700 ${
+                isDarkSection ? "fill-neutral-950" : "fill-card"
+              }`}
             />
           </g>
         </svg>
@@ -251,7 +281,7 @@ export function CompassNav({ sections }: CompassNavProps) {
               onMouseLeave={() => setHoveredIndex(null)}
               aria-label={`Scroll to ${section.label}`}
               aria-current={i === activeIndex ? "true" : undefined}
-              className="absolute rounded-full transition-colors duration-300 hover:bg-foreground/10"
+              className="absolute rounded-full transition-colors duration-300 hover:bg-white/20"
               style={{
                 width: 20,
                 height: 20,
@@ -263,10 +293,14 @@ export function CompassNav({ sections }: CompassNavProps) {
         })}
 
         {/* Active section label (below the compass) */}
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-8 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap">
           <span
             key={activeIndex}
-            className="inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] text-foreground/70 font-semibold animate-fade-in"
+            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in px-3 py-1 rounded-lg border backdrop-blur-md transition-all duration-700 shadow-lg ${
+              isDarkSection
+                ? "bg-neutral-950/90 text-white border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                : "bg-background/90 text-foreground border-border shadow-md"
+            }`}
           >
             {sections[activeIndex]?.label}
           </span>
@@ -274,8 +308,14 @@ export function CompassNav({ sections }: CompassNavProps) {
 
         {/* Hovered section tooltip */}
         {hoveredIndex !== null && hoveredIndex !== activeIndex && (
-          <div className="absolute left-1/2 -translate-x-1/2 -top-8 whitespace-nowrap animate-fade-in">
-            <span className="inline-block rounded-md bg-foreground px-2.5 py-1 text-[9px] font-semibold tracking-wide text-background shadow-lg">
+          <div className="absolute left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap animate-fade-in z-50">
+            <span
+              className={`inline-block rounded-md px-2.5 py-1 text-[9px] font-bold tracking-wide shadow-xl ${
+                isDarkSection
+                  ? "bg-white text-black"
+                  : "bg-foreground text-background"
+              }`}
+            >
               {sections[hoveredIndex]?.label}
             </span>
           </div>
