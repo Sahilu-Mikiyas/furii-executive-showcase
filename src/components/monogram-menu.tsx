@@ -63,6 +63,16 @@ export function MonogramMenu() {
         </span>
       </button>
 
+      {/* ── Floating "Book a Meeting" CTA (top-right) ── */}
+      <Link
+        to="/contact"
+        className={`fixed top-5 right-5 sm:right-6 lg:right-8 z-50 group inline-flex items-center gap-2 rounded-2xl border border-border bg-background/80 backdrop-blur-sm px-4 py-2.5 text-xs sm:text-sm font-medium text-foreground shadow-lg transition-all duration-500 ease-out hover:bg-foreground hover:text-background hover:border-foreground hover:-translate-y-0.5 hover:shadow-xl ${
+          open ? "opacity-0 pointer-events-none scale-90" : "opacity-100 scale-100"
+        }`}
+      >
+        Book a Meeting
+      </Link>
+
       {/* ── Full-Screen Overlay Menu ── */}
       <div
         className={`fixed inset-0 z-[60] transition-all duration-700 ease-out ${
