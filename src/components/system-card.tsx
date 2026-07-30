@@ -14,6 +14,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "prism-impact": "/systems/prism-impact",
     "forge-mes": "/systems/forge-mes",
     "aura-hospitality": "/systems/aura-hospitality",
+    "construct-x": "/systems/construct-x",
   };
 
   const targetPath = detailPages[s.slug];
