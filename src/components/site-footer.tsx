@@ -2,16 +2,26 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUp } from "lucide-react";
 
 const navLinks = [
-  { to: "/", label: "The Architect" },
-  { to: "/systems", label: "Systems" },
-  { to: "/architecture", label: "Architecture" },
-  { to: "/ai", label: "AI" },
-  { to: "/contact", label: "Contact" },
+  { id: "the-architect", label: "The Architect" },
+  { id: "core-disciplines", label: "Core Disciplines" },
+  { id: "architecture", label: "Architecture" },
+  { id: "applied-ai", label: "Applied AI" },
+  { id: "selected-work", label: "Selected Work" },
+  { id: "principles", label: "Principles" },
+  { id: "contact", label: "Contact" },
 ] as const;
 
 export function SiteFooter() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSectionClick = (id: string, e: React.MouseEvent) => {
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -45,19 +55,18 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Middle Bar: Inline Navigation Links & Back to Top */}
+        {/* Middle Bar: Inline Section Links & Back to Top */}
         <div className="flex flex-col gap-6 border-y border-border/80 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <nav className="flex flex-wrap items-center gap-6 sm:gap-8">
+          <nav className="flex flex-wrap items-center gap-5 sm:gap-7">
             {navLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                activeOptions={{ exact: true }}
-                className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground"
-                activeProps={{ className: "text-foreground font-semibold" }}
+              <a
+                key={l.id}
+                href={`/#${l.id}`}
+                onClick={(e) => handleSectionClick(l.id, e)}
+                className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground cursor-pointer"
               >
                 {l.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
