@@ -10,8 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AiRouteImport } from './routes/ai'
-import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FounderRouteImport } from './routes/founder'
 import { Route as SystemsRouteImport } from './routes/systems'
@@ -32,16 +30,6 @@ import { Route as SystemsVeloxCommerceRouteImport } from './routes/systems.velox
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiRoute = AiRouteImport.update({
-  id: '/ai',
-  path: '/ai',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArchitectureRoute = ArchitectureRouteImport.update({
-  id: '/architecture',
-  path: '/architecture',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -127,8 +115,6 @@ const SystemsVeloxCommerceRoute = SystemsVeloxCommerceRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ai': typeof AiRoute
-  '/architecture': typeof ArchitectureRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/systems': typeof SystemsRouteWithChildren
@@ -148,8 +134,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ai': typeof AiRoute
-  '/architecture': typeof ArchitectureRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/systems/aura-hospitality': typeof SystemsAuraHospitalityRoute
@@ -169,8 +153,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/ai': typeof AiRoute
-  '/architecture': typeof ArchitectureRoute
   '/contact': typeof ContactRoute
   '/founder': typeof FounderRoute
   '/systems': typeof SystemsRouteWithChildren
@@ -192,8 +174,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/ai'
-    | '/architecture'
     | '/contact'
     | '/founder'
     | '/systems'
@@ -213,8 +193,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/ai'
-    | '/architecture'
     | '/contact'
     | '/founder'
     | '/systems/aura-hospitality'
@@ -233,8 +211,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/ai'
-    | '/architecture'
     | '/contact'
     | '/founder'
     | '/systems'
@@ -255,8 +231,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AiRoute: typeof AiRoute
-  ArchitectureRoute: typeof ArchitectureRoute
   ContactRoute: typeof ContactRoute
   FounderRoute: typeof FounderRoute
   SystemsRoute: typeof SystemsRouteWithChildren
@@ -269,20 +243,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai': {
-      id: '/ai'
-      path: '/ai'
-      fullPath: '/ai'
-      preLoaderRoute: typeof AiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/architecture': {
-      id: '/architecture'
-      path: '/architecture'
-      fullPath: '/architecture'
-      preLoaderRoute: typeof ArchitectureRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -437,8 +397,6 @@ const SystemsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AiRoute: AiRoute,
-  ArchitectureRoute: ArchitectureRoute,
   ContactRoute: ContactRoute,
   FounderRoute: FounderRoute,
   SystemsRoute: SystemsRouteWithChildren,

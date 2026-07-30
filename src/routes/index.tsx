@@ -1,5 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Mail, Phone } from "lucide-react";
+import {
+  ArrowRight,
+  Mail,
+  Phone,
+  Boxes,
+  Shield,
+  Lock,
+  Network,
+  Database,
+  Waves,
+  Gauge,
+  Activity,
+  Cloud,
+  ServerCog,
+  GitBranch,
+  Layers,
+  Building2,
+  GraduationCap,
+  Users,
+  Home,
+  Landmark,
+  Sparkles,
+  Cpu,
+  CheckCircle2,
+} from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
 import { CompassNav } from "../components/compass-nav";
@@ -7,6 +31,8 @@ import { CompassNav } from "../components/compass-nav";
 const compassSections = [
   { id: "the-architect", label: "The Architect" },
   { id: "core-disciplines", label: "Core Disciplines" },
+  { id: "architecture", label: "Architecture" },
+  { id: "applied-ai", label: "Applied AI" },
   { id: "selected-work", label: "Selected Work" },
   { id: "principles", label: "Principles" },
   { id: "contact", label: "Contact" },
@@ -50,6 +76,94 @@ const capabilities = [
   {
     title: "Engineering Leadership",
     body: "Building disciplined, owner-minded engineering cultures focused on speed, reliability, and consumer-grade product polish.",
+  },
+];
+
+const architecturePillars = [
+  { icon: Boxes, title: "Microservices & Boundaries", desc: "Decoupled domain-driven services with explicit schemas, independent deployments, and resilient fallback states.", badge: "Scale" },
+  { icon: Shield, title: "Zero-Trust & SSO Auth", desc: "OAuth 2.0, OpenID Connect, MFA, and automated JWT rotation enforcing security across every client surface.", badge: "Security" },
+  { icon: Lock, title: "Granular RBAC Engine", desc: "Context-aware role-based access control evaluating multi-tenant permissions at API edge and database row level.", badge: "Compliance" },
+  { icon: Network, title: "High-Throughput API Gateway", desc: "Centralized entry point managing rate limiting, SSL termination, traffic splitting, and dynamic request routing.", badge: "Infrastructure" },
+  { icon: Database, title: "Heterogeneous Data Stores", desc: "PostgreSQL relational cores paired with Redis caching, Elastic Search, and time-series DBs tailored for domain load.", badge: "Persistence" },
+  { icon: Waves, title: "Event-Driven Message Bus", desc: "Asynchronous pub/sub queues (Kafka / RabbitMQ) guaranteeing idempotent background processing and zero data loss.", badge: "Messaging" },
+  { icon: Gauge, title: "Multi-Tier Memory Caching", desc: "Sub-millisecond latency via edge CDN, Redis cluster memory caching, and client-state optimistic updates.", badge: "Performance" },
+  { icon: Activity, title: "Distributed Tracing", desc: "Real-time metrics, OpenTelemetry tracing, and structured JSON logs giving instant root-cause diagnostic clarity.", badge: "Observability" },
+  { icon: Cloud, title: "Cloud-Native IaC Deployments", desc: "Reproducible Infrastructure as Code via Terraform & Docker containers, supporting multi-cloud & hybrid topologies.", badge: "DevOps" },
+  { icon: ServerCog, title: "Automated Disaster Recovery", desc: "Continuous WAL replication, point-in-time recovery, and multi-region failovers tested against zero-data-loss SLAs.", badge: "Resilience" },
+  { icon: GitBranch, title: "Progressive Delivery CI/CD", desc: "Automated test matrices, preview environments per pull request, and zero-downtime blue/green deployments.", badge: "Automation" },
+  { icon: Layers, title: "Defense-in-Depth Protection", desc: "WAF edge filtering, automated dependency vulnerability scanning, and end-to-end TLS encryption in transit & at rest.", badge: "Security" },
+];
+
+const aiDomains = [
+  {
+    icon: Building2,
+    domain: "Healthcare Clinical AI",
+    tag: "Pulse OS",
+    accent: "border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500/60",
+    badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    dotColor: "bg-emerald-400",
+    items: [
+      "AI Clinical Triage & Emergency Risk Scoring",
+      "Automated EHR Patient History Summarization",
+      "Prescription Conflict & Dosage Intelligence",
+      "Diagnostic Imaging & Lab Result Assistance",
+    ],
+  },
+  {
+    icon: GraduationCap,
+    domain: "Academic Intelligence",
+    tag: "Nexus Campus",
+    accent: "border-purple-500/30 bg-purple-500/5 hover:border-purple-500/60",
+    badgeBg: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    dotColor: "bg-purple-400",
+    items: [
+      "Early Student Dropout Risk Forecasting",
+      "Adaptive Academic Performance Analytics",
+      "Automated Parent Evaluation Report Generator",
+      "Curriculum Engagement & Attendance Matrix",
+    ],
+  },
+  {
+    icon: Users,
+    domain: "Workforce & HR Intelligence",
+    tag: "TalentGrid",
+    accent: "border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500/60",
+    badgeBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+    dotColor: "bg-cyan-400",
+    items: [
+      "Semantic Candidate Resume Parsing & Matching",
+      "Predictive Employee Retention & Attrition Scoring",
+      "Automated Compensation Equity Analytics",
+      "Personalized Skill Gap Training Pathways",
+    ],
+  },
+  {
+    icon: Home,
+    domain: "Property IoT & Asset AI",
+    tag: "Strata Ops",
+    accent: "border-amber-500/30 bg-amber-500/5 hover:border-amber-500/60",
+    badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    dotColor: "bg-amber-400",
+    items: [
+      "IoT Sensor Predictive Maintenance Engine",
+      "Automated Commercial Lease Clause Summaries",
+      "Tenant Support Ticket Triage & Resolution",
+      "Energy Consumption & Utility Optimization",
+    ],
+  },
+  {
+    icon: Landmark,
+    domain: "GovTech Intelligence",
+    tag: "CivicPulse",
+    accent: "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60",
+    badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    dotColor: "bg-blue-400",
+    items: [
+      "OCR Document Verification & Extraction",
+      "24/7 Multilingual Citizen Service Assistant",
+      "Automated Permit Application Anomaly Audit",
+      "Cross-Department Bureaucratic Flow Tracking",
+    ],
   },
 ];
 
@@ -99,7 +213,8 @@ function FounderPage() {
   return (
     <div className="space-y-0">
       <CompassNav sections={compassSections} />
-      {/* Intro Hero */}
+
+      {/* ── 1. Intro Hero (The Architect) ── */}
       <section id="the-architect" className="container-page pt-28 sm:pt-36 md:pt-40 pb-12 sm:pb-16 md:pb-24">
         <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center lg:gap-16">
           <div className="animate-fade-in">
@@ -168,7 +283,7 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* Core Disciplines */}
+      {/* ── 2. Core Disciplines ── */}
       <section id="core-disciplines" className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
         <div className="container-page">
           <SectionHeading
@@ -190,10 +305,118 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* Selected work */}
-      <section id="selected-work" className="container-page py-12 sm:py-16 md:py-24">
+      {/* ── 3. Systems Architecture Section ── */}
+      <section id="architecture" className="container-page py-16 sm:py-24 md:py-32">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <SectionHeading
+            eyebrow="Systems Architecture"
+            title="Engineering enterprise software for scale."
+            description="Every platform inherits the same zero-trust, high-throughput, and fault-tolerant foundations."
+          />
+          <span className="shrink-0 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+            ● 12 Core Architectural Pillars
+          </span>
+        </div>
+
+        <div className="mt-10 sm:mt-14 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {architecturePillars.map((p) => {
+            const Icon = p.icon;
+            return (
+              <div
+                key={p.title}
+                className="group relative flex flex-col justify-between rounded-3xl border border-border bg-card p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-foreground/30 hover:shadow-xl"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="grid h-10 w-10 place-items-center rounded-2xl border border-border bg-surface text-foreground transition-all duration-500 group-hover:bg-foreground group-hover:text-background group-hover:scale-110">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="rounded-full border border-border bg-surface/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">
+                      {p.badge}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 text-base sm:text-lg font-bold tracking-tight text-foreground">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                    {p.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── 4. Applied AI Workflows Section ── */}
+      <section id="applied-ai" className="border-t border-border bg-surface/50 py-16 sm:py-24 md:py-32">
+        <div className="container-page">
+          {/* Deep Obsidian AI Showcase Card */}
+          <div className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] border border-neutral-800 bg-gradient-to-br from-neutral-950 via-black to-neutral-900 p-8 sm:p-12 md:p-16 text-white shadow-2xl">
+            {/* Ambient background glow */}
+            <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
+
+            {/* Section Header Inside Obsidian Card */}
+            <div className="relative z-10 max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400">
+                <Sparkles className="h-3.5 w-3.5 animate-pulse" />
+                Applied AI • Zero Hype • High Precision
+              </div>
+
+              <h2 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.1]">
+                AI embedded directly into operational workflows.
+              </h2>
+
+              <p className="mt-4 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-2xl font-normal">
+                Not a standalone chatbot. We weave machine intelligence directly into daily enterprise software, quietly making teams faster, more accurate, and more proactive.
+              </p>
+            </div>
+
+            {/* AI Domain Showcase Cards */}
+            <div className="relative z-10 mt-10 sm:mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {aiDomains.map((d) => {
+                const Icon = d.icon;
+                return (
+                  <div
+                    key={d.domain}
+                    className={`group relative rounded-3xl border ${d.accent} p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="grid h-10 w-10 place-items-center rounded-2xl bg-neutral-900/80 border border-neutral-700 text-white">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <h3 className="text-base font-bold text-white tracking-tight">
+                          {d.domain}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <span className={`inline-block mt-3 rounded-full border px-2.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${d.badgeBg}`}>
+                      {d.tag}
+                    </span>
+
+                    <ul className="mt-5 space-y-2.5">
+                      {d.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5 text-xs text-neutral-300">
+                          <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${d.dotColor}`} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Selected Work ── */}
+      <section id="selected-work" className="container-page py-16 sm:py-24 md:py-32">
         <SectionHeading
-          eyebrow="Selected work"
+          eyebrow="Selected Work"
           title="Platforms we've architected and shipped."
         />
         <ol className="mt-8 sm:mt-12 md:mt-14 divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card shadow-xs">
@@ -237,10 +460,10 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* Principles */}
-      <section id="principles" className="border-t border-border bg-surface py-12 sm:py-16 md:py-24">
+      {/* ── 6. Principles ── */}
+      <section id="principles" className="border-t border-border bg-surface py-16 sm:py-24 md:py-32">
         <div className="container-page">
-          <SectionHeading eyebrow="How we work" title="Principles that shape our craft." />
+          <SectionHeading eyebrow="How We Work" title="Principles that shape our craft." />
           <div className="mt-8 sm:mt-12 md:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2">
             {principles.map((p) => (
               <div
@@ -255,7 +478,7 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* Giant Animated CTA Banner */}
+      {/* ── 7. Giant Animated CTA Banner (Contact) ── */}
       <div id="contact">
         <ContactCtaBanner />
       </div>
