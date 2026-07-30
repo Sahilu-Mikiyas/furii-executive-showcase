@@ -292,14 +292,12 @@ export function CompassNav({ sections }: CompassNavProps) {
           );
         })}
 
-        {/* Active section label (below the compass) */}
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-10 whitespace-nowrap">
+        {/* Active section label (pure text below the compass) */}
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-8 whitespace-nowrap pointer-events-none">
           <span
             key={activeIndex}
-            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in px-3 py-1 rounded-lg border backdrop-blur-md transition-all duration-700 shadow-lg ${
-              isDarkSection
-                ? "bg-neutral-950/90 text-white border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-                : "bg-background/90 text-foreground border-border shadow-md"
+            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-700 ${
+              isDarkSection ? "text-white" : "text-foreground/80"
             }`}
           >
             {sections[activeIndex]?.label}
@@ -308,7 +306,7 @@ export function CompassNav({ sections }: CompassNavProps) {
 
         {/* Hovered section tooltip */}
         {hoveredIndex !== null && hoveredIndex !== activeIndex && (
-          <div className="absolute left-1/2 -translate-x-1/2 -top-9 whitespace-nowrap animate-fade-in z-50">
+          <div className="absolute left-1/2 -translate-x-1/2 -top-8 whitespace-nowrap animate-fade-in z-50 pointer-events-none">
             <span
               className={`inline-block rounded-md px-2.5 py-1 text-[9px] font-bold tracking-wide shadow-xl ${
                 isDarkSection
