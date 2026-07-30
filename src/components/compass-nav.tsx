@@ -16,7 +16,7 @@ export function CompassNav({ sections }: CompassNavProps) {
   const [isDarkSection, setIsDarkSection] = useState(false);
   const rafRef = useRef<number>(0);
 
-  /* ── Reliable scroll-position tracking & Dark section detection ── */
+  /* ── Physical position tracking & Immediate boundary dark detection ── */
   useEffect(() => {
     const update = () => {
       const viewportCenter = window.innerHeight / 2;
@@ -38,10 +38,17 @@ export function CompassNav({ sections }: CompassNavProps) {
 
       setActiveIndex(bestIndex);
 
-      // Check if current active section has a dark background
-      const activeId = sections[bestIndex]?.id;
-      const isDark = activeId === "architecture" || activeId === "applied-ai";
-      setIsDarkSection(isDark);
+      // Check if compass center (window.innerHeight / 2) is physically inside any dark section
+      const compassY = window.innerHeight / 2;
+      const darkSectionIds = ["architecture", "applied-ai"];
+      const isCurrentlyOverDark = darkSectionIds.some((id) => {
+        const el = document.getElementById(id);
+        if (!el) return false;
+        const rect = el.getBoundingClientRect();
+        return rect.top <= compassY && rect.bottom >= compassY;
+      });
+
+      setIsDarkSection(isCurrentlyOverDark);
     };
 
     const onScroll = () => {
@@ -96,7 +103,7 @@ export function CompassNav({ sections }: CompassNavProps) {
   return (
     <nav
       aria-label="Section compass"
-      className={`fixed right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 transition-all duration-700 ease-out ${
+      className={`fixed right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 transition-all duration-500 ease-out ${
         visible
           ? "opacity-100 scale-100 translate-x-0"
           : "opacity-0 scale-75 translate-x-8"
@@ -108,7 +115,7 @@ export function CompassNav({ sections }: CompassNavProps) {
           viewBox={`0 0 ${size} ${size}`}
           width={size}
           height={size}
-          className="drop-shadow-xl transition-all duration-700"
+          className="drop-shadow-xl transition-all duration-300"
         >
           {/* Outer ring */}
           <circle
@@ -118,7 +125,7 @@ export function CompassNav({ sections }: CompassNavProps) {
             fill="none"
             stroke="currentColor"
             strokeWidth="0.75"
-            className={`transition-colors duration-700 ${
+            className={`transition-colors duration-300 ${
               isDarkSection ? "text-white/30" : "text-foreground/15"
             }`}
           />
@@ -128,7 +135,7 @@ export function CompassNav({ sections }: CompassNavProps) {
             cx={cx}
             cy={cy}
             r={innerR}
-            className={`transition-all duration-700 ${
+            className={`transition-all duration-300 ${
               isDarkSection
                 ? "fill-neutral-950/95 stroke-white/40 shadow-2xl"
                 : "fill-card/95 stroke-border shadow-md"
@@ -148,7 +155,7 @@ export function CompassNav({ sections }: CompassNavProps) {
             cy={cy}
             r={outerR - 2}
             fill="url(#compass-glow)"
-            className={`transition-colors duration-700 ${
+            className={`transition-colors duration-300 ${
               isDarkSection ? "text-white" : "text-foreground"
             }`}
           />
@@ -174,7 +181,7 @@ export function CompassNav({ sections }: CompassNavProps) {
                 y2={y2}
                 strokeWidth={isActive ? 2.5 : isHovered ? 1.5 : 1}
                 strokeLinecap="round"
-                className={`transition-all duration-700 ${
+                className={`transition-all duration-300 ${
                   isDarkSection
                     ? isActive
                       ? "stroke-white"
@@ -209,7 +216,7 @@ export function CompassNav({ sections }: CompassNavProps) {
                   y2={y2}
                   strokeWidth={0.5}
                   strokeLinecap="round"
-                  className={`transition-colors duration-700 ${
+                  className={`transition-colors duration-300 ${
                     isDarkSection ? "stroke-white/20" : "stroke-foreground/10"
                   }`}
                 />
@@ -232,7 +239,7 @@ export function CompassNav({ sections }: CompassNavProps) {
               y2={cy - innerR + 6}
               strokeWidth="2"
               strokeLinecap="round"
-              className={`transition-colors duration-700 ${
+              className={`transition-colors duration-300 ${
                 isDarkSection ? "stroke-white" : "stroke-foreground"
               }`}
             />
@@ -241,7 +248,7 @@ export function CompassNav({ sections }: CompassNavProps) {
               cx={cx}
               cy={cy - innerR + 4}
               r="2.5"
-              className={`transition-colors duration-700 ${
+              className={`transition-colors duration-300 ${
                 isDarkSection ? "fill-white" : "fill-foreground"
               }`}
             />
@@ -250,7 +257,7 @@ export function CompassNav({ sections }: CompassNavProps) {
               cx={cx}
               cy={cy}
               r="3.5"
-              className={`transition-colors duration-700 ${
+              className={`transition-colors duration-300 ${
                 isDarkSection ? "fill-white" : "fill-foreground"
               }`}
             />
@@ -258,7 +265,7 @@ export function CompassNav({ sections }: CompassNavProps) {
               cx={cx}
               cy={cy}
               r="2"
-              className={`transition-colors duration-700 ${
+              className={`transition-colors duration-300 ${
                 isDarkSection ? "fill-neutral-950" : "fill-card"
               }`}
             />
@@ -296,7 +303,7 @@ export function CompassNav({ sections }: CompassNavProps) {
         <div className="absolute left-1/2 -translate-x-1/2 -bottom-8 whitespace-nowrap pointer-events-none">
           <span
             key={activeIndex}
-            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-700 ${
+            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
               isDarkSection ? "text-white" : "text-foreground/80"
             }`}
           >
