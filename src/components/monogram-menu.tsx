@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, Menu } from "lucide-react";
 
 const menuLinks = [
   { to: "/", label: "The Architect", description: "CTO & Enterprise Systems Architect" },
@@ -36,42 +36,63 @@ export function MonogramMenu() {
 
   return (
     <>
-      {/* ── Floating Monogram Button ── */}
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Open navigation menu"
-        className={`fixed top-5 left-5 sm:left-6 lg:left-8 z-50 group flex items-center gap-2.5 transition-all duration-500 ease-out ${
-          open ? "opacity-0 pointer-events-none scale-90" : "opacity-100 scale-100"
+      {/* ── Fixed Glassmorphism Top Header ── */}
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out ${
+          scrolled
+            ? "border-b border-border bg-background/80 backdrop-blur-md shadow-xs"
+            : "border-b border-transparent bg-transparent"
         }`}
       >
-        <span
-          className={`grid h-10 w-10 place-items-center rounded-2xl text-[13px] font-mono font-bold tracking-tight shadow-lg transition-all duration-500 ease-out group-hover:scale-110 group-hover:shadow-xl ${
-            scrolled
-              ? "bg-foreground text-background border border-foreground/20"
-              : "bg-foreground/90 text-background backdrop-blur-sm border border-foreground/10"
-          }`}
-        >
-          MS
-        </span>
-        <span className="hidden sm:flex flex-col leading-none">
-          <span className="text-[13px] font-bold tracking-tight text-foreground transition-colors duration-500">
-            Mikiyas Sahilu
-          </span>
-          <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5">
-            CTO & Architect
-          </span>
-        </span>
-      </button>
+        <div className="container-page flex h-16 items-center justify-between gap-4">
+          {/* Left: Brand Monogram + Title + Menu trigger */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setOpen(true)}
+              aria-label="Open navigation menu"
+              className="group flex items-center gap-2.5 shrink-0"
+            >
+              <span className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-xl bg-foreground text-[12px] font-mono font-bold tracking-tight text-background shadow-xs transition-transform duration-500 ease-out group-hover:scale-105">
+                MS
+              </span>
+              <span className="flex flex-col text-left leading-none">
+                <span className="text-[14px] sm:text-[15px] font-bold tracking-tight text-foreground transition-colors duration-500">
+                  Mikiyas Sahilu
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-0.5">
+                  CTO & Architect
+                </span>
+              </span>
+            </button>
 
-      {/* ── Floating "Book a Meeting" CTA (top-right) ── */}
-      <Link
-        to="/contact"
-        className={`fixed top-5 right-5 sm:right-6 lg:right-8 z-50 group inline-flex items-center gap-2 rounded-2xl border border-border bg-background/80 backdrop-blur-sm px-4 py-2.5 text-xs sm:text-sm font-medium text-foreground shadow-lg transition-all duration-500 ease-out hover:bg-foreground hover:text-background hover:border-foreground hover:-translate-y-0.5 hover:shadow-xl ${
-          open ? "opacity-0 pointer-events-none scale-90" : "opacity-100 scale-100"
-        }`}
-      >
-        Book a Meeting
-      </Link>
+            <button
+              onClick={() => setOpen(true)}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface/80 px-3 py-1.5 text-xs font-medium text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            >
+              <Menu className="h-3.5 w-3.5" />
+              Menu
+            </button>
+          </div>
+
+          {/* Right: Book a Meeting CTA + Mobile Menu toggle */}
+          <div className="flex items-center gap-3">
+            <Link
+              to="/contact"
+              className="group inline-flex items-center justify-center rounded-xl bg-foreground border border-foreground px-4 py-2 text-xs sm:text-sm font-semibold text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-0.5 hover:shadow-md"
+            >
+              Book a Meeting
+            </Link>
+
+            <button
+              onClick={() => setOpen((o) => !o)}
+              aria-label="Toggle menu"
+              className="grid h-9 w-9 place-items-center rounded-xl border border-border sm:hidden transition-all duration-500 hover:bg-foreground hover:text-background"
+            >
+              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </button>
+          </div>
+        </div>
+      </header>
 
       {/* ── Full-Screen Overlay Menu ── */}
       <div
@@ -89,7 +110,7 @@ export function MonogramMenu() {
 
         {/* Content */}
         <div className="relative z-10 flex min-h-dvh flex-col justify-between p-6 sm:p-10 lg:p-16">
-          {/* Top bar: Logo + Close */}
+          {/* Top bar inside menu: Logo + Close */}
           <div className="flex items-center justify-between">
             <Link
               to="/"
@@ -119,7 +140,7 @@ export function MonogramMenu() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex-1 flex items-center">
+          <nav className="flex-1 flex items-center my-8">
             <ul className="w-full max-w-3xl mx-auto space-y-1 sm:space-y-2">
               {menuLinks.map((link, i) => (
                 <li
@@ -137,7 +158,7 @@ export function MonogramMenu() {
                     to={link.to}
                     activeOptions={{ exact: true }}
                     onClick={() => setOpen(false)}
-                    className="group flex items-center justify-between rounded-2xl px-5 sm:px-6 py-5 sm:py-6 transition-all duration-500 ease-out hover:bg-card hover:shadow-lg border border-transparent hover:border-border"
+                    className="group flex items-center justify-between rounded-2xl px-5 sm:px-6 py-4 sm:py-5 transition-all duration-500 ease-out hover:bg-card hover:shadow-lg border border-transparent hover:border-border"
                     activeProps={{
                       className:
                         "bg-card/50 border-border/50",
@@ -158,7 +179,7 @@ export function MonogramMenu() {
             </ul>
           </nav>
 
-          {/* Bottom bar: Contact info */}
+          {/* Bottom bar inside menu: Contact info */}
           <div
             className={`flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border pt-6 transition-all duration-700 ease-out ${
               open

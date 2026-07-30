@@ -6,7 +6,7 @@ import { CompassNav } from "../components/compass-nav";
 
 const compassSections = [
   { id: "the-architect", label: "The Architect" },
-  { id: "capabilities", label: "Capabilities" },
+  { id: "core-disciplines", label: "Core Disciplines" },
   { id: "selected-work", label: "Selected Work" },
   { id: "principles", label: "Principles" },
   { id: "contact", label: "Contact" },
@@ -168,11 +168,11 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* Capabilities */}
-      <section id="capabilities" className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
+      {/* Core Disciplines */}
+      <section id="core-disciplines" className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
         <div className="container-page">
           <SectionHeading
-            eyebrow="What we do"
+            eyebrow="Core Disciplines"
             title="Architecture, applied AI, and product engineering."
             description="Four core technical disciplines our team brings to every engagement."
           />
