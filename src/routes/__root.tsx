@@ -8,7 +8,7 @@ import {
 import { useEffect } from "react";
 
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SiteNav } from "../components/site-nav";
+import { MonogramMenu } from "../components/monogram-menu";
 import { SiteFooter } from "../components/site-footer";
 
 function NotFoundComponent() {
@@ -96,7 +96,7 @@ function RootComponent() {
           </span>
         </div>
 
-        <SiteNav />
+        <MonogramMenu />
         <main className="relative z-10 flex-1">
           <Outlet />
         </main>

@@ -2,6 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
 import { ContactCtaBanner } from "../components/contact-cta-banner";
+import { CompassNav } from "../components/compass-nav";
+
+const compassSections = [
+  { id: "the-architect", label: "The Architect" },
+  { id: "capabilities", label: "Capabilities" },
+  { id: "selected-work", label: "Selected Work" },
+  { id: "principles", label: "Principles" },
+  { id: "contact", label: "Contact" },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -89,12 +98,13 @@ const principles = [
 function FounderPage() {
   return (
     <div className="space-y-0">
+      <CompassNav sections={compassSections} />
       {/* Intro Hero */}
-      <section className="container-page pt-28 sm:pt-36 md:pt-40 pb-12 sm:pb-16 md:pb-24">
+      <section id="the-architect" className="container-page pt-28 sm:pt-36 md:pt-40 pb-12 sm:pb-16 md:pb-24">
         <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center lg:gap-16">
           <div className="animate-fade-in">
             <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-              Mikiyas Sahilu • Executive Profile
+              Mikiyas Sahilu • The Architect
             </span>
 
             <h1 className="mt-3 sm:mt-4 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
@@ -159,7 +169,7 @@ function FounderPage() {
       </section>
 
       {/* Capabilities */}
-      <section className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
+      <section id="capabilities" className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
         <div className="container-page">
           <SectionHeading
             eyebrow="What we do"
@@ -181,7 +191,7 @@ function FounderPage() {
       </section>
 
       {/* Selected work */}
-      <section className="container-page py-12 sm:py-16 md:py-24">
+      <section id="selected-work" className="container-page py-12 sm:py-16 md:py-24">
         <SectionHeading
           eyebrow="Selected work"
           title="Platforms we've architected and shipped."
@@ -228,7 +238,7 @@ function FounderPage() {
       </section>
 
       {/* Principles */}
-      <section className="border-t border-border bg-surface py-12 sm:py-16 md:py-24">
+      <section id="principles" className="border-t border-border bg-surface py-12 sm:py-16 md:py-24">
         <div className="container-page">
           <SectionHeading eyebrow="How we work" title="Principles that shape our craft." />
           <div className="mt-8 sm:mt-12 md:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2">
@@ -246,7 +256,9 @@ function FounderPage() {
       </section>
 
       {/* Giant Animated CTA Banner */}
-      <ContactCtaBanner />
+      <div id="contact">
+        <ContactCtaBanner />
+      </div>
     </div>
   );
 }
