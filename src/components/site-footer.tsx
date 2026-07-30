@@ -1,22 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUp } from "lucide-react";
 
-const navLinks = [
-  { id: "the-architect", label: "The Architect" },
-  { id: "core-disciplines", label: "Core Disciplines" },
-  { id: "architecture", label: "Architecture" },
-  { id: "applied-ai", label: "Applied AI" },
-  { id: "selected-work", label: "Selected Work" },
-  { id: "principles", label: "Principles" },
-  { id: "contact", label: "Contact" },
-] as const;
-
 export function SiteFooter() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSectionClick = (id: string, e: React.MouseEvent) => {
+  const scrollToSection = (id: string, e: React.MouseEvent) => {
     const el = document.getElementById(id);
     if (el) {
       e.preventDefault();
@@ -55,19 +45,42 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Middle Bar: Inline Section Links & Back to Top */}
+        {/* Middle Bar: Minimal Navigation Links & Back to Top */}
         <div className="flex flex-col gap-6 border-y border-border/80 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <nav className="flex flex-wrap items-center gap-5 sm:gap-7">
-            {navLinks.map((l) => (
-              <a
-                key={l.id}
-                href={`/#${l.id}`}
-                onClick={(e) => handleSectionClick(l.id, e)}
-                className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground cursor-pointer"
-              >
-                {l.label}
-              </a>
-            ))}
+          <nav className="flex flex-wrap items-center gap-6 sm:gap-8">
+            <a
+              href="/#the-architect"
+              onClick={(e) => scrollToSection("the-architect", e)}
+              className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground cursor-pointer"
+            >
+              The Architect
+            </a>
+            <Link
+              to="/systems"
+              className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground"
+            >
+              Systems
+            </Link>
+            <a
+              href="/#architecture"
+              onClick={(e) => scrollToSection("architecture", e)}
+              className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground cursor-pointer"
+            >
+              Architecture
+            </a>
+            <a
+              href="/#applied-ai"
+              onClick={(e) => scrollToSection("applied-ai", e)}
+              className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground cursor-pointer"
+            >
+              AI
+            </a>
+            <Link
+              to="/contact"
+              className="text-xs sm:text-sm font-medium text-muted-foreground transition-colors duration-500 hover:text-foreground"
+            >
+              Contact
+            </Link>
           </nav>
 
           <button
