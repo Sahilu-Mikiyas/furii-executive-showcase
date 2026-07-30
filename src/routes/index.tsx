@@ -299,8 +299,6 @@ function FounderPage() {
                 <div
                   className={`group ${c.shape} border border-border bg-card p-7 sm:p-9 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:border-foreground/50 relative overflow-hidden`}
                 >
-                  {/* Decorative diagonal accent line */}
-                  <div className="h-[2px] w-12 bg-foreground/20 rotate-[-12deg] mb-4 transition-all duration-500 group-hover:w-20 group-hover:bg-foreground" />
                   <h3 className="text-lg sm:text-xl font-bold tracking-tight">{c.title}</h3>
                   <p className="mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{c.body}</p>
                 </div>
@@ -310,16 +308,21 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* ── Diagonal Transition Slash into Pure Black ── */}
-      <div className="relative h-12 sm:h-16 w-full bg-neutral-950 overflow-hidden select-none" aria-hidden="true">
-        <div className="absolute inset-0 bg-surface/70 clip-path-diagonal" style={{ clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 100%)" }} />
+      {/* ── Diagonal Angled Section Divider ── */}
+      <div className="relative h-16 sm:h-24 w-full bg-black overflow-hidden select-none -mb-1 z-10" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-full text-surface/70 fill-current">
+          <path d="M1200 0L0 120V0h1200z" />
+        </svg>
       </div>
 
-      {/* ── 3. Systems Architecture Section (Stark Inverted Black + Watermark FURII) ── */}
-      <section id="architecture" className="relative overflow-hidden bg-black text-white py-24 sm:py-36 border-y border-neutral-800">
-        {/* Inverted Watermark - FURII */}
+      {/* ── 3. Systems Architecture Section (Stark Inverted Black + Bold Watermark FURII) ── */}
+      <section id="architecture" className="relative overflow-hidden bg-black text-white py-24 sm:py-36 border-b border-neutral-800">
+        {/* Prominent High-Visibility Watermark - FURII */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden select-none" aria-hidden="true">
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[26vw] sm:text-[24vw] font-black uppercase leading-none tracking-tighter text-white/[0.04] transition-colors duration-700">
+          <span className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[28vw] sm:text-[25vw] font-black uppercase leading-none tracking-tighter text-white/10 sm:text-white/12 transition-all duration-700">
+            FURII
+          </span>
+          <span className="absolute bottom-10 -right-10 font-mono text-[20vw] font-black uppercase leading-none tracking-tighter text-white/[0.08] transition-all duration-700">
             FURII
           </span>
         </div>
@@ -358,9 +361,6 @@ function FounderPage() {
                     className={`group relative flex flex-col justify-between ${shapeClass} border border-neutral-800/90 bg-neutral-950/90 p-7 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-white/60 hover:bg-neutral-900 hover:shadow-[0_25px_60px_rgba(255,255,255,0.08)]`}
                   >
                     <div>
-                      {/* Diagonal Slash accent line */}
-                      <div className="h-[2px] w-10 bg-white/20 rotate-[-12deg] mb-4 transition-all duration-500 group-hover:w-16 group-hover:bg-white" />
-
                       <div className="flex items-center justify-between gap-3">
                         <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-black transition-transform duration-500 group-hover:scale-110 shadow-md">
                           <Icon className="h-5 w-5" />
@@ -384,11 +384,11 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* ── 4. Applied AI Workflows Section (Classy Monochrome Dark + Watermark FURII) ── */}
+      {/* ── 4. Applied AI Workflows Section (Classy Monochrome Dark + Bold Watermark FURII) ── */}
       <section id="applied-ai" className="relative overflow-hidden bg-neutral-950 text-white py-24 sm:py-36 border-b border-neutral-800">
-        {/* Inverted Watermark - FURII */}
+        {/* Prominent High-Visibility Watermark - FURII */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden select-none" aria-hidden="true">
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[26vw] sm:text-[24vw] font-black uppercase leading-none tracking-tighter text-white/[0.03] transition-colors duration-700">
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[28vw] sm:text-[25vw] font-black uppercase leading-none tracking-tighter text-white/10 sm:text-white/12 transition-all duration-700">
             FURII
           </span>
         </div>
@@ -420,9 +420,6 @@ function FounderPage() {
                   <div
                     className={`group relative ${d.shape} border border-neutral-800/90 bg-black/90 p-7 sm:p-9 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-white/60 hover:bg-neutral-900 hover:shadow-[0_25px_60px_rgba(255,255,255,0.09)]`}
                   >
-                    {/* Diagonal Slash accent line */}
-                    <div className="h-[2px] w-10 bg-white/20 rotate-[-12deg] mb-4 transition-all duration-500 group-hover:w-16 group-hover:bg-white" />
-
                     <div className="flex items-center gap-3">
                       <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-black font-bold shadow-md">
                         <Icon className="h-5 w-5" />
@@ -451,6 +448,13 @@ function FounderPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Diagonal Section Divider Returning to Light ── */}
+      <div className="relative h-16 sm:h-24 w-full bg-neutral-950 overflow-hidden select-none -mt-1 z-10" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-full text-background fill-current">
+          <path d="M0 0l1200 120V0H0z" />
+        </svg>
+      </div>
 
       {/* ── 5. Selected Work ── */}
       <section id="selected-work" className="container-page py-16 sm:py-24 md:py-32">
@@ -518,8 +522,6 @@ function FounderPage() {
                 <div
                   className={`group ${p.shape} border border-border bg-card p-7 sm:p-9 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/50 relative overflow-hidden`}
                 >
-                  {/* Decorative diagonal accent line */}
-                  <div className="h-[2px] w-10 bg-foreground/20 rotate-[-12deg] mb-4 transition-all duration-500 group-hover:w-16 group-hover:bg-foreground" />
                   <h3 className="text-lg sm:text-xl font-bold tracking-tight">{p.title}</h3>
                   <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{p.body}</p>
                 </div>
