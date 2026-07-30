@@ -15,6 +15,7 @@ export function SystemCard({ s }: { s: SystemInfo }) {
     "forge-mes": "/systems/forge-mes",
     "aura-hospitality": "/systems/aura-hospitality",
     "construct-x": "/systems/construct-x",
+    "vector-dispatch": "/systems/vector-dispatch",
   };
 
   const targetPath = detailPages[s.slug];

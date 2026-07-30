@@ -27,6 +27,7 @@ import { Route as SystemsPrismImpactRouteImport } from './routes/systems.prism-i
 import { Route as SystemsPulseOsRouteImport } from './routes/systems.pulse-os'
 import { Route as SystemsStrataOpsRouteImport } from './routes/systems.strata-ops'
 import { Route as SystemsTalentGridRouteImport } from './routes/systems.talent-grid'
+import { Route as SystemsVectorDispatchRouteImport } from './routes/systems.vector-dispatch'
 import { Route as SystemsVeloxCommerceRouteImport } from './routes/systems.velox-commerce'
 
 const IndexRoute = IndexRouteImport.update({
@@ -119,6 +120,11 @@ const SystemsTalentGridRoute = SystemsTalentGridRouteImport.update({
   path: '/talent-grid',
   getParentRoute: () => SystemsRoute,
 } as any)
+const SystemsVectorDispatchRoute = SystemsVectorDispatchRouteImport.update({
+  id: '/vector-dispatch',
+  path: '/vector-dispatch',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const SystemsVeloxCommerceRoute = SystemsVeloxCommerceRouteImport.update({
   id: '/velox-commerce',
   path: '/velox-commerce',
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
+  '/systems/vector-dispatch': typeof SystemsVectorDispatchRoute
   '/systems/velox-commerce': typeof SystemsVeloxCommerceRoute
   '/systems/': typeof SystemsIndexRoute
 }
@@ -163,6 +170,7 @@ export interface FileRoutesByTo {
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
+  '/systems/vector-dispatch': typeof SystemsVectorDispatchRoute
   '/systems/velox-commerce': typeof SystemsVeloxCommerceRoute
   '/systems': typeof SystemsIndexRoute
 }
@@ -185,6 +193,7 @@ export interface FileRoutesById {
   '/systems/pulse-os': typeof SystemsPulseOsRoute
   '/systems/strata-ops': typeof SystemsStrataOpsRoute
   '/systems/talent-grid': typeof SystemsTalentGridRoute
+  '/systems/vector-dispatch': typeof SystemsVectorDispatchRoute
   '/systems/velox-commerce': typeof SystemsVeloxCommerceRoute
   '/systems/': typeof SystemsIndexRoute
 }
@@ -208,6 +217,7 @@ export interface FileRouteTypes {
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
+    | '/systems/vector-dispatch'
     | '/systems/velox-commerce'
     | '/systems/'
   fileRoutesByTo: FileRoutesByTo
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
+    | '/systems/vector-dispatch'
     | '/systems/velox-commerce'
     | '/systems'
   id:
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/systems/pulse-os'
     | '/systems/strata-ops'
     | '/systems/talent-grid'
+    | '/systems/vector-dispatch'
     | '/systems/velox-commerce'
     | '/systems/'
   fileRoutesById: FileRoutesById
@@ -391,6 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SystemsTalentGridRouteImport
       parentRoute: typeof SystemsRoute
     }
+    '/systems/vector-dispatch': {
+      id: '/systems/vector-dispatch'
+      path: '/vector-dispatch'
+      fullPath: '/systems/vector-dispatch'
+      preLoaderRoute: typeof SystemsVectorDispatchRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/systems/velox-commerce': {
       id: '/systems/velox-commerce'
       path: '/velox-commerce'
@@ -412,6 +431,7 @@ interface SystemsRouteChildren {
   SystemsPulseOsRoute: typeof SystemsPulseOsRoute
   SystemsStrataOpsRoute: typeof SystemsStrataOpsRoute
   SystemsTalentGridRoute: typeof SystemsTalentGridRoute
+  SystemsVectorDispatchRoute: typeof SystemsVectorDispatchRoute
   SystemsVeloxCommerceRoute: typeof SystemsVeloxCommerceRoute
   SystemsIndexRoute: typeof SystemsIndexRoute
 }
@@ -427,6 +447,7 @@ const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsPulseOsRoute: SystemsPulseOsRoute,
   SystemsStrataOpsRoute: SystemsStrataOpsRoute,
   SystemsTalentGridRoute: SystemsTalentGridRoute,
+  SystemsVectorDispatchRoute: SystemsVectorDispatchRoute,
   SystemsVeloxCommerceRoute: SystemsVeloxCommerceRoute,
   SystemsIndexRoute: SystemsIndexRoute,
 }
