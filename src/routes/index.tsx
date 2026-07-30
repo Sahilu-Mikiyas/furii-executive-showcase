@@ -21,7 +21,6 @@ import {
   Home,
   Landmark,
   Sparkles,
-  Cpu,
   CheckCircle2,
 } from "lucide-react";
 import { SectionHeading } from "../components/section-heading";
@@ -99,9 +98,6 @@ const aiDomains = [
     icon: Building2,
     domain: "Healthcare Clinical AI",
     tag: "Pulse OS",
-    accent: "border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500/60",
-    badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    dotColor: "bg-emerald-400",
     items: [
       "AI Clinical Triage & Emergency Risk Scoring",
       "Automated EHR Patient History Summarization",
@@ -113,9 +109,6 @@ const aiDomains = [
     icon: GraduationCap,
     domain: "Academic Intelligence",
     tag: "Nexus Campus",
-    accent: "border-purple-500/30 bg-purple-500/5 hover:border-purple-500/60",
-    badgeBg: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-    dotColor: "bg-purple-400",
     items: [
       "Early Student Dropout Risk Forecasting",
       "Adaptive Academic Performance Analytics",
@@ -127,9 +120,6 @@ const aiDomains = [
     icon: Users,
     domain: "Workforce & HR Intelligence",
     tag: "TalentGrid",
-    accent: "border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500/60",
-    badgeBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-    dotColor: "bg-cyan-400",
     items: [
       "Semantic Candidate Resume Parsing & Matching",
       "Predictive Employee Retention & Attrition Scoring",
@@ -141,9 +131,6 @@ const aiDomains = [
     icon: Home,
     domain: "Property IoT & Asset AI",
     tag: "Strata Ops",
-    accent: "border-amber-500/30 bg-amber-500/5 hover:border-amber-500/60",
-    badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    dotColor: "bg-amber-400",
     items: [
       "IoT Sensor Predictive Maintenance Engine",
       "Automated Commercial Lease Clause Summaries",
@@ -155,9 +142,6 @@ const aiDomains = [
     icon: Landmark,
     domain: "GovTech Intelligence",
     tag: "CivicPulse",
-    accent: "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60",
-    badgeBg: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    dotColor: "bg-blue-400",
     items: [
       "OCR Document Verification & Extraction",
       "24/7 Multilingual Citizen Service Assistant",
@@ -215,7 +199,7 @@ function FounderPage() {
       <CompassNav sections={compassSections} />
 
       {/* ── 1. Intro Hero (The Architect) ── */}
-      <section id="the-architect" className="container-page pt-28 sm:pt-36 md:pt-40 pb-12 sm:pb-16 md:pb-24">
+      <section id="the-architect" className="container-page pt-28 sm:pt-36 md:pt-40 pb-12 sm:pb-16 md:pb-24 relative">
         <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center lg:gap-16">
           <div className="animate-fade-in">
             <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-semibold">
@@ -284,7 +268,7 @@ function FounderPage() {
       </section>
 
       {/* ── 2. Core Disciplines ── */}
-      <section id="core-disciplines" className="border-y border-border bg-surface py-12 sm:py-16 md:py-24">
+      <section id="core-disciplines" className="border-y border-border bg-surface/70 py-16 sm:py-24 md:py-32">
         <div className="container-page">
           <SectionHeading
             eyebrow="Core Disciplines"
@@ -295,7 +279,7 @@ function FounderPage() {
             {capabilities.map((c) => (
               <div
                 key={c.title}
-                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
+                className="group rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/40"
               >
                 <h3 className="text-base sm:text-lg font-semibold tracking-tight">{c.title}</h3>
                 <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{c.body}</p>
@@ -305,110 +289,122 @@ function FounderPage() {
         </div>
       </section>
 
-      {/* ── 3. Systems Architecture Section ── */}
-      <section id="architecture" className="container-page py-16 sm:py-24 md:py-32">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <SectionHeading
-            eyebrow="Systems Architecture"
-            title="Engineering enterprise software for scale."
-            description="Every platform inherits the same zero-trust, high-throughput, and fault-tolerant foundations."
-          />
-          <span className="shrink-0 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-            ● 12 Core Architectural Pillars
+      {/* ── 3. Systems Architecture Section (Stark Inverted Black Theme) ── */}
+      <section id="architecture" className="relative overflow-hidden bg-neutral-950 text-white py-20 sm:py-28 md:py-36 border-y border-neutral-800">
+        {/* Inverted Watermark */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden select-none" aria-hidden="true">
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[22vw] font-black uppercase leading-none tracking-tighter text-white/[0.03]">
+            ARCHITECTURE
           </span>
         </div>
 
-        <div className="mt-10 sm:mt-14 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {architecturePillars.map((p) => {
-            const Icon = p.icon;
-            return (
-              <div
-                key={p.title}
-                className="group relative flex flex-col justify-between rounded-3xl border border-border bg-card p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-foreground/30 hover:shadow-xl"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="grid h-10 w-10 place-items-center rounded-2xl border border-border bg-surface text-foreground transition-all duration-500 group-hover:bg-foreground group-hover:text-background group-hover:scale-110">
-                      <Icon className="h-5 w-5" />
+        <div className="container-page relative z-10">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-neutral-400 font-semibold">
+                Systems Architecture
+              </span>
+              <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
+                Engineering enterprise software for scale.
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-neutral-400 max-w-2xl">
+                Every platform inherits the same zero-trust, high-throughput, and fault-tolerant foundations.
+              </p>
+            </div>
+            <span className="shrink-0 rounded-full border border-neutral-800 bg-neutral-900/80 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider text-neutral-300">
+              12 Core Pillars
+            </span>
+          </div>
+
+          <div className="mt-12 sm:mt-16 grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {architecturePillars.map((p) => {
+              const Icon = p.icon;
+              return (
+                <div
+                  key={p.title}
+                  className="group relative flex flex-col justify-between rounded-3xl border border-neutral-800/90 bg-neutral-900/80 p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-white/40 hover:bg-neutral-900 hover:shadow-[0_20px_50px_rgba(255,255,255,0.06)]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="grid h-10 w-10 place-items-center rounded-2xl border border-neutral-700 bg-white text-black transition-transform duration-500 group-hover:scale-110">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[9px] uppercase tracking-wider text-white font-semibold">
+                        {p.badge}
+                      </span>
                     </div>
-                    <span className="rounded-full border border-border bg-surface/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">
-                      {p.badge}
-                    </span>
+                    <h3 className="mt-5 text-base sm:text-lg font-bold tracking-tight text-white">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-400">
+                      {p.desc}
+                    </p>
                   </div>
-                  <h3 className="mt-5 text-base sm:text-lg font-bold tracking-tight text-foreground">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">
-                    {p.desc}
-                  </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* ── 4. Applied AI Workflows Section ── */}
-      <section id="applied-ai" className="border-t border-border bg-surface/50 py-16 sm:py-24 md:py-32">
-        <div className="container-page">
-          {/* Deep Obsidian AI Showcase Card */}
-          <div className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] border border-neutral-800 bg-gradient-to-br from-neutral-950 via-black to-neutral-900 p-8 sm:p-12 md:p-16 text-white shadow-2xl">
-            {/* Ambient background glow */}
-            <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
+      {/* ── 4. Applied AI Workflows Section (Classy Monochrome Dark) ── */}
+      <section id="applied-ai" className="relative overflow-hidden bg-black text-white py-20 sm:py-28 md:py-36 border-b border-neutral-800">
+        {/* Inverted Watermark */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden select-none" aria-hidden="true">
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[24vw] font-black uppercase leading-none tracking-tighter text-white/[0.025]">
+            INTELLIGENCE
+          </span>
+        </div>
 
-            {/* Section Header Inside Obsidian Card */}
-            <div className="relative z-10 max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400">
-                <Sparkles className="h-3.5 w-3.5 animate-pulse" />
-                Applied AI • Zero Hype • High Precision
-              </div>
-
-              <h2 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.1]">
-                AI embedded directly into operational workflows.
-              </h2>
-
-              <p className="mt-4 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-2xl font-normal">
-                Not a standalone chatbot. We weave machine intelligence directly into daily enterprise software, quietly making teams faster, more accurate, and more proactive.
-              </p>
+        <div className="container-page relative z-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-widest text-white">
+              <Sparkles className="h-3.5 w-3.5 animate-pulse" />
+              Applied AI • Zero Hype • High Precision
             </div>
 
-            {/* AI Domain Showcase Cards */}
-            <div className="relative z-10 mt-10 sm:mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {aiDomains.map((d) => {
-                const Icon = d.icon;
-                return (
-                  <div
-                    key={d.domain}
-                    className={`group relative rounded-3xl border ${d.accent} p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl`}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="grid h-10 w-10 place-items-center rounded-2xl bg-neutral-900/80 border border-neutral-700 text-white">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <h3 className="text-base font-bold text-white tracking-tight">
-                          {d.domain}
-                        </h3>
-                      </div>
+            <h2 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.1]">
+              AI embedded directly into operational workflows.
+            </h2>
+
+            <p className="mt-4 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-2xl font-normal">
+              Not a standalone chatbot. We weave machine intelligence directly into daily enterprise software, quietly making teams faster, more accurate, and more proactive.
+            </p>
+          </div>
+
+          {/* AI Domain Showcase Cards - Pure Classy B&W */}
+          <div className="mt-12 sm:mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {aiDomains.map((d) => {
+              const Icon = d.icon;
+              return (
+                <div
+                  key={d.domain}
+                  className="group relative rounded-3xl border border-neutral-800/90 bg-neutral-950/90 p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-white/50 hover:bg-neutral-900 hover:shadow-[0_20px_50px_rgba(255,255,255,0.08)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-black font-bold">
+                      <Icon className="h-5 w-5" />
                     </div>
-
-                    <span className={`inline-block mt-3 rounded-full border px-2.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${d.badgeBg}`}>
-                      {d.tag}
-                    </span>
-
-                    <ul className="mt-5 space-y-2.5">
-                      {d.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2.5 text-xs text-neutral-300">
-                          <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${d.dotColor}`} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                      {d.domain}
+                    </h3>
                   </div>
-                );
-              })}
-            </div>
+
+                  <span className="inline-block mt-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[9px] font-semibold uppercase tracking-wider text-white">
+                    {d.tag}
+                  </span>
+
+                  <ul className="mt-6 space-y-3">
+                    {d.items.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-xs sm:text-sm text-neutral-300">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -468,7 +464,7 @@ function FounderPage() {
             {principles.map((p) => (
               <div
                 key={p.title}
-                className="rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-foreground/20"
+                className="group rounded-3xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-foreground/40"
               >
                 <h3 className="text-lg sm:text-xl font-semibold tracking-tight">{p.title}</h3>
                 <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground">{p.body}</p>
