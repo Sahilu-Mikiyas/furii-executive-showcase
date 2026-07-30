@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 export interface CompassSection {
   id: string;
@@ -10,116 +10,277 @@ interface CompassNavProps {
 }
 
 export function CompassNav({ sections }: CompassNavProps) {
-  const [activeId, setActiveId] = useState<string>(sections[0]?.id ?? "");
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const rafRef = useRef<number>(0);
 
-  /* ── Intersection Observer ── */
+  /* ── Reliable scroll-position tracking ── */
   useEffect(() => {
-    const els = sections
-      .map((s) => document.getElementById(s.id))
-      .filter(Boolean) as HTMLElement[];
+    const update = () => {
+      const viewportCenter = window.innerHeight / 2;
+      let bestIndex = 0;
+      let bestDistance = Infinity;
 
-    if (els.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the entry with the largest intersection ratio
-        let best: IntersectionObserverEntry | null = null;
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!best || entry.intersectionRatio > best.intersectionRatio) {
-              best = entry;
-            }
-          }
-        });
-        if (best) {
-          setActiveId((best as IntersectionObserverEntry).target.id);
+      sections.forEach((s, i) => {
+        const el = document.getElementById(s.id);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        // Distance from section's vertical center to viewport center
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - viewportCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = i;
         }
-      },
-      { rootMargin: "-30% 0px -30% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
+      });
 
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      setActiveIndex(bestIndex);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    // Show compass after a short delay for elegant entrance
+    const showTimer = setTimeout(() => setVisible(true), 600);
+
+    update(); // initial
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      clearTimeout(showTimer);
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [sections]);
 
   /* ── Scroll to section ── */
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const top = el.getBoundingClientRect().top + window.scrollY - 20;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   }, []);
 
   if (sections.length === 0) return null;
 
-  const activeIndex = sections.findIndex((s) => s.id === activeId);
+  const count = sections.length;
+  // Distribute sections across 240 degrees (-120 to +120, with 0 at top)
+  const arcSpan = 240;
+  const arcStart = -120;
+  const stepDeg = count > 1 ? arcSpan / (count - 1) : 0;
+
+  // Needle rotation for the active section
+  const needleAngle = arcStart + activeIndex * stepDeg;
+
+  // Ring dimensions
+  const size = 120;
+  const outerR = size / 2;
+  const innerR = outerR - 18;
+  const tickR = outerR - 4;
+  const tickInnerR = outerR - 12;
+  const cx = outerR;
+  const cy = outerR;
 
   return (
     <nav
       aria-label="Section compass"
-      className="fixed right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-0"
+      className={`fixed right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 transition-all duration-1000 ease-out ${
+        visible
+          ? "opacity-100 scale-100 translate-x-0"
+          : "opacity-0 scale-75 translate-x-8"
+      }`}
     >
-      {sections.map((section, i) => {
-        const isActive = section.id === activeId;
-        const isHovered = section.id === hoveredId;
-        const showLabel = isActive || isHovered;
+      <div className="relative" style={{ width: size, height: size }}>
+        {/* SVG Compass Dial */}
+        <svg
+          viewBox={`0 0 ${size} ${size}`}
+          width={size}
+          height={size}
+          className="drop-shadow-lg"
+        >
+          {/* Outer ring */}
+          <circle
+            cx={cx}
+            cy={cy}
+            r={outerR - 1}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            className="text-foreground/15"
+          />
 
-        return (
-          <div key={section.id} className="flex flex-col items-center">
-            {/* Connector line above (skip for first item) */}
-            {i > 0 && (
-              <div
-                className={`w-[1.5px] h-5 sm:h-6 transition-all duration-500 ${
-                  i <= activeIndex
-                    ? "bg-foreground/40"
-                    : "bg-border"
+          {/* Inner filled circle (the dial face) */}
+          <circle
+            cx={cx}
+            cy={cy}
+            r={innerR}
+            className="fill-card/90 stroke-border"
+            strokeWidth="0.5"
+          />
+
+          {/* Subtle radial gradient glow behind active tick */}
+          <defs>
+            <radialGradient id="compass-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <circle
+            cx={cx}
+            cy={cy}
+            r={outerR - 2}
+            fill="url(#compass-glow)"
+            className="text-foreground"
+          />
+
+          {/* Section tick marks */}
+          {sections.map((_, i) => {
+            const angle = arcStart + i * stepDeg;
+            const rad = (angle * Math.PI) / 180;
+            const isActive = i === activeIndex;
+            const isHovered = i === hoveredIndex;
+
+            const x1 = cx + tickR * Math.sin(rad);
+            const y1 = cy - tickR * Math.cos(rad);
+            const x2 = cx + tickInnerR * Math.sin(rad);
+            const y2 = cy - tickInnerR * Math.cos(rad);
+
+            return (
+              <line
+                key={i}
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                strokeWidth={isActive ? 2.5 : isHovered ? 1.5 : 1}
+                strokeLinecap="round"
+                className={`transition-all duration-500 ${
+                  isActive
+                    ? "stroke-foreground"
+                    : isHovered
+                      ? "stroke-foreground/60"
+                      : "stroke-foreground/20"
                 }`}
               />
-            )}
+            );
+          })}
 
-            {/* Node */}
-            <button
-              onClick={() => scrollTo(section.id)}
-              onMouseEnter={() => setHoveredId(section.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              aria-label={`Scroll to ${section.label}`}
-              aria-current={isActive ? "true" : undefined}
-              className="group relative flex items-center"
-            >
-              {/* Label (slides out from the left) */}
-              <span
-                className={`absolute right-full mr-3 whitespace-nowrap rounded-lg px-3 py-1.5 text-[10px] sm:text-xs font-semibold tracking-wide transition-all duration-500 ease-out pointer-events-none ${
-                  showLabel
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-x-2"
-                } ${
-                  isActive
-                    ? "bg-foreground text-background shadow-lg"
-                    : "bg-card border border-border text-foreground shadow-md"
-                }`}
-              >
-                {section.label}
-              </span>
-
-              {/* Dot / Node */}
-              <span className="relative flex items-center justify-center">
-                {/* Glow ring for active */}
-                {isActive && (
-                  <span className="absolute h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-foreground/10 animate-pulse" />
-                )}
-                <span
-                  className={`relative rounded-full transition-all duration-500 ease-out ${
-                    isActive
-                      ? "h-3 w-3 sm:h-3.5 sm:w-3.5 bg-foreground shadow-[0_0_12px_rgba(255,255,255,0.3)]"
-                      : "h-2 w-2 sm:h-2.5 sm:w-2.5 bg-foreground/30 group-hover:bg-foreground/60 group-hover:scale-125"
-                  }`}
+          {/* Fine decorative ticks between sections */}
+          {sections.length > 1 &&
+            sections.slice(0, -1).map((_, i) => {
+              const midAngle = arcStart + i * stepDeg + stepDeg / 2;
+              const rad = (midAngle * Math.PI) / 180;
+              const x1 = cx + (tickR - 1) * Math.sin(rad);
+              const y1 = cy - (tickR - 1) * Math.cos(rad);
+              const x2 = cx + (tickInnerR + 3) * Math.sin(rad);
+              const y2 = cy - (tickInnerR + 3) * Math.cos(rad);
+              return (
+                <line
+                  key={`mid-${i}`}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  strokeWidth={0.5}
+                  strokeLinecap="round"
+                  className="stroke-foreground/10"
                 />
-              </span>
-            </button>
+              );
+            })}
+
+          {/* Needle */}
+          <g
+            style={{
+              transform: `rotate(${needleAngle}deg)`,
+              transformOrigin: `${cx}px ${cy}px`,
+              transition: "transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }}
+          >
+            {/* Needle body */}
+            <line
+              x1={cx}
+              y1={cy}
+              x2={cx}
+              y2={cy - innerR + 6}
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="stroke-foreground"
+            />
+            {/* Needle tip (arrowhead dot) */}
+            <circle
+              cx={cx}
+              cy={cy - innerR + 4}
+              r="2.5"
+              className="fill-foreground"
+            />
+            {/* Center pivot */}
+            <circle
+              cx={cx}
+              cy={cy}
+              r="3.5"
+              className="fill-foreground"
+            />
+            <circle
+              cx={cx}
+              cy={cy}
+              r="2"
+              className="fill-card"
+            />
+          </g>
+        </svg>
+
+        {/* Invisible clickable areas over each tick mark */}
+        {sections.map((section, i) => {
+          const angle = arcStart + i * stepDeg;
+          const rad = (angle * Math.PI) / 180;
+          const hitR = outerR - 8;
+          const hitX = cx + hitR * Math.sin(rad);
+          const hitY = cy - hitR * Math.cos(rad);
+
+          return (
+            <button
+              key={section.id}
+              onClick={() => scrollTo(section.id)}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              aria-label={`Scroll to ${section.label}`}
+              aria-current={i === activeIndex ? "true" : undefined}
+              className="absolute rounded-full transition-colors duration-300 hover:bg-foreground/10"
+              style={{
+                width: 20,
+                height: 20,
+                left: hitX - 10,
+                top: hitY - 10,
+              }}
+            />
+          );
+        })}
+
+        {/* Active section label (below the compass) */}
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-8 whitespace-nowrap">
+          <span
+            key={activeIndex}
+            className="inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] text-foreground/70 font-semibold animate-fade-in"
+          >
+            {sections[activeIndex]?.label}
+          </span>
+        </div>
+
+        {/* Hovered section tooltip */}
+        {hoveredIndex !== null && hoveredIndex !== activeIndex && (
+          <div className="absolute left-1/2 -translate-x-1/2 -top-8 whitespace-nowrap animate-fade-in">
+            <span className="inline-block rounded-md bg-foreground px-2.5 py-1 text-[9px] font-semibold tracking-wide text-background shadow-lg">
+              {sections[hoveredIndex]?.label}
+            </span>
           </div>
-        );
-      })}
+        )}
+      </div>
     </nav>
   );
 }
