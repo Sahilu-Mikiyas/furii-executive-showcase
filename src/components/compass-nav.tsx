@@ -94,8 +94,26 @@ export function CompassNav({ sections }: CompassNavProps) {
   const arcStart = -65;
   const stepDeg = count > 1 ? arcSpan / (count - 1) : 0;
 
-  // Active section angle for the needle
+  // Active section radians for needle and text label
   const activeAngle = arcStart + activeIndex * stepDeg;
+  const activeRad = (activeAngle * Math.PI) / 180;
+
+  // Active needle tip coordinates
+  const needleLen = radius + 6;
+  const tipX = cx - needleLen * Math.cos(activeRad);
+  const tipY = cy + needleLen * Math.sin(activeRad);
+
+  // Base perpendicular offsets for needle (4px width at center pivot)
+  const perpX = 4 * Math.sin(activeRad);
+  const perpY = 4 * Math.cos(activeRad);
+  const p1X = cx + perpX;
+  const p1Y = cy + perpY;
+  const p2X = cx - perpX;
+  const p2Y = cy - perpY;
+
+  // Active section label position (sitting right at the needle tip)
+  const labelX = cx - (radius + 18) * Math.cos(activeRad);
+  const labelY = cy + (radius + 18) * Math.sin(activeRad);
 
   return (
     <nav
@@ -114,7 +132,7 @@ export function CompassNav({ sections }: CompassNavProps) {
           height={height}
           className="overflow-visible transition-all duration-300"
         >
-          {/* Section Divider Ticks along the arc (Outer outline removed) */}
+          {/* Section Divider Ticks along the arc */}
           {sections.map((_, i) => {
             const angleDeg = arcStart + i * stepDeg;
             const rad = (angleDeg * Math.PI) / 180;
@@ -153,29 +171,13 @@ export function CompassNav({ sections }: CompassNavProps) {
             );
           })}
 
-          {/* Sharp Pointy Compass Needle Pivoting at Right Center (cx, cy) */}
-          <g
-            style={{
-              transform: `rotate(${activeAngle}deg)`,
-              transformOrigin: `${cx}px ${cy}px`,
-              transition: "transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1)",
-            }}
-          >
-            {/* Pointy triangular needle extending leftwards from center pivot */}
+          {/* Sharp Pointy Compass Needle (Direct Trigonometric Lock to Active Tick) */}
+          <g className="transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
             <polygon
-              points={`${cx},${cy - 4} ${cx - (radius + 4)},${cy} ${cx},${cy + 4}`}
+              points={`${p1X},${p1Y} ${tipX},${tipY} ${p2X},${p2Y}`}
               className={`transition-colors duration-300 ${
                 isDarkSection ? "fill-white text-white" : "fill-foreground text-foreground"
               }`}
-            />
-            {/* Inner decorative needle accent line */}
-            <line
-              x1={cx}
-              y1={cy}
-              x2={cx - (radius + 4)}
-              y2={cy}
-              strokeWidth="0.75"
-              className={isDarkSection ? "stroke-black" : "stroke-background"}
             />
             {/* Center Pivot Dot on Right Edge */}
             <circle
@@ -223,39 +225,31 @@ export function CompassNav({ sections }: CompassNavProps) {
           );
         })}
 
-        {/* Active Section Label sitting RIGHT ALONG THE ACTIVE TICK ON THE ARC */}
-        {(() => {
-          const rad = (activeAngle * Math.PI) / 180;
-          const labelX = cx - (radius + 14) * Math.cos(rad);
-          const labelY = cy + (radius + 14) * Math.sin(rad);
-
-          return (
-            <div
-              className="absolute pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
-              style={{
-                left: labelX,
-                top: labelY,
-                transform: "translate(-100%, -50%)",
-              }}
-            >
-              <span
-                key={activeIndex}
-                className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
-                  isDarkSection ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" : "text-foreground drop-shadow-sm"
-                }`}
-              >
-                {sections[activeIndex]?.label}
-              </span>
-            </div>
-          );
-        })()}
+        {/* Active Section Label (Trigonometrically Locked right next to Needle Tip) */}
+        <div
+          className="absolute pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+          style={{
+            left: labelX,
+            top: labelY,
+            transform: "translate(-100%, -50%)",
+          }}
+        >
+          <span
+            key={activeIndex}
+            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
+              isDarkSection ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" : "text-foreground drop-shadow-sm"
+            }`}
+          >
+            {sections[activeIndex]?.label}
+          </span>
+        </div>
 
         {/* Hovered Section Tooltip (sitting along the hovered tick) */}
         {hoveredIndex !== null && hoveredIndex !== activeIndex && (() => {
           const angleDeg = arcStart + hoveredIndex * stepDeg;
           const rad = (angleDeg * Math.PI) / 180;
-          const hX = cx - (radius + 14) * Math.cos(rad);
-          const hY = cy + (radius + 14) * Math.sin(rad);
+          const hX = cx - (radius + 18) * Math.cos(rad);
+          const hY = cy + (radius + 18) * Math.sin(rad);
 
           return (
             <div
