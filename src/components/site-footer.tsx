@@ -122,7 +122,7 @@ export function SiteFooter() {
             </a>
             <span className="hidden sm:inline text-border">•</span>
             <a
-              href="https://wa.me/251909312671?text=Hello%20Mikiyas,%20I'd%20like%20to%20discuss%20an%20enterprise%20project."
+              href="https://wa.me/251909312671"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors duration-300"
@@ -134,7 +134,7 @@ export function SiteFooter() {
             </a>
             <span className="hidden sm:inline text-border">•</span>
             <a
-              href="https://instagram.com/furiimotionlabs"
+              href="https://www.instagram.com/sahilu_mike?igsh=MWNxd2lhcTFqaGY5ZA=="
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors duration-300"
