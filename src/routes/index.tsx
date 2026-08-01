@@ -217,7 +217,7 @@ function FounderPage() {
           <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-center lg:gap-16">
             <div>
               <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                Mikiyas Sahilu • The Architect
+                Mikiyas Sahilu • CTO at FURII
               </span>
 
               <h1 className="mt-3 sm:mt-4 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
