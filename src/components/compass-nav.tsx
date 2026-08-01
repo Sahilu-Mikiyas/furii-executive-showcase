@@ -14,9 +14,10 @@ export function CompassNav({ sections }: CompassNavProps) {
   const [visible, setVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isDarkSection, setIsDarkSection] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const rafRef = useRef<number>(0);
 
-  /* ── Physical position tracking & Immediate boundary dark detection ── */
+  /* ── Physical position tracking, Mobile detection & Immediate boundary dark detection ── */
   useEffect(() => {
     const update = () => {
       const viewportCenter = window.innerHeight / 2;
@@ -27,7 +28,6 @@ export function CompassNav({ sections }: CompassNavProps) {
         const el = document.getElementById(s.id);
         if (!el) return;
         const rect = el.getBoundingClientRect();
-        // Distance from section's vertical center to viewport center
         const sectionCenter = rect.top + rect.height / 2;
         const distance = Math.abs(sectionCenter - viewportCenter);
         if (distance < bestDistance) {
@@ -49,6 +49,7 @@ export function CompassNav({ sections }: CompassNavProps) {
       });
 
       setIsDarkSection(isCurrentlyOverDark);
+      setIsMobile(window.innerWidth < 640);
     };
 
     const onScroll = () => {
@@ -82,12 +83,13 @@ export function CompassNav({ sections }: CompassNavProps) {
   if (sections.length === 0) return null;
 
   const count = sections.length;
-  // Dimensions for half-compass right edge dial
-  const width = 160;
-  const height = 200;
+
+  // Dynamically scaled dimensions for mobile vs desktop
+  const width = isMobile ? 95 : 155;
+  const height = isMobile ? 140 : 195;
   const cx = width; // Pivot point pinned to extreme right edge
   const cy = height / 2;
-  const radius = 95;
+  const radius = isMobile ? 54 : 92;
 
   // Arc span: 130° total (from -65° top to +65° bottom)
   const arcSpan = 130;
@@ -99,21 +101,23 @@ export function CompassNav({ sections }: CompassNavProps) {
   const activeRad = (activeAngle * Math.PI) / 180;
 
   // Active needle tip coordinates
-  const needleLen = radius + 6;
+  const needleLen = radius + (isMobile ? 3 : 5);
   const tipX = cx - needleLen * Math.cos(activeRad);
   const tipY = cy + needleLen * Math.sin(activeRad);
 
-  // Base perpendicular offsets for needle (4px width at center pivot)
-  const perpX = 4 * Math.sin(activeRad);
-  const perpY = 4 * Math.cos(activeRad);
+  // Base perpendicular offsets for needle (3px width on mobile, 4px on desktop)
+  const perpWidth = isMobile ? 3 : 4;
+  const perpX = perpWidth * Math.sin(activeRad);
+  const perpY = perpWidth * Math.cos(activeRad);
   const p1X = cx + perpX;
   const p1Y = cy + perpY;
   const p2X = cx - perpX;
   const p2Y = cy - perpY;
 
   // Active section label position (sitting right at the needle tip)
-  const labelX = cx - (radius + 18) * Math.cos(activeRad);
-  const labelY = cy + (radius + 18) * Math.sin(activeRad);
+  const labelOffset = isMobile ? 10 : 16;
+  const labelX = cx - (radius + labelOffset) * Math.cos(activeRad);
+  const labelY = cy + (radius + labelOffset) * Math.sin(activeRad);
 
   return (
     <nav
@@ -139,7 +143,10 @@ export function CompassNav({ sections }: CompassNavProps) {
             const isActive = i === activeIndex;
             const isHovered = i === hoveredIndex;
 
-            const tickLength = isActive ? 18 : isHovered ? 14 : 10;
+            const tickLength = isMobile
+              ? isActive ? 12 : isHovered ? 9 : 6
+              : isActive ? 18 : isHovered ? 14 : 10;
+
             const x1 = cx - radius * Math.cos(rad);
             const y1 = cy + radius * Math.sin(rad);
             const x2 = cx - (radius - tickLength) * Math.cos(rad);
@@ -152,7 +159,7 @@ export function CompassNav({ sections }: CompassNavProps) {
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                strokeWidth={isActive ? 2.5 : isHovered ? 1.5 : 1}
+                strokeWidth={isActive ? (isMobile ? 2 : 2.5) : isHovered ? 1.5 : 1}
                 strokeLinecap="round"
                 className={`transition-all duration-300 ${
                   isDarkSection
@@ -183,7 +190,7 @@ export function CompassNav({ sections }: CompassNavProps) {
             <circle
               cx={cx}
               cy={cy}
-              r="5"
+              r={isMobile ? 3.5 : 5}
               className={`transition-colors duration-300 ${
                 isDarkSection ? "fill-white" : "fill-foreground"
               }`}
@@ -191,7 +198,7 @@ export function CompassNav({ sections }: CompassNavProps) {
             <circle
               cx={cx}
               cy={cy}
-              r="2.5"
+              r={isMobile ? 1.8 : 2.5}
               className={`transition-colors duration-300 ${
                 isDarkSection ? "fill-black" : "fill-card"
               }`}
@@ -205,6 +212,7 @@ export function CompassNav({ sections }: CompassNavProps) {
           const rad = (angleDeg * Math.PI) / 180;
           const hitX = cx - radius * Math.cos(rad);
           const hitY = cy + radius * Math.sin(rad);
+          const hitSize = isMobile ? 20 : 24;
 
           return (
             <button
@@ -216,10 +224,10 @@ export function CompassNav({ sections }: CompassNavProps) {
               aria-current={i === activeIndex ? "true" : undefined}
               className="absolute rounded-full transition-colors duration-300 hover:bg-white/20"
               style={{
-                width: 24,
-                height: 24,
-                left: hitX - 12,
-                top: hitY - 12,
+                width: hitSize,
+                height: hitSize,
+                left: hitX - hitSize / 2,
+                top: hitY - hitSize / 2,
               }}
             />
           );
@@ -236,7 +244,7 @@ export function CompassNav({ sections }: CompassNavProps) {
         >
           <span
             key={activeIndex}
-            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
+            className={`inline-block font-mono text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
               isDarkSection ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" : "text-foreground drop-shadow-sm"
             }`}
           >
@@ -248,8 +256,8 @@ export function CompassNav({ sections }: CompassNavProps) {
         {hoveredIndex !== null && hoveredIndex !== activeIndex && (() => {
           const angleDeg = arcStart + hoveredIndex * stepDeg;
           const rad = (angleDeg * Math.PI) / 180;
-          const hX = cx - (radius + 18) * Math.cos(rad);
-          const hY = cy + (radius + 18) * Math.sin(rad);
+          const hX = cx - (radius + labelOffset) * Math.cos(rad);
+          const hY = cy + (radius + labelOffset) * Math.sin(rad);
 
           return (
             <div
@@ -261,7 +269,7 @@ export function CompassNav({ sections }: CompassNavProps) {
               }}
             >
               <span
-                className={`inline-block rounded-md px-2.5 py-1 text-[9px] font-bold tracking-wide shadow-xl ${
+                className={`inline-block rounded-md px-2 py-0.5 sm:px-2.5 sm:py-1 text-[8px] sm:text-[9px] font-bold tracking-wide shadow-xl ${
                   isDarkSection
                     ? "bg-white text-black"
                     : "bg-foreground text-background"
