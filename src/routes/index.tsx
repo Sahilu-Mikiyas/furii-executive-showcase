@@ -28,7 +28,7 @@ import { CompassNav } from "../components/compass-nav";
 import { ScrollReveal } from "../components/scroll-reveal";
 
 const compassSections = [
-  { id: "the-architect", label: "The Architect" },
+  { id: "the-architect", label: "CTO's Profile" },
   { id: "core-disciplines", label: "Core Disciplines" },
   { id: "architecture", label: "Architecture" },
   { id: "applied-ai", label: "Applied AI" },

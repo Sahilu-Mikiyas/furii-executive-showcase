@@ -14,10 +14,9 @@ export function CompassNav({ sections }: CompassNavProps) {
   const [visible, setVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isDarkSection, setIsDarkSection] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const rafRef = useRef<number>(0);
 
-  /* ── Scroll tracking & Immediate boundary dark detection ── */
+  /* ── Physical position tracking & Immediate boundary dark detection ── */
   useEffect(() => {
     const update = () => {
       const viewportCenter = window.innerHeight / 2;
@@ -28,6 +27,7 @@ export function CompassNav({ sections }: CompassNavProps) {
         const el = document.getElementById(s.id);
         if (!el) return;
         const rect = el.getBoundingClientRect();
+        // Distance from section's vertical center to viewport center
         const sectionCenter = rect.top + rect.height / 2;
         const distance = Math.abs(sectionCenter - viewportCenter);
         if (distance < bestDistance) {
@@ -37,12 +37,6 @@ export function CompassNav({ sections }: CompassNavProps) {
       });
 
       setActiveIndex(bestIndex);
-
-      // Scroll progress percentage (0 to 1) for smooth micro-rotation of arc
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll > 0) {
-        setScrollProgress(window.scrollY / maxScroll);
-      }
 
       // Check if compass center (window.innerHeight / 2) is physically inside any dark section
       const compassY = window.innerHeight / 2;
@@ -88,27 +82,24 @@ export function CompassNav({ sections }: CompassNavProps) {
   if (sections.length === 0) return null;
 
   const count = sections.length;
-  // Semicircle arc dimensions pinned to right screen edge
-  const width = 75;
-  const height = 170;
-  const cx = width; // Pinned directly on right boundary
+  // Dimensions for half-compass right edge dial
+  const width = 160;
+  const height = 200;
+  const cx = width; // Pivot point pinned to extreme right edge
   const cy = height / 2;
-  const radius = 64;
+  const radius = 95;
 
-  // Arc span: 150° total (from -75° top to +75° bottom)
-  const arcSpan = 150;
-  const arcStart = -75;
+  // Arc span: 130° total (from -65° top to +65° bottom)
+  const arcSpan = 130;
+  const arcStart = -65;
   const stepDeg = count > 1 ? arcSpan / (count - 1) : 0;
 
-  // Active section angle
+  // Active section angle for the needle
   const activeAngle = arcStart + activeIndex * stepDeg;
-
-  // Fluid micro-rotation based on scroll progress (-8° to +8°)
-  const microRotation = (scrollProgress - 0.5) * 16;
 
   return (
     <nav
-      aria-label="Minimalist edge compass"
+      aria-label="Section compass"
       className={`fixed right-0 top-1/2 -translate-y-1/2 z-40 transition-all duration-700 ease-out ${
         visible
           ? "opacity-100 translate-x-0"
@@ -116,114 +107,97 @@ export function CompassNav({ sections }: CompassNavProps) {
       }`}
     >
       <div className="relative" style={{ width, height }}>
-        {/* SVG Razor-Thin Semicircle Arc Track */}
+        {/* SVG Dial with Divider Ticks & Sharp Pointy Needle */}
         <svg
           viewBox={`0 0 ${width} ${height}`}
           width={width}
           height={height}
           className="overflow-visible transition-all duration-300"
-          style={{
-            transform: `rotate(${microRotation}deg)`,
-            transformOrigin: `${cx}px ${cy}px`,
-            transition: "transform 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-          }}
         >
-          {/* Main Semicircle Arc Line */}
-          <path
-            d={`M ${cx} ${cy - radius} A ${radius} ${radius} 0 0 0 ${cx} ${cy + radius}`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            className={`transition-colors duration-300 ${
-              isDarkSection ? "text-white/30" : "text-foreground/20"
-            }`}
-          />
-
-          {/* Inner Accent Arc */}
-          <path
-            d={`M ${cx} ${cy - (radius - 12)} A ${radius - 12} ${radius - 12} 0 0 0 ${cx} ${cy + (radius - 12)}`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            strokeDasharray="2 4"
-            className={`transition-colors duration-300 ${
-              isDarkSection ? "text-white/20" : "text-foreground/15"
-            }`}
-          />
-
-          {/* Section Ticks along the Arc */}
+          {/* Section Divider Ticks along the arc (Outer outline removed) */}
           {sections.map((_, i) => {
             const angleDeg = arcStart + i * stepDeg;
             const rad = (angleDeg * Math.PI) / 180;
             const isActive = i === activeIndex;
             const isHovered = i === hoveredIndex;
 
-            // Coordinates extending leftwards from right boundary
+            const tickLength = isActive ? 18 : isHovered ? 14 : 10;
             const x1 = cx - radius * Math.cos(rad);
             const y1 = cy + radius * Math.sin(rad);
-            const x2 = cx - (radius - (isActive ? 14 : isHovered ? 10 : 7)) * Math.cos(rad);
-            const y2 = cy + (radius - (isActive ? 14 : isHovered ? 10 : 7)) * Math.sin(rad);
+            const x2 = cx - (radius - tickLength) * Math.cos(rad);
+            const y2 = cy + (radius - tickLength) * Math.sin(rad);
 
             return (
-              <g key={i}>
-                <line
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  strokeWidth={isActive ? 2.5 : isHovered ? 1.5 : 1}
-                  strokeLinecap="round"
-                  className={`transition-all duration-300 ${
-                    isDarkSection
-                      ? isActive
-                        ? "stroke-white"
-                        : isHovered
-                          ? "stroke-white/90"
-                          : "stroke-white/30"
-                      : isActive
-                        ? "stroke-foreground"
-                        : isHovered
-                          ? "stroke-foreground/70"
-                          : "stroke-foreground/25"
-                  }`}
-                />
-
-                {/* Glowing active node dot */}
-                {isActive && (
-                  <circle
-                    cx={x1}
-                    cy={y1}
-                    r="2.5"
-                    className={`transition-colors duration-300 ${
-                      isDarkSection ? "fill-white" : "fill-foreground"
-                    }`}
-                  />
-                )}
-              </g>
-            );
-          })}
-
-          {/* Active Pointer Needle */}
-          {(() => {
-            const rad = (activeAngle * Math.PI) / 180;
-            const pointerX = cx - (radius + 4) * Math.cos(rad);
-            const pointerY = cy + (radius + 4) * Math.sin(rad);
-            return (
-              <circle
-                cx={pointerX}
-                cy={pointerY}
-                r="3"
-                className={`transition-all duration-500 ${
+              <line
+                key={i}
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                strokeWidth={isActive ? 2.5 : isHovered ? 1.5 : 1}
+                strokeLinecap="round"
+                className={`transition-all duration-300 ${
                   isDarkSection
-                    ? "fill-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"
-                    : "fill-foreground"
+                    ? isActive
+                      ? "stroke-white"
+                      : isHovered
+                        ? "stroke-white/90"
+                        : "stroke-white/30"
+                    : isActive
+                      ? "stroke-foreground"
+                      : isHovered
+                        ? "stroke-foreground/70"
+                        : "stroke-foreground/25"
                 }`}
               />
             );
-          })()}
+          })}
+
+          {/* Sharp Pointy Compass Needle Pivoting at Right Center (cx, cy) */}
+          <g
+            style={{
+              transform: `rotate(${activeAngle}deg)`,
+              transformOrigin: `${cx}px ${cy}px`,
+              transition: "transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }}
+          >
+            {/* Pointy triangular needle extending leftwards from center pivot */}
+            <polygon
+              points={`${cx},${cy - 4} ${cx - (radius + 4)},${cy} ${cx},${cy + 4}`}
+              className={`transition-colors duration-300 ${
+                isDarkSection ? "fill-white text-white" : "fill-foreground text-foreground"
+              }`}
+            />
+            {/* Inner decorative needle accent line */}
+            <line
+              x1={cx}
+              y1={cy}
+              x2={cx - (radius + 4)}
+              y2={cy}
+              strokeWidth="0.75"
+              className={isDarkSection ? "stroke-black" : "stroke-background"}
+            />
+            {/* Center Pivot Dot on Right Edge */}
+            <circle
+              cx={cx}
+              cy={cy}
+              r="5"
+              className={`transition-colors duration-300 ${
+                isDarkSection ? "fill-white" : "fill-foreground"
+              }`}
+            />
+            <circle
+              cx={cx}
+              cy={cy}
+              r="2.5"
+              className={`transition-colors duration-300 ${
+                isDarkSection ? "fill-black" : "fill-card"
+              }`}
+            />
+          </g>
         </svg>
 
-        {/* Invisible Clickable Hit Areas over Arc Ticks */}
+        {/* Clickable Hit Areas over Ticks */}
         {sections.map((section, i) => {
           const angleDeg = arcStart + i * stepDeg;
           const rad = (angleDeg * Math.PI) / 180;
@@ -249,32 +223,61 @@ export function CompassNav({ sections }: CompassNavProps) {
           );
         })}
 
-        {/* Active Section Label (pure text protruding to the left of the arc) */}
-        <div className="absolute right-[85px] top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none">
-          <span
-            key={activeIndex}
-            className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
-              isDarkSection ? "text-white" : "text-foreground/80"
-            }`}
-          >
-            {sections[activeIndex]?.label}
-          </span>
-        </div>
+        {/* Active Section Label sitting RIGHT ALONG THE ACTIVE TICK ON THE ARC */}
+        {(() => {
+          const rad = (activeAngle * Math.PI) / 180;
+          const labelX = cx - (radius + 14) * Math.cos(rad);
+          const labelY = cy + (radius + 14) * Math.sin(rad);
 
-        {/* Hovered Section Tooltip (left of hovered tick) */}
-        {hoveredIndex !== null && hoveredIndex !== activeIndex && (
-          <div className="absolute right-[90px] top-1/2 -translate-y-1/2 whitespace-nowrap animate-fade-in z-50 pointer-events-none">
-            <span
-              className={`inline-block rounded-md px-2.5 py-1 text-[9px] font-bold tracking-wide shadow-xl ${
-                isDarkSection
-                  ? "bg-white text-black"
-                  : "bg-foreground text-background"
-              }`}
+          return (
+            <div
+              className="absolute pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+              style={{
+                left: labelX,
+                top: labelY,
+                transform: "translate(-100%, -50%)",
+              }}
             >
-              {sections[hoveredIndex]?.label}
-            </span>
-          </div>
-        )}
+              <span
+                key={activeIndex}
+                className={`inline-block font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] font-bold animate-fade-in transition-colors duration-300 ${
+                  isDarkSection ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" : "text-foreground drop-shadow-sm"
+                }`}
+              >
+                {sections[activeIndex]?.label}
+              </span>
+            </div>
+          );
+        })()}
+
+        {/* Hovered Section Tooltip (sitting along the hovered tick) */}
+        {hoveredIndex !== null && hoveredIndex !== activeIndex && (() => {
+          const angleDeg = arcStart + hoveredIndex * stepDeg;
+          const rad = (angleDeg * Math.PI) / 180;
+          const hX = cx - (radius + 14) * Math.cos(rad);
+          const hY = cy + (radius + 14) * Math.sin(rad);
+
+          return (
+            <div
+              className="absolute pointer-events-none z-50 animate-fade-in"
+              style={{
+                left: hX,
+                top: hY,
+                transform: "translate(-100%, -50%)",
+              }}
+            >
+              <span
+                className={`inline-block rounded-md px-2.5 py-1 text-[9px] font-bold tracking-wide shadow-xl ${
+                  isDarkSection
+                    ? "bg-white text-black"
+                    : "bg-foreground text-background"
+                }`}
+              >
+                {sections[hoveredIndex]?.label}
+              </span>
+            </div>
+          );
+        })()}
       </div>
     </nav>
   );
