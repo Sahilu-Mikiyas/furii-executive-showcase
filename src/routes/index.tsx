@@ -241,21 +241,45 @@ function FounderPage() {
               <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
                 <a
                   href="mailto:furiimotionlabsceo@outlook.com"
-                  className="group inline-flex items-center gap-2 rounded-[24px] bg-foreground border-2 border-foreground px-6 py-3.5 text-xs sm:text-sm font-semibold text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-1 hover:shadow-lg"
+                  className="group inline-flex items-center gap-2 rounded-[24px] bg-foreground border-2 border-foreground px-5 py-3.5 text-xs sm:text-sm font-semibold text-background transition-all duration-500 ease-out hover:bg-background hover:text-foreground hover:border-foreground hover:-translate-y-1 hover:shadow-lg"
                 >
                   <Mail className="h-4 w-4" />
                   Email us
                 </a>
                 <a
                   href="tel:+251909312671"
-                  className="group inline-flex items-center gap-2 rounded-[24px] border-2 border-border bg-background px-6 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-lg"
+                  className="group inline-flex items-center gap-2 rounded-[24px] border-2 border-border bg-background px-5 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-lg"
                 >
                   <Phone className="h-4 w-4" />
                   Call us (+251 909 312 671)
                 </a>
+                <a
+                  href="https://wa.me/251909312671?text=Hello%20Mikiyas,%20I'd%20like%20to%20discuss%20an%20enterprise%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 rounded-[24px] border-2 border-border bg-background px-5 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884" />
+                  </svg>
+                  WhatsApp
+                </a>
+                <a
+                  href="https://instagram.com/furiimotionlabs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 rounded-[24px] border-2 border-border bg-background px-5 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                  Instagram
+                </a>
                 <Link
                   to="/systems"
-                  className="group inline-flex items-center gap-2 rounded-[24px] border-2 border-border bg-surface px-6 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-lg"
+                  className="group inline-flex items-center gap-2 rounded-[24px] border-2 border-border bg-surface px-5 py-3.5 text-xs sm:text-sm font-semibold text-foreground transition-all duration-500 ease-out hover:border-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-lg"
                 >
                   Explore systems
                   <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
